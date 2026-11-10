@@ -21,7 +21,8 @@ video è dentro l'app (`app/src/misteri/assets/catalogo.json`); i video nuovi li
 
 ## Scaricare l'app
 
-https://mondo.workingwithweb.eu/grandi-misteri-italiani-unofficial-app/
+https://mondo.workingwithweb.eu/grandi-misteri-italiani-unofficial-app/ · controllo VirusTotal della 2.42.42:
+[0 su 67](https://www.virustotal.com/gui/file/7bc53f07fcf1d8c403f8b66cc1b9dd783979757cef7cad6ee737faf98eb08eaf)
 
 ## Licenza
 
