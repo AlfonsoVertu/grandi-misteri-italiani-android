@@ -127,7 +127,8 @@ class RicercaActivity : Activity() {
         if (Marca.ASSISTENTE) it.bibliotecadialessandria.ricerca.assistente.ConfigAi.importaSeCe(this)?.let { android.widget.Toast.makeText(this, it, android.widget.Toast.LENGTH_LONG).show() }
         // (11/11/2026, fase 2b) le indagini precaricate negli assets: una volta sola, nel database della persona
         if (Marca.ASSISTENTE) ambito.launch {
-            val nuove = withContext(Dispatchers.IO) { runCatching { it.bibliotecadialessandria.ricerca.indagine.Indagini.importaSeServe(this@RicercaActivity) }.getOrDefault(emptyList()) }
+            val nuove = withContext(Dispatchers.IO) { runCatching { it.bibliotecadialessandria.ricerca.indagine.Indagini.importaSeServe(this@RicercaActivity) }.getOrDefault(emptyList()) +
+                runCatching { it.bibliotecadialessandria.ricerca.indagine.Indagini.scaricaNuove(this@RicercaActivity) }.getOrDefault(emptyList()) }
             if (nuove.isNotEmpty()) avvisa("Indagine pronta: " + nuove.joinToString(", ") + ". La trovi in Teorie, Note, Mappa e Persone di interesse.")
             withContext(Dispatchers.IO) { it.bibliotecadialessandria.ricerca.indagine.Rag.scriviCopia(this@RicercaActivity) }
         }

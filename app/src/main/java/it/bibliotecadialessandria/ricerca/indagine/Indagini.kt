@@ -1,11 +1,22 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import it.bibliotecadialessandria.ricerca.Marca
+import it.bibliotecadialessandria.ricerca.R
 import it.bibliotecadialessandria.ricerca.TrascrizioniYoutube
 import it.bibliotecadialessandria.ricerca.strumenti.AiutiIndagine
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
+import java.security.MessageDigest
 
 /**
  * Le indagini precaricate (11/11/2026, fase 2b, STUDIO_ASSISTENTE_AI.md §7.4): `assets/indagini/<caso>.json`, preparate
@@ -137,5 +148,75 @@ object Indagini {
             }
             t.optString("titolo").takeIf { it.isNotBlank() }?.let { AiutiIndagine.ricordaTitolo(ctx, vid, it) }
         }
+    }
+
+    // ---- (10/11/2026) le indagini nuove da mondo, una al giorno, senza reinstallare l'app ----
+    // Alfonso: «ogni giorno un nuovo video e un nuovo approfondimento aggiornato nell'app, come quello di David Rossi».
+    // `indagini/indice.json` accanto a versione.json: [{"id","titolo","file","sha256","dal"}]. Si importa solo dal
+    // giorno «dal» (AAAA-MM-GG, ora italiana del telefono), solo se l'impronta coincide, una volta sola come gli assets.
+
+    private const val CARTELLA = "https://mondo.workingwithweb.eu/${Marca.MONDO}/indagini/"
+    private const val OGNI = 30 * 60_000L
+    private const val AVVISI = "indagini_nuove"
+
+    private fun leggi(url: String): ByteArray? {
+        val c = (URL(url).openConnection() as HttpURLConnection).apply { connectTimeout = 15000; readTimeout = 30000; useCaches = false }
+        return try { if (c.responseCode == 200) c.inputStream.use { it.readBytes() } else null } finally { c.disconnect() }
+    }
+
+    private fun sha256(b: ByteArray) = MessageDigest.getInstance("SHA-256").digest(b).joinToString("") { "%02x".format(it) }
+
+    /** Fuori dal filo dell'interfaccia. `forza` salta l'intervallo. Torna i titoli importati adesso. */
+    fun scaricaNuove(ctx: Context, forza: Boolean = false): List<String> {
+        if (!Marca.ASSISTENTE) return emptyList()
+        val app = ctx.applicationContext
+        val p = app.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+        val ora = System.currentTimeMillis()
+        if (!forza && ora - p.getLong("guardato", 0L) < OGNI) return emptyList()
+        p.edit().putLong("guardato", ora).apply()
+        val indice = runCatching { leggi(CARTELLA + "indice.json?t=" + ora / 60_000) }.getOrNull() ?: return emptyList()
+        val oggi = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.ROOT).format(java.util.Date(ora))
+        val nuove = ArrayList<String>()
+        for (e in lista(runCatching { JSONArray(String(indice)) }.getOrNull())) {
+            val id = e.optString("id").takeIf { it.matches(Regex("[a-z0-9_]{2,60}")) } ?: continue
+            if (id in p.getStringSet("importate", emptySet()).orEmpty()) continue
+            if (e.optString("dal").isNotBlank() && e.optString("dal") > oggi) continue
+            val file = e.optString("file").ifBlank { "$id.json" }.takeIf { it.matches(Regex("[A-Za-z0-9_.-]+")) } ?: continue
+            try {
+                val b = leggi(CARTELLA + file + "?s=" + e.optString("sha256").take(12)) ?: continue
+                if (e.optString("sha256").isNotBlank() && !sha256(b).equals(e.optString("sha256"), true)) {
+                    Log.w(TAG, "indagine $id: impronta diversa, non importata"); continue
+                }
+                val o = JSONObject(String(b, Charsets.UTF_8))
+                importa(app, o.optString("id").ifBlank { id }, o)
+                p.edit().putStringSet("importate", p.getStringSet("importate", emptySet()).orEmpty() + id).apply()
+                nuove.add(o.optString("titolo").ifBlank { e.optString("titolo", id) })
+                Log.i(TAG, "indagine scaricata e importata: $id")
+            } catch (x: Exception) {
+                Log.w(TAG, "indagine $id non scaricata: ${x.javaClass.simpleName} ${x.message?.take(120)}")
+            }
+        }
+        if (nuove.isNotEmpty()) Archivio.avvisa()
+        return nuove
+    }
+
+    /** Dal controllo periodico: scarica e avvisa con una notifica. */
+    fun scaricaEAvvisa(ctx: Context) {
+        val nuove = scaricaNuove(ctx)
+        if (nuove.isEmpty()) return
+        val c = ctx.applicationContext
+        if (Build.VERSION.SDK_INT >= 26) c.getSystemService(NotificationManager::class.java).createNotificationChannel(
+            NotificationChannel(AVVISI, "Indagini nuove", NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = "Un avviso quando nell'app arriva un approfondimento nuovo su un caso" })
+        val nm = NotificationManagerCompat.from(c)
+        if (!nm.areNotificationsEnabled()) return
+        val apri = c.packageManager.getLaunchIntentForPackage(c.packageName)?.let {
+            PendingIntent.getActivity(c, 7412, it, PendingIntent.FLAG_IMMUTABLE) }
+        val testo = nuove.joinToString(", ") + ": note, mappa e persone del caso, con i video al minuto."
+        val n = NotificationCompat.Builder(c, AVVISI).setSmallIcon(R.drawable.ic_notifica)
+            .setContentTitle(if (nuove.size == 1) "Nuova indagine nell'app" else "Nuove indagini nell'app")
+            .setContentText(testo).setStyle(NotificationCompat.BigTextStyle().bigText(testo))
+            .setContentIntent(apri).setAutoCancel(true).build()
+        try { nm.notify(7412, n) } catch (_: SecurityException) {}
     }
 }

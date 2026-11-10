@@ -347,7 +347,12 @@ object Seguiti {
 class ControlloSeguiti : JobService() {
     private val ambito = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     override fun onStartJob(p: JobParameters): Boolean {
-        ambito.launch { runCatching { Seguiti.controlla(applicationContext) }; jobFinished(p, false) }
+        ambito.launch {
+            runCatching { Seguiti.controlla(applicationContext) }
+            // (10/11/2026) le indagini nuove da mondo (solo le app con l'assistente)
+            runCatching { it.bibliotecadialessandria.ricerca.indagine.Indagini.scaricaEAvvisa(applicationContext) }
+            jobFinished(p, false)
+        }
         return true
     }
     override fun onStopJob(p: JobParameters) = true
