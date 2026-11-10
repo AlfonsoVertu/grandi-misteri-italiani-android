@@ -125,6 +125,12 @@ class RicercaActivity : Activity() {
     override fun onCreate(stato: Bundle?) {
         super.onCreate(stato)
         if (Marca.ASSISTENTE) it.bibliotecadialessandria.ricerca.assistente.ConfigAi.importaSeCe(this)?.let { android.widget.Toast.makeText(this, it, android.widget.Toast.LENGTH_LONG).show() }
+        // (11/11/2026, fase 2b) le indagini precaricate negli assets: una volta sola, nel database della persona
+        if (Marca.ASSISTENTE) ambito.launch {
+            val nuove = withContext(Dispatchers.IO) { runCatching { it.bibliotecadialessandria.ricerca.indagine.Indagini.importaSeServe(this@RicercaActivity) }.getOrDefault(emptyList()) }
+            if (nuove.isNotEmpty()) avvisa("Indagine pronta: " + nuove.joinToString(", ") + ". La trovi in Teorie, Note, Mappa e Persone di interesse.")
+            withContext(Dispatchers.IO) { it.bibliotecadialessandria.ricerca.indagine.Rag.scriviCopia(this@RicercaActivity) }
+        }
         scorrimento = ScrollView(this).apply { isFillViewport = true }
         corpo = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         scorrimento.addView(corpo, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT))
@@ -272,6 +278,17 @@ class RicercaActivity : Activity() {
             // (11/11/2026) l'archivio dell'indagine: foto, video, PDF e file (anche quelli mandati all'assistente)
             Voce(R.drawable.ic_media, "Media", "Foto, video e PDF dell'indagine") {
                 startActivity(Intent(this, it.bibliotecadialessandria.ricerca.assistente.MediaActivity::class.java)) },
+            // (11/11/2026, fase 2b) l'indagine: teorie, note, mappa, persone di interesse, memoria dell'assistente
+            Voce(R.drawable.ic_teoria, "Teorie", "Note, video e luoghi per ipotesi") {
+                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.TeorieActivity::class.java)) },
+            Voce(R.drawable.ic_nota, "Note", "Appunti con la fonte e il minuto") {
+                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.NoteActivity::class.java)) },
+            Voce(R.drawable.ic_mappa, "Mappa", "I luoghi dei casi") {
+                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.MappaActivity::class.java)) },
+            Voce(R.drawable.ic_persona, "Persone di interesse", "Fatti e fonti, non accuse") {
+                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.PersoneActivity::class.java)) },
+            Voce(R.drawable.ic_memoria, "Memoria", "Cosa ricorda l'assistente") {
+                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.MemoriaActivity::class.java)) },
         )) + listOf(
             Voce(R.drawable.ic_preferiti, "Preferiti", "I video salvati") { scheda = Scheda.PREFERITI; disegna() },
             Voce(R.drawable.ic_playlist, "Playlist", "Le tue raccolte") { playlistAperta = null; scheda = Scheda.PLAYLIST; disegna() },
@@ -716,7 +733,15 @@ class RicercaActivity : Activity() {
         riga.addView(azioni, sopra(6))
         // (10/11/2026) i sottotitoli del video in un file .txt con i tempi, senza AI (lo stesso codice dello
         // strumento «trascrizioni» dell'assistente). Per ora solo dove c'e' l'assistente.
-        if (Marca.ASSISTENTE) riga.addView(bottone("⤓  Scarica trascrizione") { scaricaTrascrizione(v) }, sopra(6))
+        if (Marca.ASSISTENTE) {
+            // (11/11/2026, fase 2b) «＋ Nota»: il video in una nota, al minuto che si sceglie
+            val ultime = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+            ultime.addView(bottone("⤓  Trascrizione") { scaricaTrascrizione(v) },
+                LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { rightMargin = dp(4) })
+            ultime.addView(bottone("＋ Nota") { it.bibliotecadialessandria.ricerca.indagine.NoteActivity.daVideo(this, v.youtubeId, v.titolo) },
+                LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { leftMargin = dp(4) })
+            riga.addView(ultime, sopra(6))
+        }
         return riga
     }
 

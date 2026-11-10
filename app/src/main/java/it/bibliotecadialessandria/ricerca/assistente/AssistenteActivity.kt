@@ -89,6 +89,11 @@ class AssistenteActivity : Aspetto() {
             setOnClickListener { startActivity(Intent(this@AssistenteActivity, ImpostazioniAiActivity::class.java)) } })
         radice.addView(testa, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT))
 
+        // (11/11/2026, fase 2b, §7.1) il piano del compito lungo, sopra la chat (tocca per aprirlo o chiuderlo)
+        pianoBox = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(14), dp(8), dp(14), dp(8))
+            background = sfondo(colore(R.color.card), colore(R.color.oro), 0); visibility = View.GONE
+            setOnClickListener { pianoAperto = !pianoAperto; disegnaPiano() } }
+        radice.addView(pianoBox, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT))
         scorri = ScrollView(this).apply { isFillViewport = true }
         lista = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(12), dp(12), dp(12), dp(12)) }
         scorri.addView(lista, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT))
@@ -139,12 +144,14 @@ class AssistenteActivity : Aspetto() {
         super.onResume()
         Conversazione.ascolta = { disegna() }
         Voce.cambiato = { disegna() }
+        it.bibliotecadialessandria.ricerca.indagine.Archivio.cambiato = { orologio.post { if (::pianoBox.isInitialized) disegnaPiano() } }
         disegna(); scorri.post { scorri.fullScroll(View.FOCUS_DOWN) }
     }
 
     override fun onPause() {
         Conversazione.ascolta = null
         Voce.cambiato = null
+        it.bibliotecadialessandria.ricerca.indagine.Archivio.cambiato = null
         registratore?.let { it.ferma(); registratore = null; registra.visibility = View.GONE }
         fermaLettore()
         super.onPause()
@@ -336,7 +343,30 @@ class AssistenteActivity : Aspetto() {
 
     // ── disegno ──────────────────────────────────────────────────────
 
+    private lateinit var pianoBox: LinearLayout
+    private var pianoAperto = true
+
+    /** Il piano aperto (strumento `piano`): titolo, quanti passi fatti, e i passi con il loro stato. */
+    private fun disegnaPiano() {
+        val i = runCatching { it.bibliotecadialessandria.ricerca.indagine.Archivio.di(this) }.getOrNull() ?: return
+        val p = if (Marca.ASSISTENTE) i.pianoAperto() else null
+        pianoBox.removeAllViews()
+        if (p == null) { pianoBox.visibility = View.GONE; return }
+        pianoBox.visibility = View.VISIBLE
+        val passi = i.passi(p.id)
+        pianoBox.addView(TextView(this).apply { textSize = 13.5f; setTextColor(colore(R.color.oro)); setTypeface(Typeface.DEFAULT, Typeface.BOLD)
+            text = (if (pianoAperto) "▾ " else "▸ ") + "Piano: ${p.titolo} · ${passi.count { it.stato == "fatto" }} su ${passi.size}" })
+        if (!pianoAperto) return
+        passi.forEach { x ->
+            val segno = when (x.stato) { "fatto" -> "✓"; "in_corso" -> "▶"; "bloccato" -> "✕"; else -> "○" }
+            pianoBox.addView(nota("$segno  ${x.ordine}. ${x.testo}" + if (x.esito.isNotBlank() && x.stato == "fatto") " — ${x.esito.take(90)}" else "").apply {
+                textSize = 12.5f; maxLines = 2
+                if (x.stato == "in_corso") setTextColor(colore(R.color.testo)) })
+        }
+    }
+
     private fun disegna() {
+        if (::pianoBox.isInitialized) disegnaPiano()
         val messaggi = Conversazione.messaggi(this)
         lista.removeAllViews()
         val cfg = ConfigAi.leggi(this)
@@ -483,6 +513,8 @@ class AssistenteActivity : Aspetto() {
     private fun formatta(t: String): CharSequence {
         val pulito = t.lines().joinToString("\n") {
             it.replace(Regex("^#{1,6}\\s+"), "").replace(Regex("^(\\s*)[*\\-]\\s+"), "$1•  ")
+                // [testo](link) del markdown: il testo e poi il link nudo, che Linkify rende cliccabile
+                .replace(Regex("\\[([^\\]]+)]\\((https?://[^)\\s]+)\\)"), "$1 $2")
         }
         val sb = SpannableStringBuilder()
         var i = 0

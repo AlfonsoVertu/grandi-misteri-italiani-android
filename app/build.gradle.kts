@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 /**
@@ -32,8 +33,8 @@ android {
         create("misteri") {
             dimension = "canale"
             applicationId = "eu.workingwithweb.canali.misteri"
-            versionCode = 3
-            versionName = "3.42.42"
+            versionCode = 4
+            versionName = "4.42.42"
         }
     }
 
@@ -69,4 +70,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     // Il sito non ha un'API: si legge la sua pagina di ricerca. Licenza MIT.
     implementation("org.jsoup:jsoup:1.18.3")
+    // (11/11/2026, fase 2b) i dati dell'indagine (note, teorie, segnalini, persone, memoria, piani) in Room. Licenza Apache 2.0.
+    implementation("androidx.room:room-runtime:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
+    // la mappa: OpenStreetMap con osmdroid (Apache 2.0, nessuna chiave)
+    implementation("org.osmdroid:osmdroid-android:6.1.20")
 }

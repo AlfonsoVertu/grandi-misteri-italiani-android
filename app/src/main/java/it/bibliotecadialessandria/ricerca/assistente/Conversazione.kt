@@ -123,8 +123,50 @@ object Conversazione {
         }
     }
 
+    // ── il riassunto (11/11/2026, fase 2b, STUDIO_ASSISTENTE_AI.md §7.1) ──
+
+    private const val FILE_RIASSUNTO = "assistente_riassunto.json"
+    /** Oltre questi messaggi non riassunti, i piu' vecchi si condensano (restano tutti sul telefono e nella chat). */
+    private const val SOGLIA_RIASSUNTO = 24
+    /** Quanti messaggi recenti restano sempre interi. */
+    private const val TIENI_INTERI = 8
+
+    /** Il riassunto e l'id dell'ultimo messaggio che contiene. */
+    fun riassunto(ctx: Context): Pair<String, Long> = runCatching {
+        val o = org.json.JSONObject(File(ctx.filesDir, FILE_RIASSUNTO).readText())
+        o.optString("testo") to o.optLong("fino_a")
+    }.getOrDefault("" to 0L)
+
+    private fun salvaRiassunto(ctx: Context, testo: String, finoA: Long) = runCatching {
+        File(ctx.filesDir, FILE_RIASSUNTO).writeText(JSONObject().put("testo", testo).put("fino_a", finoA).put("quando", System.currentTimeMillis()).toString())
+    }
+
+    /**
+     * Se la conversazione e' lunga, i messaggi vecchi (tutti tranne gli ultimi [TIENI_INTERI]) diventano un riassunto
+     * fatto dal modello: fatti trovati, fonti con link e minuti, decisioni, cosa resta da fare. Il riassunto di prima
+     * entra nel nuovo. Il testo intero resta nella chat sul telefono. Fuori dal filo dell'interfaccia; un errore non ferma niente.
+     */
+    private fun riassumiSeServe(app: Context, cfg: ConfigAi.Config) {
+        val (prima, finoA) = riassunto(app)
+        val nuovi = synchronized(lista) { lista.filter { it.id > finoA && !it.inCorso && !it.errore } }
+        if (nuovi.size <= SOGLIA_RIASSUNTO) return
+        val daRiassumere = nuovi.dropLast(TIENI_INTERI)
+        val testo = daRiassumere.joinToString("\n\n") { m -> (if (m.ruolo == "user") "PERSONA: " + m.perIlModello() else "ASSISTENTE: " + m.testo).take(4000) }
+        val domanda = "Condensa questa parte di conversazione fra una persona e l'assistente di un'app sui misteri italiani in un " +
+            "riassunto per l'assistente stesso, che lo leggera' al posto dei messaggi. In italiano, a punti, massimo 40 righe, in " +
+            "quattro parti: FATTI TROVATI (con chi li dice), FONTI (link interi, video con il minuto &t=…s, pagine), DECISIONI E " +
+            "RICHIESTE DELLA PERSONA (come vuole che si lavori), COSA RESTA DA FARE. Non inventare niente che non sia scritto qui." +
+            (if (prima.isNotBlank()) "\n\nRIASSUNTO PRECEDENTE (da tenere e integrare):\n$prima" else "") + "\n\nCONVERSAZIONE:\n" + testo.takeLast(60000)
+        try {
+            val m = FlussoAi.completa(cfg.endpoint, cfg.chiave, cfg.modello, JSONArray().put(JSONObject().put("role", "user").put("content", domanda)), JSONArray())
+            val r = (m.opt("content") as? String).orEmpty().replace(Regex("<think>[\\s\\S]*?</think>"), "").trim()
+            if (r.isNotBlank()) { salvaRiassunto(app, r, daRiassumere.last().id); Log.i(TAG, "riassunto aggiornato (${daRiassumere.size} messaggi, ${r.length} caratteri)") }
+        } catch (e: Exception) { Log.i(TAG, "riassunto non fatto: ${e.javaClass.simpleName}") }
+    }
+
     fun svuota(ctx: Context) {
         carica(ctx)
+        runCatching { File(ctx.filesDir, FILE_RIASSUNTO).delete() }
         synchronized(lista) { lista.clear() }
         interrotta = null
         Voce.ferma()
@@ -241,8 +283,9 @@ object Conversazione {
         }
         if (annullato()) return
         val cfg = ConfigAi.leggi(app)
+        val (riassunto, finoA) = riassunto(app)
         val (storia, aVoce) = synchronized(lista) {
-            val buoni = lista.filter { !it.errore && !it.preparando && !it.inCorso && (it.ruolo != "assistant" || it.testo.isNotBlank()) }
+            val buoni = lista.filter { it.id > finoA }.filter { !it.errore && !it.preparando && !it.inCorso && (it.ruolo != "assistant" || it.testo.isNotBlank()) }
                 .filter { it.ruolo == "assistant" || it.perIlModello().isNotBlank() }.takeLast(30)
             val ultima = buoni.indexOfLast { it.ruolo == "assistant" }
             val nuove = buoni.drop(ultima + 1)
@@ -266,7 +309,8 @@ object Conversazione {
                     if (System.currentTimeMillis() - mostratoIl > 250) { mostratoIl = System.currentTimeMillis(); dillo() }
                 },
                 annullato = annullato,
-                nota = { n -> risposta.nota = (risposta.nota + " " + n).trim().takeLast(2000) })
+                nota = { n -> risposta.nota = (risposta.nota + " " + n).trim().takeLast(2000) },
+                riassunto = riassunto)
         } catch (e: Assistente.Annullata) {
             fermata = true; ""
         } catch (e: Exception) {
@@ -281,10 +325,14 @@ object Conversazione {
             dillo()
             return
         }
-        risposta.testo = finale.ifBlank { "(nessuna risposta)" }
+        // (11/11/2026) certi modelli ricopiano nella risposta la nota interna che rileggono nella cronologia (visto sul
+        // Tab8 con una conferma in attesa): quella parte non e' per la persona e si toglie
+        risposta.testo = finale.substringBefore("[nota interna dell'app").trim().ifBlank { finale }.ifBlank { "(nessuna risposta)" }
         risposta.inCorso = false
         salva(app); dillo()
         // l'agente VOCE: una lettura sola, alla fine, sul testo intero, solo se la domanda era a voce
         if (aVoce && !risposta.errore) Voce.leggi(app, risposta.id, risposta.testo)
+        // (11/11/2026, fase 2b) la conversazione lunga si condensa dopo la risposta (la persona non aspetta)
+        if (!risposta.errore) riassumiSeServe(app, cfg)
     }
 }

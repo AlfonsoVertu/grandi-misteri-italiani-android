@@ -142,6 +142,9 @@ object TrascrizioniYoutube {
             .put("scaricata", t.scaricata).put("righe", righe).toString())
     }
 
+    /** (11/11/2026, fase 2b) una trascrizione arrivata da fuori (le indagini precaricate): nella cache come se fosse scaricata. */
+    fun mettiInCache(ctx: Context, t: Trascrizione) = salva(ctx, t)
+
     fun salvata(ctx: Context, id: String): Trascrizione? = runCatching {
         val o = JSONObject(file(ctx, id).takeIf { it.exists() }?.readText() ?: return null)
         val r = o.getJSONArray("righe")

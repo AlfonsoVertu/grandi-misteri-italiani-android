@@ -31,6 +31,9 @@ class Azione(
     val parametri: List<Parametro> = emptyList(),
     /** La riga che si vede nella chat mentre lavora: «cerco nel catalogo…». */
     val passo: String = "",
+    /** (11/11/2026, fase 2b) per la documentazione del RAG (doc_strumenti.json): gli errori tipici e le azioni vicine. */
+    val errori: List<String> = emptyList(),
+    val collegate: List<String> = emptyList(),
     /** Riceve argomenti gia' controllati e convertiti ai tipi giusti; torna la risposta in JSON. Fuori dal filo dell'interfaccia. */
     val esegui: (ctx: Context, a: JSONObject) -> JSONObject,
 ) {

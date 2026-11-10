@@ -23,7 +23,9 @@ object Smistatore {
 
     /** Gli strumenti dell'assistente, nell'ordine in cui il modello li vede: la guida per prima. */
     val TUTTI: List<Strumento> by lazy {
-        listOf(GuidaStrumento, CatalogoStrumento, TrascrizioniStrumento, WebStrumento, PaginaStrumento, MediaStrumento)
+        listOf(GuidaStrumento, CatalogoStrumento, TrascrizioniStrumento, WebStrumento, PaginaStrumento, MediaStrumento,
+            // (11/11/2026, fase 2b) l'indagine: note, teorie, mappa, persone di interesse, memoria e il piano dei compiti lunghi
+            NoteStrumento, TeorieStrumento, MappaStrumento, PersoneStrumento, MemoriaStrumento, PianoStrumento)
     }
 
     private val DOC = setOf("documentazione", "guida", "help", "doc", "docs", "aiuto")

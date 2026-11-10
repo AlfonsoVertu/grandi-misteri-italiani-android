@@ -21,6 +21,14 @@ object GuidaStrumento : Strumento() {
             "Quando non sai quale strumento usare.", emptyList(), "guardo i miei strumenti") { _, _ -> strumenti() },
         Azione("come-si-usa", "La regola per chiamare gli strumenti: strumento + action + parametri, e i tre passi.",
             "", emptyList(), "rileggo come si usano gli strumenti") { _, _ -> comeSiUsa() },
+        // (11/11/2026, fase 2b) il RAG locale della documentazione delle azioni (doc_strumenti.json)
+        Azione("cerca", "Cerca nella documentazione delle azioni di tutti gli strumenti: torna strumento, azione, cosa fa ed esempio da copiare.",
+            "Quando non sai quale strumento o azione fa una cosa.", listOf(Parametro("testo", "string", "Cosa vuoi fare, a parole.", true,
+                esempio = "mettere un luogo sulla mappa")), "cerco nella documentazione") { c, a ->
+            val trovate = it.bibliotecadialessandria.ricerca.indagine.Rag.cercaDoc(c, a.optString("testo"), 6)
+            riuscito().put("azioni", JSONArray().also { r -> trovate.forEach { r.put(it) } })
+                .apply { if (trovate.isEmpty()) put("nota", "Niente di simile: guarda tutto con action=strumenti.") }
+        },
     )
 
     private fun app(): JSONObject = riuscito()
@@ -34,7 +42,12 @@ object GuidaStrumento : Strumento() {
             "I miei canali: avvisi da altri canali YouTube.",
             "Assistente AI: questa chat; usa la chiave e il fornitore scelti dalla persona nelle Impostazioni AI. Con ＋ si " +
                 "allegano foto, video, PDF e file; tenendo premuto il microfono si manda un vocale (la risposta si sente anche a voce).",
-            "Media: l'archivio dell'indagine (foto, video, PDF, audio, testi) sul telefono: aggiungi, apri, condividi, cancella, cerca.")))
+            "Media: l'archivio dell'indagine (foto, video, PDF, audio, testi) sul telefono: aggiungi, apri, condividi, cancella, cerca.",
+            "Note: appunti con la fonte, collegati a piu' video al minuto (dalla riga di un video: «＋ Nota»), alle teorie e alla mappa.",
+            "Teorie: raccolgono note, video ai minuti, media, persone e segnalini («Vedi sulla mappa»).",
+            "Mappa: OpenStreetMap con i segnalini (tocco lungo per crearne uno) e le linee fra segnalini, filtro per teoria.",
+            "Persone di interesse: schede con ruolo, cronologia con le fonti e collegamenti (fatti e fonti, non accuse).",
+            "Memoria: quello che l'assistente ricorda (istruzioni, flussi, fatti, preferenze); si modifica ed esporta in markdown.")))
         .put("assistente", "Risponde usando il catalogo dei video, le trascrizioni dei video, il web (DuckDuckGo e Wikipedia) " +
             "le pagine web e l'archivio Media (strumento `media`). Quello che la persona scrive lo legge il fornitore del modello che ha scelto. Nessun server dell'app.")
         .put("crediti", Marca.CREDITI)

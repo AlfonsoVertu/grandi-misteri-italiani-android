@@ -68,6 +68,16 @@
             android:exported="false"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:windowSoftInputMode="adjustResize" />
+        <!-- (11/11/2026, fase 2b) l'indagine: note, teorie, mappa, persone di interesse, memoria (mattonelle dietro Marca.ASSISTENTE) -->
+        <activity android:name=".indagine.NoteActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".indagine.NotaActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".indagine.TeorieActivity" android:exported="false" />
+        <activity android:name=".indagine.TeoriaActivity" android:exported="false" />
+        <activity android:name=".indagine.MappaActivity" android:exported="false"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".indagine.PersoneActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".indagine.PersonaActivity" android:exported="false" />
+        <activity android:name=".indagine.MemoriaActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
         <!-- (10/11/2026) «Scarica trascrizione» → Condividi: il file .txt dalla cache -->
         <provider
             android:name="androidx.core.content.FileProvider"

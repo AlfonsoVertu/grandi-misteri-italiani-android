@@ -1,0 +1,1230 @@
+{
+  "guida": {
+    "app": {
+      "cosa_fa": "Cosa fa l'app e cosa puo' fare la persona da sola (senza assistente).",
+      "quando": "Quando chiedono come funziona l'app o dove trovare qualcosa.",
+      "parametri": {},
+      "esempio": {
+        "action": "app"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "strumenti": {
+      "cosa_fa": "Gli strumenti dell'assistente con le loro azioni e un esempio da copiare per ognuna.",
+      "quando": "Quando non sai quale strumento usare.",
+      "parametri": {},
+      "esempio": {
+        "action": "strumenti"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "come-si-usa": {
+      "cosa_fa": "La regola per chiamare gli strumenti: strumento + action + parametri, e i tre passi.",
+      "quando": "",
+      "parametri": {},
+      "esempio": {
+        "action": "come-si-usa"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cerca": {
+      "cosa_fa": "Cerca nella documentazione delle azioni di tutti gli strumenti: torna strumento, azione, cosa fa ed esempio da copiare.",
+      "quando": "Quando non sai quale strumento o azione fa una cosa.",
+      "parametri": {
+        "testo": "obbligatorio, string: Cosa vuoi fare, a parole."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "mettere un luogo sulla mappa"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "catalogo": {
+    "cerca": {
+      "cosa_fa": "Cerca i video per parole e filtri; torna titolo, canale, data, durata, casi, temi e link.",
+      "quando": "Per trovare i video che parlano di un caso, di una persona o di un luogo.",
+      "parametri": {
+        "testo": "facoltativo, string: Le parole da cercare (tutte devono comparire). Vuoto = nessuna parola.",
+        "caso": "facoltativo, string: Solo i video di questo caso (i nomi veri con action=filtri).",
+        "tema": "facoltativo, string: Solo i video di questo tema (i nomi veri con action=filtri).",
+        "canale": "facoltativo, string: Solo i video di questo canale.",
+        "tipo": "facoltativo, string: Video, Short o Diretta. Valori: Video, Short, Diretta",
+        "dove": "facoltativo, string: Dove cercare le parole: titolo, descrizione, tag o tutto (predefinito). Valori: titolo, descrizione, tag, tutto",
+        "quanti": "facoltativo, integer: Quanti risultati (1-25, predefinito 10).",
+        "pagina": "facoltativo, integer: La pagina dei risultati, da 1 (predefinito 1)."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "Ustica"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "dettaglio": {
+      "cosa_fa": "Tutto quello che il catalogo sa di un video: titolo, canale, data, durata, casi, temi, tag, descrizione.",
+      "quando": "Dopo cerca, per leggere la descrizione di un video.",
+      "parametri": {
+        "youtube_id": "obbligatorio, string: L'id YouTube del video (11 caratteri) o il suo link."
+      },
+      "esempio": {
+        "action": "dettaglio",
+        "youtube_id": "oRFuohjWMpA"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "filtri": {
+      "cosa_fa": "I valori ammessi per caso, tema, canale e tipo, con quanti video ha ognuno.",
+      "quando": "Prima di cercare per caso o tema, per usare i nomi esatti.",
+      "parametri": {},
+      "esempio": {
+        "action": "filtri"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "recenti": {
+      "cosa_fa": "Gli ultimi video arrivati nel catalogo.",
+      "quando": "Per «cosa c'e' di nuovo».",
+      "parametri": {
+        "tipo": "facoltativo, string: Video, Short o Diretta. Valori: Video, Short, Diretta",
+        "quanti": "facoltativo, integer: Quanti risultati (1-25, predefinito 10)."
+      },
+      "esempio": {
+        "action": "recenti",
+        "tipo": "<string>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "trascrizioni": {
+    "scarica": {
+      "cosa_fa": "Scarica la trascrizione di un video (o la prende dal telefono se c'e' gia'); torna lingua, se e' automatica, quante righe, la durata e l'inizio del testo.",
+      "quando": "Prima di leggere o cercare in un video.",
+      "parametri": {
+        "youtube_id": "obbligatorio, string: L'id YouTube del video (11 caratteri) o il suo link.",
+        "lingua": "facoltativo, string: La lingua dei sottotitoli (codice di due lettere, predefinita it)."
+      },
+      "esempio": {
+        "action": "scarica",
+        "youtube_id": "oRFuohjWMpA"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "leggi": {
+      "cosa_fa": "Legge un pezzo della trascrizione con i tempi [mm:ss], da un secondo a un altro; con `continua` il pezzo dopo.",
+      "quando": "Per riassumere o citare una parte del video.",
+      "parametri": {
+        "youtube_id": "obbligatorio, string: L'id YouTube del video (11 caratteri) o il suo link.",
+        "da_secondo": "facoltativo, string: Da dove leggere: secondi o mm:ss (predefinito 0).",
+        "a_secondo": "facoltativo, string: Fino a dove (facoltativo): secondi o mm:ss.",
+        "caratteri": "facoltativo, integer: Quanto testo al massimo (fino a 6000, predefinito 4000).",
+        "lingua": "facoltativo, string: La lingua dei sottotitoli (codice di due lettere, predefinita it)."
+      },
+      "esempio": {
+        "action": "leggi",
+        "youtube_id": "oRFuohjWMpA"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cerca": {
+      "cosa_fa": "Cerca parole nella trascrizione di un video (o in tutte quelle gia' scaricate): torna i punti con il minuto, una riga prima e dopo e il link al secondo.",
+      "quando": "Per sapere IN QUALE MINUTO un video parla di qualcosa.",
+      "parametri": {
+        "testo": "obbligatorio, string: Le parole da cercare.",
+        "youtube_id": "facoltativo, string: Il video in cui cercare; vuoto = in tutte le trascrizioni gia' sul telefono.",
+        "quanti": "facoltativo, integer: Quanti punti al massimo (predefinito 8, massimo 20).",
+        "lingua": "facoltativo, string: La lingua dei sottotitoli (codice di due lettere, predefinita it)."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "depistaggio"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "salvate": {
+      "cosa_fa": "Le trascrizioni gia' scaricate sul telefono.",
+      "quando": "",
+      "parametri": {},
+      "esempio": {
+        "action": "salvate"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "web": {
+    "cerca": {
+      "cosa_fa": "Cerca sul web con DuckDuckGo: titolo, link ed estratto dei risultati.",
+      "quando": "Per fatti recenti o fonti che non sono nel catalogo dei video.",
+      "parametri": {
+        "testo": "obbligatorio, string: Cosa cercare.",
+        "quanti": "facoltativo, integer: Quanti risultati (1-10, predefinito 6)."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "strage di Ustica sentenza"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "wikipedia": {
+      "cosa_fa": "Cerca su Wikipedia: le voci trovate e l'introduzione della prima.",
+      "quando": "Per date, nomi e fatti accertati dei casi storici.",
+      "parametri": {
+        "testo": "obbligatorio, string: Cosa cercare.",
+        "lingua": "facoltativo, string: La lingua di Wikipedia (codice di due lettere, predefinita it)."
+      },
+      "esempio": {
+        "action": "wikipedia",
+        "testo": "strage di Ustica sentenza"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "pagina": {
+    "leggi": {
+      "cosa_fa": "Il testo pulito della pagina, 5000 caratteri per volta (con `da` il pezzo dopo), titolo e quanto e' lunga.",
+      "quando": "Dopo una ricerca sul web, per leggere una fonte.",
+      "parametri": {
+        "url": "obbligatorio, string: L'indirizzo della pagina (https:\/\/...).",
+        "da": "facoltativo, integer: Da quale carattere continuare (lo dice `continua`)."
+      },
+      "esempio": {
+        "action": "leggi",
+        "url": "https:\/\/it.wikipedia.org\/wiki\/Strage_di_Ustica"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "link": {
+      "cosa_fa": "I link della pagina (al massimo 60), con un filtro facoltativo sul testo o sull'indirizzo.",
+      "quando": "",
+      "parametri": {
+        "url": "obbligatorio, string: L'indirizzo della pagina (https:\/\/...).",
+        "filtro": "facoltativo, string: Solo i link che contengono queste parole."
+      },
+      "esempio": {
+        "action": "link",
+        "url": "https:\/\/it.wikipedia.org\/wiki\/Strage_di_Ustica"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cerca-nella-pagina": {
+      "cosa_fa": "I passaggi della pagina che contengono le parole cercate.",
+      "quando": "In una pagina lunga, per arrivare subito al punto.",
+      "parametri": {
+        "url": "obbligatorio, string: L'indirizzo della pagina (https:\/\/...).",
+        "testo": "obbligatorio, string: Le parole da cercare."
+      },
+      "esempio": {
+        "action": "cerca-nella-pagina",
+        "url": "https:\/\/it.wikipedia.org\/wiki\/Strage_di_Ustica",
+        "testo": "depistaggio"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "media": {
+    "elenca": {
+      "cosa_fa": "I file dell'archivio, dal piu' recente: id, nome, tipo, misura, data, origine.",
+      "quando": "Per sapere cosa c'e' nell'archivio.",
+      "parametri": {
+        "tipo": "facoltativo, string: Solo un tipo. Valori: immagine, video, pdf, audio, testo, file",
+        "quanti": "facoltativo, integer: Quanti al massimo (predefinito 20, massimo 50).",
+        "pagina": "facoltativo, integer: La pagina (da 1)."
+      },
+      "esempio": {
+        "action": "elenca",
+        "tipo": "<string>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cerca": {
+      "cosa_fa": "Cerca nell'archivio per nome, tipo, URL di origine e testo (testo dei file, descrizioni delle immagini, trascrizioni).",
+      "quando": "Per trovare un file di cui ricordi una parola.",
+      "parametri": {
+        "testo": "obbligatorio, string: Le parole da cercare (tutte).",
+        "tipo": "facoltativo, string: Solo un tipo. Valori: immagine, video, pdf, audio, testo, file",
+        "quanti": "facoltativo, integer: Quanti al massimo (predefinito 20)."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "ustica"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "leggi": {
+      "cosa_fa": "Il contenuto di un file: testo (.txt\/.md\/.json) a pezzi da 6000 caratteri; PDF letto dal modello per i file; immagine descritta dal modello per le immagini; video descritto; audio trascritto.",
+      "quando": "Per usare un file nella risposta. Con `domanda` il modello guarda il file pensando a quella domanda.",
+      "parametri": {
+        "id": "facoltativo, integer: L'id del file nell'archivio (lo danno `elenca` e `cerca`).",
+        "nome": "facoltativo, string: In alternativa all'id: il nome esatto del file.",
+        "da": "facoltativo, integer: Per i testi: da quale carattere continuare (lo dice `continua`).",
+        "domanda": "facoltativo, string: Cosa cercare nel file (per immagini, video e PDF)."
+      },
+      "esempio": {
+        "action": "leggi",
+        "id": 3
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "scarica_da_url": {
+      "cosa_fa": "Scarica da internet un'immagine, un PDF, un audio o un video piccolo (massimo 25 MB, solo https) e lo salva nell'archivio con l'URL di origine.",
+      "quando": "Quando la persona chiede di salvare un'immagine o un documento trovato sul web. Serve il link DIRETTO al file (per Wikipedia: l'immagine su upload.wikimedia.org); se dai una pagina web ti dico i link alle immagini che contiene.",
+      "parametri": {
+        "url": "obbligatorio, string: Il link diretto al file (https:\/\/...).",
+        "nome": "facoltativo, string: Il nome da dare al file (facoltativo)."
+      },
+      "esempio": {
+        "action": "scarica_da_url",
+        "url": "https:\/\/upload.wikimedia.org\/wikipedia\/commons\/a\/a9\/Example.jpg"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "scrivi": {
+      "cosa_fa": "Crea un file di testo (.md, .txt o .json) nell'archivio, o lo aggiorna se esiste gia' con quel nome.",
+      "quando": "Per un riassunto, un dossier, una cronologia che la persona vuole tenere.",
+      "parametri": {
+        "nome": "obbligatorio, string: Il nome del file (se manca l'estensione diventa .md).",
+        "testo": "obbligatorio, string: Il contenuto (markdown semplice).",
+        "modo": "facoltativo, string: sostituisci (predefinito) o aggiungi in fondo. Valori: sostituisci, aggiungi"
+      },
+      "esempio": {
+        "action": "scrivi",
+        "nome": "dossier_ustica.md",
+        "testo": "# Strage di Ustica\n\n..."
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cancella": {
+      "cosa_fa": "Cancella un file dall'archivio. A DUE PASSI: la prima chiamata da' il riepilogo e un `conferma_token`; si richiama con il token SOLO dopo il si' della persona.",
+      "quando": "Solo se la persona lo chiede.",
+      "parametri": {
+        "id": "facoltativo, integer: L'id del file nell'archivio (lo danno `elenca` e `cerca`).",
+        "nome": "facoltativo, string: In alternativa all'id: il nome esatto del file.",
+        "conferma_token": "facoltativo, string: Il token avuto dalla prima chiamata, SOLO dopo il si' della persona."
+      },
+      "esempio": {
+        "action": "cancella",
+        "id": 3
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "note": {
+    "elenca": {
+      "cosa_fa": "Le note, dalle piu' recenti: id, titolo, autore, quanti video.",
+      "quando": "Per vedere cosa c'e' gia'.",
+      "parametri": {
+        "teoria_id": "facoltativo, integer: Solo le note di questa teoria.",
+        "quanti": "facoltativo, integer: Quante (predefinito 20, massimo 50).",
+        "pagina": "facoltativo, integer: La pagina (da 1)."
+      },
+      "esempio": {
+        "action": "elenca",
+        "teoria_id": "<integer>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": [
+        "cerca",
+        "leggi"
+      ]
+    },
+    "cerca": {
+      "cosa_fa": "Cerca nelle note (titolo, testo, fonte) o le note di un video.",
+      "quando": "Per ritrovare una nota o sapere cosa si e' gia' annotato su un video.",
+      "parametri": {
+        "testo": "facoltativo, string: Le parole da cercare.",
+        "youtube_id": "facoltativo, string: Solo le note collegate a questo video."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "orologio"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": [
+        "leggi"
+      ]
+    },
+    "leggi": {
+      "cosa_fa": "Una nota intera: testo, fonte, video al minuto (con link), teorie, segnalini e persone collegate.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della nota (lo danno elenca e cerca)."
+      },
+      "esempio": {
+        "action": "leggi",
+        "id": 1
+      },
+      "errori": [
+        "non_esiste: l'id non c'e' (ti dico quelli che ci sono)"
+      ],
+      "collegate": []
+    },
+    "crea": {
+      "cosa_fa": "Crea una nota (autore: assistente), con i video al minuto, la fonte e la teoria se le dai.",
+      "quando": "Quando la persona chiede di annotare qualcosa o tu trovi un fatto da tenere. Metti SEMPRE la fonte (video+minuto o link).",
+      "parametri": {
+        "titolo": "obbligatorio, string: Il titolo breve.",
+        "testo": "obbligatorio, string: Il testo della nota (fatti e chi li dice).",
+        "fonte": "facoltativo, string: Da dove viene: «Pulp Podcast #71, min 32:10» o un URL.",
+        "video": "facoltativo, string: I video da collegare: array JSON [{\"youtube_id\":\"…\",\"tempo\":\"12:30\"}] oppure testo «id@12:30, id2@1:02:03» o link con &t=. Tempo vuoto = il video intero.",
+        "teoria_id": "facoltativo, integer: Mettila anche in questa teoria."
+      },
+      "esempio": {
+        "action": "crea",
+        "titolo": "L'orologio caduto dopo",
+        "testo": "Secondo Davide Vecchi (min 32:10)…"
+      },
+      "errori": [
+        "mancano_parametri: titolo e testo",
+        "video non capiti: ti dico quali"
+      ],
+      "collegate": [
+        "collega_video",
+        "teorie\/aggiungi_nota",
+        "mappa\/crea_segnalino"
+      ]
+    },
+    "modifica": {
+      "cosa_fa": "Cambia titolo, testo o fonte di una nota (solo i campi passati); `aggiungi_in_fondo` aggiunge testo.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della nota (lo danno elenca e cerca).",
+        "titolo": "facoltativo, string: Nuovo titolo.",
+        "testo": "facoltativo, string: Nuovo testo (sostituisce).",
+        "fonte": "facoltativo, string: Nuova fonte.",
+        "aggiungi_in_fondo": "facoltativo, string: Testo da aggiungere in fondo."
+      },
+      "esempio": {
+        "action": "modifica",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "collega_video": {
+      "cosa_fa": "Collega un altro video (al minuto) a una nota.",
+      "quando": "Una nota puo' avere piu' video.",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della nota (lo danno elenca e cerca).",
+        "youtube_id": "obbligatorio, string: L'id del video o il link.",
+        "tempo": "facoltativo, string: Il minuto: «12:30», «1:02:03» o secondi. Vuoto = il video intero.",
+        "etichetta": "facoltativo, string: Cosa c'e' a quel minuto."
+      },
+      "esempio": {
+        "action": "collega_video",
+        "id": 1,
+        "youtube_id": "oRFuohjWMpA"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "scollega_video": {
+      "cosa_fa": "Toglie un video da una nota (il `collegamento_id` lo da' leggi).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della nota (lo danno elenca e cerca).",
+        "collegamento_id": "obbligatorio, integer: L'id del collegamento (in leggi, video[].collegamento_id)."
+      },
+      "esempio": {
+        "action": "scollega_video",
+        "id": 1,
+        "collegamento_id": "<integer>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cancella": {
+      "cosa_fa": "Cancella una nota. A DUE PASSI: la prima chiamata da' il riepilogo e il `conferma_token`; si richiama col token SOLO dopo il si' della persona.",
+      "quando": "Solo se la persona lo chiede.",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della nota (lo danno elenca e cerca).",
+        "conferma_token": "facoltativo, string: Il token avuto dalla prima chiamata, SOLO dopo il si' della persona."
+      },
+      "esempio": {
+        "action": "cancella",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "teorie": {
+    "elenca": {
+      "cosa_fa": "Le teorie: id, titolo, quante note.",
+      "quando": "",
+      "parametri": {},
+      "esempio": {
+        "action": "elenca"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "leggi": {
+      "cosa_fa": "Una teoria con le sue note, i video ai minuti, i segnalini, le persone e i media.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della teoria (lo da' elenca)."
+      },
+      "esempio": {
+        "action": "leggi",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "crea": {
+      "cosa_fa": "Crea una teoria (autore: assistente).",
+      "quando": "Per raccogliere note e prove attorno a un'ipotesi.",
+      "parametri": {
+        "titolo": "obbligatorio, string: Il titolo.",
+        "descrizione": "facoltativo, string: L'ipotesi in breve, distinguendo fatti accertati e ipotesi."
+      },
+      "esempio": {
+        "action": "crea",
+        "titolo": "Ustica: la battaglia aerea"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": [
+        "aggiungi_nota"
+      ]
+    },
+    "modifica": {
+      "cosa_fa": "Rinomina una teoria o ne cambia la descrizione.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della teoria (lo da' elenca).",
+        "titolo": "facoltativo, string: Nuovo titolo.",
+        "descrizione": "facoltativo, string: Nuova descrizione."
+      },
+      "esempio": {
+        "action": "modifica",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "aggiungi_nota": {
+      "cosa_fa": "Mette una nota in una teoria.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della teoria (lo da' elenca).",
+        "nota_id": "obbligatorio, integer: L'id della nota."
+      },
+      "esempio": {
+        "action": "aggiungi_nota",
+        "id": 1,
+        "nota_id": 3
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "togli_nota": {
+      "cosa_fa": "Toglie una nota da una teoria (la nota resta).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della teoria (lo da' elenca).",
+        "nota_id": "obbligatorio, integer: L'id della nota."
+      },
+      "esempio": {
+        "action": "togli_nota",
+        "id": 1,
+        "nota_id": "<integer>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "collega": {
+      "cosa_fa": "Collega alla teoria un segnalino della mappa o un file dei Media.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della teoria (lo da' elenca).",
+        "segnalino_id": "facoltativo, integer: L'id del segnalino.",
+        "media_id": "facoltativo, integer: L'id del file nei Media."
+      },
+      "esempio": {
+        "action": "collega",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cancella": {
+      "cosa_fa": "Cancella una teoria (le note restano). A DUE PASSI con `conferma_token`, solo dopo il si' della persona.",
+      "quando": "Solo se la persona lo chiede.",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della teoria (lo da' elenca).",
+        "conferma_token": "facoltativo, string: Il token avuto dalla prima chiamata, SOLO dopo il si' della persona."
+      },
+      "esempio": {
+        "action": "cancella",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "mappa": {
+    "segnalini": {
+      "cosa_fa": "I segnalini: id, titolo, lat, lon, video, nota. Filtri facoltativi.",
+      "quando": "",
+      "parametri": {
+        "testo": "facoltativo, string: Solo quelli con queste parole.",
+        "teoria_id": "facoltativo, integer: Solo quelli di questa teoria.",
+        "nota_id": "facoltativo, integer: Solo quelli di questa nota."
+      },
+      "esempio": {
+        "action": "segnalini",
+        "testo": "<string>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "leggi_segnalino": {
+      "cosa_fa": "Un segnalino con la nota, il video al minuto, le persone e le linee collegate.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id del segnalino (lo da' segnalini)."
+      },
+      "esempio": {
+        "action": "leggi_segnalino",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cerca_luogo": {
+      "cosa_fa": "Cerca le coordinate di un luogo per nome con Nominatim (OpenStreetMap). Una richiesta per volta.",
+      "quando": "Prima di creare un segnalino se non sai lat\/lon, o per scegliere fra piu' luoghi con lo stesso nome.",
+      "parametri": {
+        "luogo": "obbligatorio, string: Il luogo: indirizzo, piazza, citta'."
+      },
+      "esempio": {
+        "action": "cerca_luogo",
+        "luogo": "piazza Fontana, Milano"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": [
+        "crea_segnalino"
+      ]
+    },
+    "crea_segnalino": {
+      "cosa_fa": "Crea un segnalino (autore: assistente): con `lat`+`lon` oppure con `luogo` (cerco io le coordinate col primo risultato di Nominatim).",
+      "quando": "Per mettere sulla mappa un luogo del caso. Collega la nota o il video al minuto se ci sono.",
+      "parametri": {
+        "titolo": "obbligatorio, string: Il nome del punto.",
+        "lat": "facoltativo, number: Latitudine (-90…90).",
+        "lon": "facoltativo, number: Longitudine (-180…180).",
+        "luogo": "facoltativo, string: In alternativa a lat\/lon: il luogo da cercare.",
+        "testo": "facoltativo, string: Cosa e' successo li' (con la fonte).",
+        "youtube_id": "facoltativo, string: Il video che ne parla (id o link).",
+        "tempo": "facoltativo, string: Il minuto nel video.",
+        "nota_id": "facoltativo, integer: La nota collegata.",
+        "teoria_id": "facoltativo, integer: Collegalo anche a questa teoria."
+      },
+      "esempio": {
+        "action": "crea_segnalino",
+        "titolo": "Piazza Fontana"
+      },
+      "errori": [
+        "mancano lat\/lon o luogo",
+        "luogo non trovato da Nominatim"
+      ],
+      "collegate": [
+        "cerca_luogo",
+        "crea_linea"
+      ]
+    },
+    "modifica_segnalino": {
+      "cosa_fa": "Cambia un segnalino (solo i campi passati).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id del segnalino (lo da' segnalini).",
+        "titolo": "facoltativo, string: Nuovo titolo.",
+        "testo": "facoltativo, string: Nuovo testo.",
+        "lat": "facoltativo, number: Nuova latitudine.",
+        "lon": "facoltativo, number: Nuova longitudine.",
+        "youtube_id": "facoltativo, string: Video (id o link).",
+        "tempo": "facoltativo, string: Minuto.",
+        "nota_id": "facoltativo, integer: Nota collegata."
+      },
+      "esempio": {
+        "action": "modifica_segnalino",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cancella_segnalino": {
+      "cosa_fa": "Cancella un segnalino (e le linee che restano con meno di 2 punti). A DUE PASSI con `conferma_token`.",
+      "quando": "Solo se la persona lo chiede.",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id del segnalino (lo da' segnalini).",
+        "conferma_token": "facoltativo, string: Il token avuto dalla prima chiamata, SOLO dopo il si' della persona."
+      },
+      "esempio": {
+        "action": "cancella_segnalino",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "crea_linea": {
+      "cosa_fa": "Unisce dei segnalini con una linea, nell'ordine dato (un percorso).",
+      "quando": "",
+      "parametri": {
+        "titolo": "obbligatorio, string: Il nome della linea.",
+        "punti": "obbligatorio, string: Gli id dei segnalini in ordine, separati da virgole (almeno 2).",
+        "colore": "facoltativo, string: Colore #RRGGBB (predefinito rosso)."
+      },
+      "esempio": {
+        "action": "crea_linea",
+        "titolo": "Il percorso della fuga",
+        "punti": "1,2"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "linee": {
+      "cosa_fa": "Le linee con i loro punti.",
+      "quando": "",
+      "parametri": {},
+      "esempio": {
+        "action": "linee"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "modifica_linea": {
+      "cosa_fa": "Rinomina una linea o ne cambia i punti (in ordine).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della linea (lo da' linee).",
+        "titolo": "facoltativo, string: Nuovo titolo.",
+        "punti": "facoltativo, string: Gli id dei segnalini in ordine, separati da virgole (almeno 2)."
+      },
+      "esempio": {
+        "action": "modifica_linea",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cancella_linea": {
+      "cosa_fa": "Cancella una linea (i segnalini restano). A DUE PASSI con `conferma_token`.",
+      "quando": "Solo se la persona lo chiede.",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della linea (lo da' linee).",
+        "conferma_token": "facoltativo, string: Il token avuto dalla prima chiamata, SOLO dopo il si' della persona."
+      },
+      "esempio": {
+        "action": "cancella_linea",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "persone": {
+    "elenca": {
+      "cosa_fa": "Le persone: id, nome, ruolo.",
+      "quando": "",
+      "parametri": {},
+      "esempio": {
+        "action": "elenca"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cerca": {
+      "cosa_fa": "Cerca per nome, ruolo o descrizione.",
+      "quando": "",
+      "parametri": {
+        "testo": "obbligatorio, string: Le parole."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "Rossi"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "leggi": {
+      "cosa_fa": "La scheda intera: ruolo, descrizione, cronologia con le fonti, tutti i collegamenti.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della persona (lo danno elenca e cerca)."
+      },
+      "esempio": {
+        "action": "leggi",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "crea": {
+      "cosa_fa": "Crea una scheda (autore: assistente). Riporta fatti e fonti, non accuse: ruolo neutro (vittima, familiare, magistrato, testimone, giornalista, avvocato; «indagato» solo se risulta da atti pubblici) e ogni affermazione attribuita a chi la fa («secondo X, min 12:30»).",
+      "quando": "Quando una persona conta nel caso. Prima cerca se esiste gia'.",
+      "parametri": {
+        "nome": "obbligatorio, string: Nome e cognome.",
+        "ruolo": "obbligatorio, string: Ruolo NEUTRO nel caso.",
+        "descrizione": "facoltativo, string: Chi e', solo fatti, con la fonte.",
+        "fonte": "obbligatorio, string: La fonte della descrizione (video+minuto o URL)."
+      },
+      "esempio": {
+        "action": "crea",
+        "nome": "Antonella Tognazzi",
+        "ruolo": "familiare (vedova)",
+        "fonte": "Pulp Podcast #71, min 0:40"
+      },
+      "errori": [
+        "mancano_parametri: nome, ruolo, fonte"
+      ],
+      "collegate": [
+        "aggiungi_cronologia",
+        "collega"
+      ]
+    },
+    "aggiorna": {
+      "cosa_fa": "Cambia nome, ruolo, descrizione o foto (solo i campi passati).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della persona (lo danno elenca e cerca).",
+        "nome": "facoltativo, string: Nome.",
+        "ruolo": "facoltativo, string: Ruolo neutro.",
+        "descrizione": "facoltativo, string: Descrizione (fatti con fonte).",
+        "foto_media_id": "facoltativo, integer: Un'immagine dell'archivio Media da usare come foto."
+      },
+      "esempio": {
+        "action": "aggiorna",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "aggiungi_cronologia": {
+      "cosa_fa": "Aggiunge una voce alla cronologia: quando, cosa ha fatto o detto, e la FONTE (obbligatoria).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della persona (lo danno elenca e cerca).",
+        "quando": "obbligatorio, string: La data o il momento.",
+        "cosa": "obbligatorio, string: Il fatto, attribuito («secondo X…» se e' una ricostruzione).",
+        "fonte": "obbligatorio, string: Video+minuto, pagina web o documento."
+      },
+      "esempio": {
+        "action": "aggiungi_cronologia",
+        "id": 1,
+        "quando": "6 marzo 2013",
+        "cosa": "Secondo la vedova (min 5:10), quel giorno…",
+        "fonte": "Pulp Podcast #71, min 5:10"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "togli_cronologia": {
+      "cosa_fa": "Toglie una voce dalla cronologia (`voce_id` da leggi).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della persona (lo danno elenca e cerca).",
+        "voce_id": "obbligatorio, integer: L'id della voce."
+      },
+      "esempio": {
+        "action": "togli_cronologia",
+        "id": 1,
+        "voce_id": "<integer>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "collega": {
+      "cosa_fa": "Collega la persona a: un video al minuto, un segnalino, una nota, una teoria, un file dei Media o un'altra persona (con etichetta, es. «moglie di»).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della persona (lo danno elenca e cerca).",
+        "a": "obbligatorio, string: Cosa collegare. Valori: video, segnalino, nota, teoria, media, persona",
+        "a_id": "facoltativo, integer: L'id della cosa (non serve per un video).",
+        "youtube_id": "facoltativo, string: Per a=video: id o link.",
+        "tempo": "facoltativo, string: Per a=video: il minuto.",
+        "etichetta": "facoltativo, string: Il legame, neutro: «moglie di», «parla al minuto», «testimone in»."
+      },
+      "esempio": {
+        "action": "collega",
+        "id": 1,
+        "a": "video"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "scollega": {
+      "cosa_fa": "Toglie un collegamento (`legame_id` da leggi).",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della persona (lo danno elenca e cerca).",
+        "legame_id": "obbligatorio, integer: L'id del collegamento."
+      },
+      "esempio": {
+        "action": "scollega",
+        "id": 1,
+        "legame_id": "<integer>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cancella": {
+      "cosa_fa": "Cancella una scheda. A DUE PASSI con `conferma_token`, solo dopo il si' della persona.",
+      "quando": "Solo se la persona lo chiede.",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della persona (lo danno elenca e cerca).",
+        "conferma_token": "facoltativo, string: Il token avuto dalla prima chiamata, SOLO dopo il si' della persona."
+      },
+      "esempio": {
+        "action": "cancella",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "memoria": {
+    "crea": {
+      "cosa_fa": "Ricorda una cosa (creata da: AI).",
+      "quando": "Quando la persona dice «ricordati…», «d'ora in poi…», o descrive una procedura da ripetere (flusso), o quando trovi un fatto da non perdere. Prima cerca se c'e' gia' (meglio aggiornare che duplicare).",
+      "parametri": {
+        "tipo": "obbligatorio, string: Il tipo. Valori: istruzione, flusso, fatto, preferenza",
+        "titolo": "obbligatorio, string: Un titolo breve.",
+        "testo": "obbligatorio, string: Il contenuto. Per un flusso: i passi numerati."
+      },
+      "esempio": {
+        "action": "crea",
+        "tipo": "istruzione",
+        "titolo": "Cita sempre il minuto",
+        "testo": "Quando parli di un video metti sempre il minuto."
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": [
+        "cerca",
+        "aggiorna"
+      ]
+    },
+    "elenca": {
+      "cosa_fa": "Le memorie (titolo, tipo, chi l'ha creata, data), anche di un solo tipo.",
+      "quando": "",
+      "parametri": {
+        "tipo": "facoltativo, string: Il tipo. Valori: istruzione, flusso, fatto, preferenza"
+      },
+      "esempio": {
+        "action": "elenca",
+        "tipo": "<string>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cerca": {
+      "cosa_fa": "Cerca nelle memorie a parole (titolo e testo).",
+      "quando": "",
+      "parametri": {
+        "testo": "obbligatorio, string: Le parole."
+      },
+      "esempio": {
+        "action": "cerca",
+        "testo": "caso nuovo"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "leggi": {
+      "cosa_fa": "Una memoria intera.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della memoria (lo danno elenca e cerca)."
+      },
+      "esempio": {
+        "action": "leggi",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "aggiorna": {
+      "cosa_fa": "Cambia titolo, testo o tipo di una memoria.",
+      "quando": "",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della memoria (lo danno elenca e cerca).",
+        "tipo": "facoltativo, string: Il tipo. Valori: istruzione, flusso, fatto, preferenza",
+        "titolo": "facoltativo, string: Nuovo titolo.",
+        "testo": "facoltativo, string: Nuovo testo."
+      },
+      "esempio": {
+        "action": "aggiorna",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "cancella": {
+      "cosa_fa": "Cancella una memoria. A DUE PASSI con `conferma_token`, solo dopo il si' della persona.",
+      "quando": "Solo se la persona lo chiede.",
+      "parametri": {
+        "id": "obbligatorio, integer: L'id della memoria (lo danno elenca e cerca).",
+        "conferma_token": "facoltativo, string: Il token avuto dalla prima chiamata, SOLO dopo il si' della persona."
+      },
+      "esempio": {
+        "action": "cancella",
+        "id": 1
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "esporta": {
+      "cosa_fa": "Tutte le memorie in markdown (## titolo, tipo, chi, data, testo).",
+      "quando": "Per un riepilogo o per salvarle in un file dei Media.",
+      "parametri": {},
+      "esempio": {
+        "action": "esporta"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  },
+  "piano": {
+    "crea": {
+      "cosa_fa": "Crea il piano con i passi in ordine (chiude quello vecchio se ce n'e' uno aperto e lo dici).",
+      "quando": "All'inizio di una richiesta che chiede piu' di 3-4 chiamate agli strumenti.",
+      "parametri": {
+        "titolo": "obbligatorio, string: Il compito in breve.",
+        "passi": "obbligatorio, string: I passi in ordine: array JSON di testi oppure righe separate da «|» o a capo.",
+        "obiettivo": "facoltativo, string: Cosa deve esserci alla fine."
+      },
+      "esempio": {
+        "action": "crea",
+        "titolo": "Dossier sul caso David Rossi",
+        "passi": "Cerca i video nel catalogo | Scarica le trascrizioni | Crea la teoria e le note | Scrivi il dossier"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": [
+        "aggiorna_passo"
+      ]
+    },
+    "aggiorna_passo": {
+      "cosa_fa": "Cambia lo stato di un passo (da_fare, in_corso, fatto, bloccato) e ne scrive l'esito (cosa hai trovato, con le fonti).",
+      "quando": "Prima di cominciare un passo (in_corso) e appena l'hai finito (fatto + esito).",
+      "parametri": {
+        "passo": "obbligatorio, integer: Il numero del passo (da 1).",
+        "stato": "obbligatorio, string: Il nuovo stato. Valori: da_fare, in_corso, fatto, bloccato",
+        "esito": "facoltativo, string: Cosa e' venuto fuori, in breve, con link e minuti."
+      },
+      "esempio": {
+        "action": "aggiorna_passo",
+        "passo": 1,
+        "stato": "fatto"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "aggiungi_passo": {
+      "cosa_fa": "Aggiunge un passo in fondo al piano aperto.",
+      "quando": "Quando scopri che serve altro.",
+      "parametri": {
+        "testo": "obbligatorio, string: Il passo."
+      },
+      "esempio": {
+        "action": "aggiungi_passo",
+        "testo": "<string>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "appunti": {
+      "cosa_fa": "Aggiunge una riga al taccuino del piano (risultati intermedi, fonti, idee): resta su disco anche se la conversazione si accorcia.",
+      "quando": "",
+      "parametri": {
+        "testo": "obbligatorio, string: L'appunto."
+      },
+      "esempio": {
+        "action": "appunti",
+        "testo": "<string>"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "leggi": {
+      "cosa_fa": "Il piano aperto (o l'ultimo) con i passi, gli esiti e gli appunti.",
+      "quando": "Per riprendere un compito: comincia dal primo passo non fatto.",
+      "parametri": {},
+      "esempio": {
+        "action": "leggi"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    },
+    "chiudi": {
+      "cosa_fa": "Chiude il piano aperto con l'esito finale.",
+      "quando": "Quando il compito e' finito (o la persona lo abbandona).",
+      "parametri": {
+        "esito": "obbligatorio, string: Com'e' finita, in breve."
+      },
+      "esempio": {
+        "action": "chiudi",
+        "esito": "Dossier scritto nei Media: dossier_rossi.md"
+      },
+      "errori": [
+        "mancano_parametri: ti dico quali e la riga da copiare in fai_cosi"
+      ],
+      "collegate": []
+    }
+  }
+}
