@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Grandi misteri italiani, tema chiaro: carta di fascicolo, inchiostro scuro, rosso cupo -->
+    <color name="fondo">#FFF6F1EC</color>
+    <color name="card">#FFFFFBF7</color>
+    <color name="bordo">#FFE4D6CF</color>
+    <color name="testo">#FF2A1718</color>
+    <color name="tenue">#FF7E6762</color>
+    <color name="oro">#FFA8352E</color>
+    <color name="su_oro">#FFFFFFFF</color>
+    <color name="icona_fondo">#FF120D10</color>
+</resources>

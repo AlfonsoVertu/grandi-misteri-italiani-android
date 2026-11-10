@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Grandi misteri italiani, tema scuro (di partenza): notte, carta ingiallita, rosso cupo -->
+    <color name="fondo">#FF120D10</color>
+    <color name="card">#FF1D1619</color>
+    <color name="bordo">#FF33272B</color>
+    <color name="testo">#FFF1E6DE</color>
+    <color name="tenue">#FFB09A92</color>
+    <color name="oro">#FFC8473F</color>
+    <color name="su_oro">#FFFFFFFF</color>
+    <color name="icona_fondo">#FF120D10</color>
+</resources>

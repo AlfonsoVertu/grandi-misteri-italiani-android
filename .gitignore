@@ -1,0 +1,17 @@
+.gradle/
+build/
+app/build/
+*.apk
+*.aab
+local.properties
+*.jks
+*.keystore
+.idea/
+*.iml
+.DS_Store
+
+# l APK firmato da installare sta nel repository, apposta
+# consegna/ resta fuori: gli APK stanno su mondo e nello store
+
+# dati scaricati dai canali: si rigenerano con gli strumenti
+strumenti/dati/

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- (29/10) le notifiche dei video nuovi: il permesso (Android 13+) e il riavvio del controllo dopo lo spegnimento -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- da Android 14 un lavoro che chiede la rete deve poterla controllare (29/10: senza, crash all'avvio) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- (10/11/2026) la famiglia delle app dei canali: si scambiano «I miei canali» solo se firmate con la stessa chiave -->
+    <permission android:name="eu.workingwithweb.canali.permesso.FAMIGLIA" android:protectionLevel="signature" />
+    <uses-permission android:name="eu.workingwithweb.canali.permesso.FAMIGLIA" />
+
+    <!-- Da Android 11 un'app vede le altre solo se le dichiara: servono per
+         sapere se Somnio c'e' (per "Aggiungi alla libreria Somnio") e per
+         aprire i link di YouTube. -->
+    <queries>
+        <package android:name="eu.workingwithweb.somnio" />
+        <package android:name="com.google.android.youtube" />
+        <intent>
+            <action android:name="eu.workingwithweb.canali.FAMIGLIA" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Tema">
+        <activity
+            android:name=".RicercaActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- (10/11) «Condividi» da YouTube: il video nei preferiti, oppure segui il suo canale -->
+            <intent-filter android:label="Biblioteca: preferiti o segui il canale">
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name=".FamigliaProvider"
+            android:authorities="${applicationId}.famiglia"
+            android:exported="true"
+            android:permission="eu.workingwithweb.canali.permesso.FAMIGLIA" />
+        <receiver
+            android:name=".FamigliaRicevitore"
+            android:exported="true"
+            android:permission="eu.workingwithweb.canali.permesso.FAMIGLIA">
+            <intent-filter>
+                <action android:name="eu.workingwithweb.canali.FAMIGLIA" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".ControlloSeguiti"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false" />
+        <service
+            android:name=".ControlloNovita"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false" />
+    </application>
+</manifest>
