@@ -31,6 +31,8 @@ object Marca {
     const val MONDO = "grandi-misteri-italiani"
     const val CERCA_SOTTO = "Per caso, tema e canale"
     const val CERCO = "Cerco fra i video..."
+    /** Il suggerimento nella casella di ricerca. */
+    const val SUGGERIMENTO = "Cerca un video: Moro, Ustica, Orlandi..."
     const val NON_RISPONDE = "Non riesco a leggere il catalogo dei video. Riprova."
     const val NOTA_CERCA = "Ricerca fra i video sui misteri italiani dei canali dell'app · app non ufficiale"
     const val PIEDE = "App non ufficiale · i video sono dei rispettivi canali YouTube"

@@ -32,8 +32,8 @@ android {
         create("misteri") {
             dimension = "canale"
             applicationId = "eu.workingwithweb.canali.misteri"
-            versionCode = 1
-            versionName = "1.42.42"
+            versionCode = 2
+            versionName = "2.42.42"
         }
     }
 
