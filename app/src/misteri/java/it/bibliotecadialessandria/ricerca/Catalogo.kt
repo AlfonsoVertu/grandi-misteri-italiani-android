@@ -46,7 +46,11 @@ object Catalogo {
         return leggi(o, aggiunti).also { dati = it }
     }
 
-    private fun piano(s: String) = Normalizer.normalize(s.lowercase(), Normalizer.Form.NFD).replace(Regex("\\p{M}+"), "")
+    // minuscolo, senza accenti e senza punteggiatura, con uno spazio davanti: cosi' una parola si cerca solo
+    // all'INIZIO delle parole («ustica» non trova «rustica» ne' «acustica»)
+    private fun piano(s: String) = " " + Normalizer.normalize(s.lowercase(), Normalizer.Form.NFD).replace(Regex("\\p{M}+"), "")
+        .replace(Regex("[^a-z0-9]+"), " ")
+    private fun ha(testo: String, parola: String) = testo.contains(" $parola")
     private fun lista(a: JSONArray?) = a?.let { t -> (0 until t.length()).map { t.getString(it) } }.orEmpty()
 
     private fun voce(x: JSONObject): Voce {
@@ -138,7 +142,8 @@ object Catalogo {
         Modulo(
             listOfNotNull(
                 Gruppo("Cerca le parole nel", listOf(Opzione("dove:titolo", "Titolo", true),
-                    Opzione("dove:descrizione", "Descrizione", true), Opzione("dove:tag", "Tag, casi e canale", true))),
+                    Opzione("dove:descrizione", "Descrizione", true), Opzione("dove:tag", "Tag, casi e canale", true),
+                    Opzione("dove:trascrizione", "Trascrizione (dei video già scaricati)", false))),
                 gruppo("caso", "Caso", false), gruppo("tema", "Tema", false), gruppo("canale", "Canale", false), gruppo("tipo", "Tipo", true)),
             listOf(Testo("Descrizione", "Parole da cercare", ""), Testo("MaxRisultati", "Quanti risultati al massimo", "100")),
             emptyList(),
@@ -152,12 +157,20 @@ object Catalogo {
         val tipi = scelti("tipo"); val temi = scelti("tema"); val casi = scelti("caso"); val canali = scelti("canale")
         val dove = scelti("dove").ifEmpty { setOf("titolo") }
         val parole = piano(valori["Descrizione"].orEmpty()).split(Regex("\\s+")).filter { it.length > 1 }
+        // (10/11/2026) le trascrizioni: solo quelle gia' sul telefono (pulsante «Scarica trascrizione» o assistente)
+        val trascr: Map<String, String> = if ("trascrizione" in dove && parole.isNotEmpty())
+            TrascrizioniYoutube.salvate(app).mapNotNull { id ->
+                TrascrizioniYoutube.salvata(app, id)?.let { id to piano(TrascrizioniYoutube.testo(it)) }
+            }.toMap() else emptyMap()
+        fun nellaTrascr(x: Voce, p: String) = trascr[x.v.youtubeId]?.let { ha(it, p) } == true
         val trovati = d.voci.filter { x ->
             (tipi.isEmpty() || x.tipo in tipi) && (canali.isEmpty() || x.canale in canali) &&
                 (temi.isEmpty() || x.temi.any { it in temi }) && (casi.isEmpty() || x.casi.any { it in casi }) &&
-                parole.all { p -> ("titolo" in dove && p in x.titolo) || ("descrizione" in dove && p in x.descrizione) || ("tag" in dove && p in x.tag) }
+                parole.all { p -> ("titolo" in dove && ha(x.titolo, p)) || ("descrizione" in dove && ha(x.descrizione, p)) ||
+                    ("tag" in dove && ha(x.tag, p)) || ("trascrizione" in dove && nellaTrascr(x, p)) }
         }
-        fun punti(x: Voce) = parole.sumOf { p -> (if (p in x.titolo) 4 else 0) + (if (p in x.tag) 2 else 0) + (if (p in x.descrizione) 1 else 0) }
+        fun punti(x: Voce) = parole.sumOf { p -> (if (ha(x.titolo, p)) 4 else 0) + (if (ha(x.tag, p)) 2 else 0) +
+            (if (ha(x.descrizione, p)) 1 else 0) + (if (nellaTrascr(x, p)) 1 else 0) }
         val ordinati = if (parole.isEmpty()) trovati else trovati.sortedByDescending { punti(it) }
         val max = valori["MaxRisultati"]?.toIntOrNull()?.coerceIn(1, 1000) ?: 100
         Esito(ordinati.take(max).map { it.v }, trovati.size)

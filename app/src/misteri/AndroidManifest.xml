@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (11/11/2026) Solo per Misteri, l'unica app con l'assistente AI (Marca.ASSISTENTE): Biblioteca ed Entropy non
+     chiedono il microfono. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- i vocali per l'assistente: chiesto al primo «tieni premuto» sul microfono -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- da Android 11 un'app vede i servizi delle altre solo se li dichiara: la voce del telefono (TextToSpeech),
+         il riconoscimento vocale e la fotocamera per «Scatta una foto» -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+</manifest>

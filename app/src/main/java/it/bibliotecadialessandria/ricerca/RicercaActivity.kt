@@ -38,12 +38,16 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import it.bibliotecadialessandria.ricerca.assistente.AssistenteActivity
+import it.bibliotecadialessandria.ricerca.assistente.ImpostazioniAiActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -59,6 +63,8 @@ import java.net.URL
 private const val DONAZIONI = "https://paypal.me/alfonsovertucci"
 /** Il canale YouTube di questa app: nome, link e testi stanno in [Marca], diversa per ogni canale. */
 private val CANALE = Marca.CANALE
+/** (10/11/2026) la richiesta della finestra di sistema per salvare una trascrizione. */
+private const val SALVA_TRASCRIZIONE = 42
 
 class RicercaActivity : Activity() {
 
@@ -118,6 +124,7 @@ class RicercaActivity : Activity() {
 
     override fun onCreate(stato: Bundle?) {
         super.onCreate(stato)
+        if (Marca.ASSISTENTE) it.bibliotecadialessandria.ricerca.assistente.ConfigAi.importaSeCe(this)?.let { android.widget.Toast.makeText(this, it, android.widget.Toast.LENGTH_LONG).show() }
         scorrimento = ScrollView(this).apply { isFillViewport = true }
         corpo = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         scorrimento.addView(corpo, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT))
@@ -256,6 +263,16 @@ class RicercaActivity : Activity() {
             Voce(R.drawable.ic_post, "Post", "Dal canale") { scheda = Scheda.POST; disegna() },
         )) + listOf(
             Voce(R.drawable.ic_cerca, "Cerca", Marca.CERCA_SOTTO) { scheda = Scheda.CERCA; disegna() },
+        ) + (if (!Marca.ASSISTENTE) emptyList() else listOf(
+            // (10/11/2026) l'assistente AI e le sue impostazioni (fornitore e chiave dell'utente)
+            Voce(R.drawable.ic_assistente, "Assistente AI", "Chiedi dei casi e dei video") {
+                startActivity(Intent(this, AssistenteActivity::class.java)) },
+            Voce(R.drawable.ic_regola, "Impostazioni AI", "Fornitore, chiave, modello") {
+                startActivity(Intent(this, ImpostazioniAiActivity::class.java)) },
+            // (11/11/2026) l'archivio dell'indagine: foto, video, PDF e file (anche quelli mandati all'assistente)
+            Voce(R.drawable.ic_media, "Media", "Foto, video e PDF dell'indagine") {
+                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.assistente.MediaActivity::class.java)) },
+        )) + listOf(
             Voce(R.drawable.ic_preferiti, "Preferiti", "I video salvati") { scheda = Scheda.PREFERITI; disegna() },
             Voce(R.drawable.ic_playlist, "Playlist", "Le tue raccolte") { playlistAperta = null; scheda = Scheda.PLAYLIST; disegna() },
             Voce(R.drawable.ic_campanella, "I miei canali", "Avvisi da altri canali") { apriCanali(null) },
@@ -410,6 +427,14 @@ class RicercaActivity : Activity() {
                 totale != null -> ris.addView(etichetta(
                     "$totale video trovati" +
                         (if (trovati.size < (totale ?: 0)) " · ne vedi ${trovati.size}" else "")), sotto(8))
+            }
+            // (10/11/2026) per cercare anche dentro il parlato: le trascrizioni dei video trovati, una alla volta
+            if (Marca.ASSISTENTE && !cercando && trovati.isNotEmpty()) {
+                val gia = TrascrizioniYoutube.salvate(this).toSet()
+                val mancano = trovati.filter { it.youtubeId !in gia }
+                ris.addView(nota(if (mancano.isEmpty()) "Hai già la trascrizione di tutti questi video: nei filtri accendi «Trascrizione» per cercare anche nel parlato."
+                    else "Trascrizioni sul telefono: ${trovati.size - mancano.size} su ${trovati.size}. Per cercare anche nel parlato scaricale e accendi «Trascrizione» nei filtri."), sotto(6))
+                if (mancano.isNotEmpty()) ris.addView(bottone("⤓  Scarica le trascrizioni dei video trovati (${minOf(mancano.size, 30)})") { scaricaTrascrizioni(mancano.take(30)) }, sotto(10))
             }
             trovati.forEach { ris.addView(rigaVideo(it), sotto(14)) }
             if (trovati.isNotEmpty() && trovati.size < (totale ?: 0)) {
@@ -689,7 +714,97 @@ class RicercaActivity : Activity() {
             }, LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { leftMargin = dp(4) })
         }
         riga.addView(azioni, sopra(6))
+        // (10/11/2026) i sottotitoli del video in un file .txt con i tempi, senza AI (lo stesso codice dello
+        // strumento «trascrizioni» dell'assistente). Per ora solo dove c'e' l'assistente.
+        if (Marca.ASSISTENTE) riga.addView(bottone("⤓  Scarica trascrizione") { scaricaTrascrizione(v) }, sopra(6))
         return riga
+    }
+
+    // ── trascrizioni (10/11/2026) ────────────────────────────────────
+
+    /** Il testo da scrivere nel file scelto con la finestra di sistema (ACTION_CREATE_DOCUMENT). */
+    private var daSalvare: String? = null
+
+    /** Le trascrizioni di piu' video, piano (una ogni 4 secondi, come gli strumenti del PC: YouTube non va forzato). */
+    private fun scaricaTrascrizioni(lista: List<Video>) {
+        var fermo = false
+        val attesa = AlertDialog.Builder(this).setTitle("Scarico le trascrizioni")
+            .setMessage("0 su ${lista.size}…").setNegativeButton("Ferma") { _, _ -> fermo = true }.setCancelable(false).show()
+        ambito.launch {
+            var ok = 0; var senza = 0
+            for ((i, v) in lista.withIndex()) {
+                if (fermo) break
+                val r = runCatching { withContext(Dispatchers.IO) { TrascrizioniYoutube.scarica(this@RicercaActivity, v.youtubeId) } }
+                if (r.isSuccess) ok++ else senza++
+                attesa.setMessage("${i + 1} su ${lista.size} · scaricate $ok" + (if (senza > 0) " · senza sottotitoli $senza" else ""))
+                if (i < lista.size - 1 && !fermo) kotlinx.coroutines.delay(4000)
+            }
+            if (attesa.isShowing) attesa.dismiss()
+            AlertDialog.Builder(this@RicercaActivity).setTitle("Trascrizioni")
+                .setMessage("Scaricate $ok" + (if (senza > 0) "; $senza video senza sottotitoli o non raggiungibili" else "") +
+                    ".\n\nNei filtri accendi «Trascrizione» e cerca di nuovo: la ricerca guarderà anche dentro il parlato.")
+                .setPositiveButton("Va bene") { _, _ -> disegna() }.show()
+        }
+    }
+
+    private fun scaricaTrascrizione(v: Video) {
+        val attesa = AlertDialog.Builder(this).setTitle(v.titolo)
+            .setMessage("Scarico i sottotitoli da YouTube…").setNegativeButton("Annulla", null).show()
+        ambito.launch {
+            val r = runCatching { withContext(Dispatchers.IO) { TrascrizioniYoutube.scarica(this@RicercaActivity, v.youtubeId) } }
+            if (!attesa.isShowing) return@launch          // annullato
+            attesa.dismiss()
+            r.onSuccess { t ->
+                val testo = TrascrizioniYoutube.testo(t)
+                val come = buildString {
+                    append("${t.righe.size} righe · lingua ${t.lingua}")
+                    if (t.automatica) append(" · sottotitoli generati automaticamente da YouTube")
+                    if (t.tradotta) append(" · tradotti da YouTube")
+                }
+                val inizio = TrascrizioniYoutube.blocchi(t).take(3).joinToString("\n") { "[${TrascrizioniYoutube.tempo(it.inizioMs)}] ${it.testo}" }
+                AlertDialog.Builder(this@RicercaActivity).setTitle("Trascrizione pronta")
+                    .setMessage("$come\n\n$inizio…")
+                    .setPositiveButton("Salva in un file") { _, _ ->
+                        daSalvare = testo
+                        val scegli = Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE)
+                            .setType("text/plain").putExtra(Intent.EXTRA_TITLE, TrascrizioniYoutube.nomeFile(t))
+                        runCatching { @Suppress("DEPRECATION") startActivityForResult(scegli, SALVA_TRASCRIZIONE) }
+                            .onFailure { avvisa("Su questo telefono non c'è la finestra per salvare i file: usa Condividi.") }
+                    }
+                    .setNeutralButton("Condividi") { _, _ -> condividiTrascrizione(t, testo) }
+                    .setNegativeButton("Chiudi", null).show()
+            }.onFailure { e ->
+                val msg = if (e is TrascrizioniYoutube.NonDisponibile) e.message
+                    else "Non riesco a scaricare la trascrizione: ${e.message ?: "errore di rete"}"
+                AlertDialog.Builder(this@RicercaActivity).setTitle("Trascrizione non disponibile").setMessage(msg)
+                    .setPositiveButton("Apri su YouTube") { _, _ -> apri(v.link) }
+                    .setNegativeButton("Chiudi", null).show()
+            }
+        }
+    }
+
+    private fun condividiTrascrizione(t: TrascrizioniYoutube.Trascrizione, testo: String) {
+        runCatching {
+            val f = File(File(cacheDir, "trascrizioni").apply { mkdirs() }, TrascrizioniYoutube.nomeFile(t))
+            f.writeText(testo)
+            val uri = FileProvider.getUriForFile(this, "$packageName.file", f)
+            val manda = Intent(Intent.ACTION_SEND).setType("text/plain")
+                .putExtra(Intent.EXTRA_STREAM, uri).putExtra(Intent.EXTRA_SUBJECT, f.name.removeSuffix(".txt"))
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            startActivity(Intent.createChooser(manda, "Condividi la trascrizione"))
+        }.onFailure { avvisa("Non riesco a condividere il file.") }
+    }
+
+    @Deprecated("Activity semplice: il risultato della finestra di sistema arriva qui")
+    override fun onActivityResult(codice: Int, esito: Int, dati: Intent?) {
+        @Suppress("DEPRECATION") super.onActivityResult(codice, esito, dati)
+        if (codice != SALVA_TRASCRIZIONE) return
+        val testo = daSalvare; daSalvare = null
+        val uri = dati?.data
+        if (esito != RESULT_OK || uri == null || testo == null) return
+        runCatching { contentResolver.openOutputStream(uri)?.use { it.write(testo.toByteArray(Charsets.UTF_8)) } ?: error("") }
+            .onSuccess { avvisa("Trascrizione salvata.") }
+            .onFailure { avvisa("Non riesco a scrivere il file.") }
     }
 
     // ── dialoghi playlist ────────────────────────────────────────────

@@ -10,6 +10,8 @@ object Marca {
     /** Piu' canali in un'app (app per argomento): niente scheda Post, Novita' dal catalogo. */
     const val MULTI = true
     const val DOPPIO_TEMA = true
+    /** (10/11/2026) L'assistente AI (chat con la chiave dell'utente) e il pulsante «Scarica trascrizione»: per ora solo Misteri. */
+    const val ASSISTENTE = true
     const val MOTTO = "Delitti, stragi, logge e misteri d'Italia, raccontati dai migliori canali YouTube"
     /** I canali dell'app: id «UC...» e nome. Gli stessi del catalogo (strumenti/argomenti/misteri.json). */
     val CASA = listOf(
@@ -36,7 +38,9 @@ object Marca {
     const val NON_RISPONDE = "Non riesco a leggere il catalogo dei video. Riprova."
     const val NOTA_CERCA = "Ricerca fra i video sui misteri italiani dei canali dell'app · app non ufficiale"
     const val PIEDE = "App non ufficiale · i video sono dei rispettivi canali YouTube"
-    const val CREDITI = "I video sono dei canali Vox Investigazioni, Starting Finance, Nova Lectio, Il Punto Economico, " +
+    const val CREDITI = "Grandi misteri italiani è a cura di Alfonso Vertucci e Havva Vertucci, di Working With Web " +
+        "(workingwithweb.it) e Libertà e Azione (libertaeazione.it). " +
+        "I video sono dei canali Vox Investigazioni, Starting Finance, Nova Lectio, Il Punto Economico, " +
         "Pulp Podcast, Roberto Saviano e Fanpage.it. Questa app li raccoglie per argomento e li rende comodi da " +
         "cercare; non è affiliata a nessuno dei canali. I casi e i temi sono assegnati in automatico dai titoli e " +
         "possono sbagliare."

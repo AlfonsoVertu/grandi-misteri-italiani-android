@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (10/11/2026) Le trascrizioni da condividere: un file .txt nella cache, dato con FileProvider. -->
+<paths>
+    <cache-path name="trascrizioni" path="trascrizioni/" />
+    <!-- (11/11/2026) l'archivio Media (apri e condividi) e le foto scattate per la chat dell'assistente -->
+    <files-path name="media" path="media/" />
+    <cache-path name="scatti" path="scatti/" />
+</paths>

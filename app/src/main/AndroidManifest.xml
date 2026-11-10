@@ -32,6 +32,8 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:fullBackupContent="@xml/backup"
+        android:dataExtractionRules="@xml/estrazione"
         android:theme="@style/Tema">
         <activity
             android:name=".RicercaActivity"
@@ -50,6 +52,32 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <!-- (10/11/2026) l'assistente AI: la chat e le sue impostazioni (chiave e fornitore dell'utente) -->
+        <activity
+            android:name=".assistente.AssistenteActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".assistente.ImpostazioniAiActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- (11/11/2026) l'archivio Media dell'indagine (solo dove c'e' l'assistente: mattonella dietro Marca.ASSISTENTE) -->
+        <activity
+            android:name=".assistente.MediaActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- (10/11/2026) «Scarica trascrizione» → Condividi: il file .txt dalla cache -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.file"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_condivisi" />
+        </provider>
         <provider
             android:name=".FamigliaProvider"
             android:authorities="${applicationId}.famiglia"

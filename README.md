@@ -12,10 +12,12 @@ Non è affiliata a nessuno dei canali: i video sono loro.
 - Novità e avvisi dei video nuovi dei canali, solo quando parlano di un caso.
 - Preferiti e playlist, salvati solo sul telefono. Niente account, niente pubblicità, niente tracciamento.
 - «I miei canali»: altri canali YouTube da seguire, condivisi con le altre app della stessa famiglia.
+- Ricerca anche dentro il parlato dei video (trascrizioni di YouTube scaricate sul telefono, con il pulsante «Scarica trascrizione»).
+- Assistente AI facoltativo, con la TUA chiave del fornitore (OpenRouter, OpenAI, Gemini, Anthropic, Groq e altri compatibili OpenAI): cerca nel catalogo, nelle trascrizioni e sul web, legge pagine, guarda foto, video e PDF, ascolta i vocali e risponde anche a voce; archivio Media dell'indagine. La chiave resta cifrata sul telefono (Android Keystore) e va solo al fornitore scelto.
 
 ## Cosa fa in rete
 
-L'app parla solo con YouTube (feed RSS pubblici dei canali e miniature) e una volta ogni 6 ore legge
+L'app parla solo con YouTube (feed RSS pubblici dei canali, miniature e sottotitoli), con il fornitore AI scelto dall'utente (solo se attiva l'assistente), con i siti che l'assistente cerca o legge (DuckDuckGo, Wikipedia, pagine indicate) e una volta ogni 6 ore legge
 `https://mondo.workingwithweb.eu/grandi-misteri-italiani/versione.json` per proporre gli aggiornamenti. Il catalogo dei
 video è dentro l'app (`app/src/misteri/assets/catalogo.json`); i video nuovi li aggiunge leggendo il feed di YouTube.
 

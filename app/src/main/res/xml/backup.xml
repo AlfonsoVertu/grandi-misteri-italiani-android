@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (10/11/2026) Le chiavi API dell'assistente AI non vanno nel backup (fino ad Android 11). -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="portachiavi_ai.xml" />
+</full-backup-content>
