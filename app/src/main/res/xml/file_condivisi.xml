@@ -5,4 +5,6 @@
     <!-- (11/11/2026) l'archivio Media (apri e condividi) e le foto scattate per la chat dell'assistente -->
     <files-path name="media" path="media/" />
     <cache-path name="scatti" path="scatti/" />
+    <!-- (11/11/2026) la teoria esportata in ZIP da mandare per email -->
+    <cache-path name="teorie" path="teorie/" />
 </paths>

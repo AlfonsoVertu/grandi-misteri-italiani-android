@@ -42,6 +42,8 @@ class TeoriaActivity : Schermata() {
             if (t.descrizione.isNotBlank()) addView(nota(t.descrizione).apply { textSize = 15f; setTextColor(colore(R.color.testo)); setTextIsSelectable(true) })
         }, sotto(10))
         lista.addView(bottone("📍  Vedi sulla mappa", pieno = true) { vai(this, MappaActivity::class.java, 0) { putExtra("teoria", t.id) } }, sotto(10))
+        // (11/11/2026) la teoria in uno ZIP, da mandare alla redazione (info@workingwithweb.it) o a chi si vuole
+        lista.addView(bottone("📤  Esporta e manda la teoria") { EsportaTeoria.condividi(this, t.id) }, sotto(10))
 
         val note = i.noteDellaTeoria(t.id)
         lista.addView(sezione("Note (${note.size})") {

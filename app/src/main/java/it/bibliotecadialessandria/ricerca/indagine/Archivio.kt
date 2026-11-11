@@ -178,7 +178,7 @@ interface Indice {
     @Query("SELECT * FROM teoria WHERE origine = :origine AND origine != '' LIMIT 1") fun teoriaDa(origine: String): Teoria?
     @Insert(onConflict = OnConflictStrategy.IGNORE) fun metti(x: NotaTeoria): Long
     @Query("DELETE FROM nota_teoria WHERE notaId = :notaId AND teoriaId = :teoriaId") fun togliNotaDaTeoria(notaId: Long, teoriaId: Long)
-    @Query("SELECT nota.* FROM nota JOIN nota_teoria ON nota.id = nota_teoria.notaId WHERE nota_teoria.teoriaId = :teoriaId ORDER BY nota.creata")
+    @Query("SELECT nota.* FROM nota JOIN nota_teoria ON nota.id = nota_teoria.notaId WHERE nota_teoria.teoriaId = :teoriaId ORDER BY nota.creata DESC, nota.id DESC")
     fun noteDellaTeoria(teoriaId: Long): List<Nota>
     @Query("SELECT teoria.* FROM teoria JOIN nota_teoria ON teoria.id = nota_teoria.teoriaId WHERE nota_teoria.notaId = :notaId")
     fun teorieDellaNota(notaId: Long): List<Teoria>
