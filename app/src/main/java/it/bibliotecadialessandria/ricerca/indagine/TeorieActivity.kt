@@ -8,7 +8,32 @@ import it.bibliotecadialessandria.ricerca.assistente.MediaActivity
 class TeorieActivity : Schermata() {
     override val titolo = "Teorie"
     override val sottotitolo = "Note, video, media, persone e luoghi raccolti per ipotesi"
-    override fun bottoniTesta() = listOf<Pair<String, () -> Unit>>("＋ Nuova" to {
+    // (11/11/2026) «Importa»: una teoria ricevuta in ZIP (anche aprendo il file da un'altra app)
+    override fun onCreate(stato: android.os.Bundle?) {
+        super.onCreate(stato)
+        intent?.data?.let { importaDa(it) }
+    }
+
+    private fun importaDa(u: android.net.Uri) {
+        Thread {
+            val r = runCatching { contentResolver.openInputStream(u)!!.use { Indagini.importaZip(this, it) } }
+            runOnUiThread {
+                r.onSuccess { avvisa("Teoria importata: «$it». La trovi qui sotto."); disegna() }
+                    .onFailure { avvisa("Non sono riuscito a importare la teoria: ${it.message?.take(120)}") }
+            }
+        }.start()
+    }
+
+    @Deprecated("API") override fun onActivityResult(codice: Int, esito: Int, dati: android.content.Intent?) {
+        super.onActivityResult(codice, esito, dati)
+        if (codice == 73 && esito == RESULT_OK) dati?.data?.let { importaDa(it) }
+    }
+
+    override fun bottoniTesta() = listOf<Pair<String, () -> Unit>>("Importa" to {
+        runCatching { startActivityForResult(android.content.Intent(android.content.Intent.ACTION_OPEN_DOCUMENT)
+            .addCategory(android.content.Intent.CATEGORY_OPENABLE).setType("application/zip"), 73) }
+            .onFailure { avvisa("Nessuna app per scegliere il file.") }
+    }, "＋ Nuova" to {
         chiedi("Nuova teoria", listOf(Triple("Titolo", "", 1), Triple("L'ipotesi in breve", "", 4))) { v ->
             if (v[0].isNotBlank()) vai(this, TeoriaActivity::class.java, Archivio.di(this).metti(Teoria(titolo = v[0], descrizione = v[1])))
         }

@@ -327,10 +327,17 @@ class AssistenteActivity : Aspetto() {
         lettore = null; suona = null
     }
 
+    /** (11/11/2026) la chiave come procedura guidata in tre passi: per chi non sa cos'è una chiave API */
     private fun invito(perche: String?) {
-        AlertDialog.Builder(this).setTitle("Manca la configurazione")
-            .setMessage((perche ?: "L'assistente non è configurato.") + "\n\nApri le impostazioni dell'assistente AI per scegliere il fornitore e mettere la tua chiave.")
-            .setPositiveButton("Apri le impostazioni") { _, _ -> startActivity(Intent(this, ImpostazioniAiActivity::class.java)) }
+        AlertDialog.Builder(this).setTitle("Attiva l'assistente in 3 passi")
+            .setMessage((perche?.let { "$it\n\n" } ?: "") +
+                "L'assistente usa un modello di intelligenza artificiale con una chiave tua, gratuita per iniziare.\n\n" +
+                "1. Tocca «Apri OpenRouter» e accedi (anche con Google).\n" +
+                "2. Crea una chiave («Create key») e copiala.\n" +
+                "3. Torna qui, tocca «Incolla la chiave» e incollala nel campo Chiave.\n\n" +
+                "La chiave resta solo su questo telefono, cifrata. Quello che chiedi lo legge il fornitore del modello.")
+            .setPositiveButton("Incolla la chiave") { _, _ -> startActivity(Intent(this, ImpostazioniAiActivity::class.java)) }
+            .setNeutralButton("Apri OpenRouter") { _, _ -> runCatching { startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://openrouter.ai/keys"))) } }
             .setNegativeButton("Non ora", null).show()
     }
 

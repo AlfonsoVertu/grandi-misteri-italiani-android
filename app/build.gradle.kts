@@ -33,8 +33,8 @@ android {
         create("misteri") {
             dimension = "canale"
             applicationId = "eu.workingwithweb.canali.misteri"
-            versionCode = 6
-            versionName = "1.42.42.42"
+            versionCode = 7
+            versionName = "2.42.42.42"
         }
     }
 

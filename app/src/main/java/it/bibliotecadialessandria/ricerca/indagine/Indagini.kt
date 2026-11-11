@@ -134,6 +134,10 @@ object Indagini {
             }
         }
 
+        // (11/11/2026) i titoli di tutti i video citati, così le note non mostrano l'id
+        o.optJSONObject("titoli")?.let { tt -> tt.keys().forEach { v -> tt.optString(v).takeIf { it.isNotBlank() }?.let { AiutiIndagine.ricordaTitolo(ctx, v, it) } } }
+        ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).edit().putString("ultima", caso).apply()
+
         // la trascrizione del video principale «in pancia» (se non c'e' gia' una scaricata)
         o.optJSONObject("trascrizione")?.let { t ->
             val vid = t.optString("video").ifBlank { o.optString("video_principale") }
@@ -165,6 +169,24 @@ object Indagini {
     }
 
     private fun sha256(b: ByteArray) = MessageDigest.getInstance("SHA-256").digest(b).joinToString("") { "%02x".format(it) }
+
+    /** (11/11/2026) l'indagine più recente arrivata (per la scheda «Indagine del giorno» della home). */
+    fun ultima(ctx: Context): Teoria? {
+        val caso = ctx.getSharedPreferences(PREF, Context.MODE_PRIVATE).getString("ultima", null) ?: return null
+        return runCatching { Archivio.di(ctx).teoriaDa("$caso:teoria") }.getOrNull()
+    }
+
+    /** (11/11/2026) una teoria ricevuta in ZIP (EsportaTeoria): teoria.json nello stesso formato delle indagini. */
+    fun importaZip(ctx: Context, flusso: java.io.InputStream): String {
+        var json: String? = null
+        java.util.zip.ZipInputStream(flusso).use { z ->
+            while (true) { val e = z.nextEntry ?: break; if (e.name == "teoria.json") json = z.readBytes().toString(Charsets.UTF_8) }
+        }
+        val o = JSONObject(json ?: throw IllegalArgumentException("nello ZIP non c'è teoria.json"))
+        val caso = o.optString("id").ifBlank { "teoria_ricevuta" } + "_" + (System.currentTimeMillis() / 1000)
+        importa(ctx, caso, o); Archivio.avvisa()
+        return o.optString("titolo").ifBlank { "Teoria ricevuta" }
+    }
 
     /** Fuori dal filo dell'interfaccia. `forza` salta l'intervallo. Torna i titoli importati adesso. */
     fun scaricaNuove(ctx: Context, forza: Boolean = false): List<String> {

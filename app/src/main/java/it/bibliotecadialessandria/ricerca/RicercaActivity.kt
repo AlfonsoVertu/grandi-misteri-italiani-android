@@ -1,5 +1,6 @@
 package it.bibliotecadialessandria.ricerca
 
+import it.bibliotecadialessandria.ricerca.indagine.TeoriaActivity
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
@@ -225,7 +226,8 @@ class RicercaActivity : Activity() {
         eroe.addView(ImageView(this).apply {
             setImageResource(R.drawable.banner_sito)
             scaleType = ImageView.ScaleType.CENTER_CROP
-            alpha = 0.16f
+            // (11/11/2026) il banner dietro al titolo si leggeva tagliato («Grandi … isteri ital»): solo una velatura
+            alpha = if (Marca.ASSISTENTE) 0f else 0.16f
             importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
         }, FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT))
         eroe.addView(View(this).apply {
@@ -262,7 +264,36 @@ class RicercaActivity : Activity() {
 
     // ── home: mattonelle per le sezioni, poi le donazioni ───────────
 
+    /** (11/11/2026) dalla home la mappa chiede quale caso mostrare (o tutti) */
+    private fun scegliMappa() {
+        val mappa = Intent(this, it.bibliotecadialessandria.ricerca.indagine.MappaActivity::class.java)
+        val t = runCatching { it.bibliotecadialessandria.ricerca.indagine.Archivio.di(this).teorie() }.getOrDefault(emptyList())
+        if (t.isEmpty()) { startActivity(mappa); return }
+        android.app.AlertDialog.Builder(this).setTitle("Quale caso?")
+            .setItems((t.map { it.titolo } + "Tutti i luoghi").toTypedArray()) { _, k ->
+                startActivity(if (k < t.size) Intent(mappa).putExtra("teoria", t[k].id) else mappa) }
+            .setNegativeButton("Annulla", null).show()
+    }
+
+    /** (11/11/2026) in cima alla home: l'indagine più recente, con «Apri l'indagine» */
+    private fun schedaIndagine(dentro: LinearLayout) {
+        if (!Marca.ASSISTENTE) return
+        val t = it.bibliotecadialessandria.ricerca.indagine.Indagini.ultima(this) ?: return
+        dentro.addView(LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL; setPadding(dp(18), dp(16), dp(18), dp(16))
+            background = GradientDrawable().apply { cornerRadius = dp(18).toFloat(); setColor(colore(R.color.oro)) }
+            addView(TextView(this@RicercaActivity).apply { text = "INDAGINE DEL GIORNO"; textSize = 12f; setTextColor(Color.WHITE); alpha = 0.85f
+                letterSpacing = 0.08f })
+            addView(TextView(this@RicercaActivity).apply { text = t.titolo; textSize = 20f; setTextColor(Color.WHITE)
+                setTypeface(Typeface.SERIF, Typeface.BOLD); setPadding(0, dp(4), 0, dp(4)) })
+            addView(TextView(this@RicercaActivity).apply { text = "Note con il minuto di ogni video, luoghi sulla mappa e persone del caso.  Apri l'indagine ›"
+                textSize = 14f; setTextColor(Color.WHITE) })
+            setOnClickListener { startActivity(Intent(this@RicercaActivity, TeoriaActivity::class.java).putExtra("id", t.id)) }
+        }, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply { setMargins(0, 0, 0, dp(12)) })
+    }
+
     private fun disegnaHome(dentro: LinearLayout) {
+        schedaIndagine(dentro)
         class Voce(val icona: Int, val nome: String, val sotto: String, val vai: () -> Unit)
         val voci = listOf(
             Voce(R.drawable.ic_novita, "Novità", "Video, short e live") { scheda = Scheda.NOVITA; disegna() },
@@ -284,8 +315,7 @@ class RicercaActivity : Activity() {
                 startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.TeorieActivity::class.java)) },
             Voce(R.drawable.ic_nota, "Note", "Appunti con la fonte e il minuto") {
                 startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.NoteActivity::class.java)) },
-            Voce(R.drawable.ic_mappa, "Mappa", "I luoghi dei casi") {
-                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.MappaActivity::class.java)) },
+            Voce(R.drawable.ic_mappa, "Mappa", "I luoghi dei casi") { scegliMappa() },
             Voce(R.drawable.ic_persona, "Persone di interesse", "Fatti e fonti, non accuse") {
                 startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.PersoneActivity::class.java)) },
             Voce(R.drawable.ic_memoria, "Memoria", "Cosa ricorda l'assistente") {

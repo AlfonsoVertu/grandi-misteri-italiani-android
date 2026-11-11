@@ -122,8 +122,13 @@ abstract class Schermata : Aspetto() {
     fun rigaAzione(testo: String, tocca: (() -> Unit)?, toglie: (() -> Unit)? = null): View = LinearLayout(this).apply {
         orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
         setPadding(0, dp(6), 0, dp(6))
-        addView(TextView(this@Schermata).apply { text = testo; textSize = 14.5f
-            setTextColor(colore(if (tocca != null) R.color.oro else R.color.testo)); tocca?.let { f -> setOnClickListener { f() } } },
+        addView(TextView(this@Schermata).apply { textSize = 14.5f
+            // (11/11/2026) prima riga chiara, la seconda (la fonte) tenue e più piccola: niente più tutto rosso
+            val k = testo.indexOf('\n')
+            text = if (k < 0) testo else android.text.SpannableString(testo).apply {
+                setSpan(android.text.style.ForegroundColorSpan(colore(R.color.tenue)), k, testo.length, 0)
+                setSpan(android.text.style.RelativeSizeSpan(0.88f), k, testo.length, 0) }
+            setTextColor(colore(if (tocca != null && k < 0) R.color.oro else R.color.testo)); tocca?.let { f -> setOnClickListener { f() } } },
             LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f))
         if (toglie != null) addView(nota("✕").apply { textSize = 16f; setPadding(dp(12), 0, dp(4), 0); contentDescription = "Togli"
             setOnClickListener { toglie() } })
@@ -142,7 +147,7 @@ abstract class Schermata : Aspetto() {
     fun apriVideo(youtubeId: String, secondi: Int?) = apri(this, linkAlSecondo(youtubeId, secondi))
 
     fun testoVideo(youtubeId: String, secondi: Int?, etichetta: String = ""): String {
-        val t = AiutiIndagine.titolo(this, youtubeId).ifBlank { "Video $youtubeId" }
+        val t = AiutiIndagine.titolo(this, youtubeId).ifBlank { "Video su YouTube" }
         return "▶  " + (if (t.length > 50) t.take(48) + "…" else t) + (secondi?.let { " · ${mmss(it)}" } ?: "") +
             (if (etichetta.isNotBlank()) " — $etichetta" else "")
     }

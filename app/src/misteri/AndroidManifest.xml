@@ -19,4 +19,21 @@
             <action android:name="android.media.action.IMAGE_CAPTURE" />
         </intent>
     </queries>
+
+    <!-- (11/11/2026) solo Misteri: aprire con l'app lo ZIP di una teoria ricevuta («Esporta e manda la teoria») -->
+    <application>
+        <activity android:name="it.bibliotecadialessandria.ricerca.indagine.TeorieActivity" android:exported="true"
+            xmlns:tools="http://schemas.android.com/tools" tools:replace="android:exported">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:mimeType="application/zip" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:mimeType="application/x-zip-compressed" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>
