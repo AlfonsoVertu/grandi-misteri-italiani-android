@@ -22,6 +22,7 @@ object Marca {
         "UCY99TnBJ8xyat2lpeN_hcEA" to "Pulp Podcast",
         "UCtgIlU49ppoBvEgDboD34Pg" to "Roberto Saviano",
         "UCWJhBqnyVdHAuxexgjghNFw" to "Fanpage.it",
+        "UC_OSSIRAJ1QhAqDO113JVYg" to "Vanilla Magazine",
     )
     /** Per le parti dell'app pensate per un canale solo (Post, «Apri il canale»): qui non si usano. */
     const val CANALE = "https://www.youtube.com/@VoxInvestigazioni"
@@ -41,13 +42,14 @@ object Marca {
     const val CREDITI = "Grandi misteri italiani è a cura di Alfonso Vertucci e Havva Vertucci, di Working With Web " +
         "(workingwithweb.it) e Libertà e Azione (libertaeazione.it). " +
         "I video sono dei canali Vox Investigazioni, Starting Finance, Nova Lectio, Il Punto Economico, " +
-        "Pulp Podcast, Roberto Saviano e Fanpage.it. Questa app li raccoglie per argomento e li rende comodi da " +
+        "Pulp Podcast, Roberto Saviano, Fanpage.it e Vanilla Magazine (che ha dato il suo permesso). Questa app li raccoglie per argomento e li rende comodi da " +
         "cercare; non è affiliata a nessuno dei canali. I casi e i temi sono assegnati in automatico dai titoli e " +
         "possono sbagliare."
     const val AVVISI_NOTA = "Un avviso quando uno dei canali dell'app pubblica un video su un mistero italiano"
 
     /** I link dei canali, in home (dopo le sezioni dell'app) e nei crediti. */
     val LINK = listOf(
+        Collegamento(R.drawable.ic_canale, "Vanilla Magazine", "Storia e misteri · fonte che ha aderito", "https://www.youtube.com/@Vanilla_Magazine"),
         Collegamento(R.drawable.ic_canale, "Vox Investigazioni", "Cronaca e casi", "https://www.youtube.com/@VoxInvestigazioni"),
         Collegamento(R.drawable.ic_canale, "Pulp Podcast", "Il podcast", "https://www.youtube.com/@Pulp_podcast"),
         Collegamento(R.drawable.ic_canale, "Roberto Saviano", "Mafie e camorra", "https://www.youtube.com/@robertosavianoofficial569"),
