@@ -7,11 +7,28 @@ package it.bibliotecadialessandria.ricerca
  */
 object Marca {
     const val NOME = "Grandi misteri italiani"
+    /** (14/11/2026) La lingua dell\'interfaccia: "it" sempre italiano; "tr" o "en" fissa; "auto" = quella del telefono (it/tr, se no en). */
+    const val LINGUA = "it"
     /** Piu' canali in un'app (app per argomento): niente scheda Post, Novita' dal catalogo. */
     const val MULTI = true
     const val DOPPIO_TEMA = true
     /** (10/11/2026) L'assistente AI (chat con la chiave dell'utente) e il pulsante «Scarica trascrizione»: per ora solo Misteri. */
     const val ASSISTENTE = true
+    /** Le parole per le «teorie» dell'indagine (Barbero: «Ricostruzione»). */
+    /** Sottotitoli delle voci in Home e dell'elenco delle teorie (12/11/2026: testi del canale, non del codice comune). */
+    const val SOTTO_ASSISTENTE = "Chiedi dei casi e dei video"
+    const val SOTTO_MEDIA = "Foto, video e PDF dell'indagine"
+    const val SOTTO_TEORIE = "Note, video e luoghi per ipotesi"
+    const val SOTTO_ELENCO_TEORIE = "Note, video, media, persone e luoghi raccolti per ipotesi"
+    /** Scheda in cima alla home e avviso delle nuove (12/11/2026). */
+    const val TITOLO_DEL_GIORNO = "INDAGINE DEL GIORNO"
+    const val SOTTO_DEL_GIORNO = "Note con il minuto di ogni video, luoghi sulla mappa e persone del caso.  Apri l'indagine ›"
+    const val AVVISO_NUOVE = ": note, mappa e persone del caso, con i video al minuto."
+    /** (12/11/2026) Il feed di un podcast dentro l'app (vuoto = niente sezione Podcast) e il sottotitolo della voce in home. */
+    const val PODCAST_FEED = ""
+    const val SOTTO_PODCAST = ""
+    const val TEORIA = "Teoria"
+    const val TEORIE = "Teorie"
     const val MOTTO = "Delitti, stragi, logge e misteri d'Italia, raccontati dai migliori canali YouTube"
     /** I canali dell'app: id «UC...» e nome. Gli stessi del catalogo (strumenti/argomenti/misteri.json). */
     val CASA = listOf(
@@ -42,7 +59,7 @@ object Marca {
     const val CREDITI = "Grandi misteri italiani è a cura di Alfonso Vertucci e Havva Vertucci, di Working With Web " +
         "(workingwithweb.it) e Libertà e Azione (libertaeazione.it). " +
         "I video sono dei canali Vox Investigazioni, Starting Finance, Nova Lectio, Il Punto Economico, " +
-        "Pulp Podcast, Roberto Saviano, Fanpage.it e Vanilla Magazine (che ha dato il suo permesso). Questa app li raccoglie per argomento e li rende comodi da " +
+        "Pulp Podcast, Roberto Saviano, Fanpage.it, Vanilla Magazine ed Endriu Files (che hanno dato il loro permesso; di Endriu Files ci sono i video sui casi italiani), più il documentario di Cronache Hacker sulla storia di BFi. Questa app li raccoglie per argomento e li rende comodi da " +
         "cercare; non è affiliata a nessuno dei canali. I casi e i temi sono assegnati in automatico dai titoli e " +
         "possono sbagliare."
     const val AVVISI_NOTA = "Un avviso quando uno dei canali dell'app pubblica un video su un mistero italiano"
@@ -50,6 +67,8 @@ object Marca {
     /** I link dei canali, in home (dopo le sezioni dell'app) e nei crediti. */
     val LINK = listOf(
         Collegamento(R.drawable.ic_canale, "Vanilla Magazine", "Storia e misteri · fonte che ha aderito", "https://www.youtube.com/@Vanilla_Magazine"),
+        Collegamento(R.drawable.ic_canale, "Endriu Files", "True crime · fonte che ha aderito", "https://www.youtube.com/@EndriuFiles"),
+        Collegamento(R.drawable.ic_canale, "Cronache Hacker", "Storie vere degli hacker", "https://www.youtube.com/@CronacheHacker"),
         Collegamento(R.drawable.ic_canale, "Vox Investigazioni", "Cronaca e casi", "https://www.youtube.com/@VoxInvestigazioni"),
         Collegamento(R.drawable.ic_canale, "Pulp Podcast", "Il podcast", "https://www.youtube.com/@Pulp_podcast"),
         Collegamento(R.drawable.ic_canale, "Roberto Saviano", "Mafie e camorra", "https://www.youtube.com/@robertosavianoofficial569"),

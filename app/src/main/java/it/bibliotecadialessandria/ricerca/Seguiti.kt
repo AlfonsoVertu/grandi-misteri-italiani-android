@@ -324,7 +324,7 @@ object Seguiti {
                 Intent(Intent.ACTION_VIEW, Uri.parse(v.link)), PendingIntent.FLAG_IMMUTABLE)
             val n = NotificationCompat.Builder(c, CANALE_ID)
                 .setSmallIcon(R.drawable.ic_notifica)
-                .setContentTitle(when (v.tipo) { "Short" -> "Nuovo short"; "Live" -> "Diretta"; else -> "Nuovo video" } + " · " + s.nome)
+                .setContentTitle(Lingua.t(when (v.tipo) { "Short" -> "Nuovo short"; "Live" -> "Diretta"; else -> "Nuovo video" }) + " · " + s.nome)
                 .setContentText(v.titolo)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(v.titolo))
                 .setContentIntent(apri).setAutoCancel(true)
@@ -336,8 +336,8 @@ object Seguiti {
     private fun creaCanale(c: Context) {
         if (Build.VERSION.SDK_INT >= 26) {
             c.getSystemService(NotificationManager::class.java).createNotificationChannel(
-                NotificationChannel(CANALE_ID, "I miei canali", NotificationManager.IMPORTANCE_DEFAULT).apply {
-                    description = "Video, short e dirette dei canali YouTube che segui nell'app"
+                NotificationChannel(CANALE_ID, Lingua.t("I miei canali"), NotificationManager.IMPORTANCE_DEFAULT).apply {
+                    description = Lingua.t("Video, short e dirette dei canali YouTube che segui nell'app")
                 })
         }
     }

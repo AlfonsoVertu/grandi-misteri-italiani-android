@@ -1,5 +1,7 @@
 package it.bibliotecadialessandria.ricerca.assistente
 
+import it.bibliotecadialessandria.ricerca.Dialogo
+import it.bibliotecadialessandria.ricerca.Lingua
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
@@ -157,7 +159,7 @@ class ImpostazioniAiActivity : Aspetto() {
 
     private fun scegliFornitore(nome: TextView) {
         val voci = ModelliAi.NOTI.keys.toList() + "Indirizzo a mano…"
-        AlertDialog.Builder(this).setTitle("Fornitore del modello").setItems(voci.toTypedArray()) { _, i ->
+        Dialogo(this).setTitle("Fornitore del modello").setItems(voci.toTypedArray()) { _, i ->
             if (i < ModelliAi.NOTI.size) indirizzo.setText(ModelliAi.NOTI.getValue(voci[i]))
             else { indirizzo.setText(""); indirizzo.requestFocus() }
             modelli = null
@@ -211,11 +213,11 @@ class ImpostazioniAiActivity : Aspetto() {
     private fun cancellaChiave() {
         val e = endpoint()
         if (e.isBlank() || !ConfigAi.haChiave(this, e)) { toast("Non c'è nessuna chiave salvata per questo fornitore."); return }
-        AlertDialog.Builder(this).setTitle("Cancellare la chiave?")
+        Dialogo(this).setTitle("Cancellare la chiave?")
             .setMessage("La chiave di ${ModelliAi.nomeDi(e) ?: e} sarà tolta da questo telefono. L'assistente non funzionerà finché non ne metti un'altra.")
             .setPositiveButton("Cancella") { _, _ -> ConfigAi.cancellaChiave(this, e); aggiornaStatoChiave(); esito.text = "Chiave cancellata." }
             .setNegativeButton("Annulla", null).show()
     }
 
-    private fun toast(t: String) = Toast.makeText(this, t, Toast.LENGTH_LONG).show()
+    private fun toast(t: String) = Lingua.toast(this, t, Toast.LENGTH_LONG).show()
 }

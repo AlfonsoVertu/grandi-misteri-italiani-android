@@ -33,9 +33,23 @@ data class Video(
     val serie: String,
     val periodo: String,
     val zona: String,
+    /** (12/11/2026) una voce che NON e' un video YouTube (un episodio di podcast): la pagina da aprire. Vuoto = YouTube. */
+    val esterno: String = "",
+    /** (12/11/2026) il video YouTube da cui prendere miniatura e sottotitoli quando la voce e' esterna (l'«Originale»). */
+    val sottotitoliDa: String = "",
+    /** (12/11/2026) un video del catalogo che e' anche un episodio di podcast: la pagina dell'episodio («Ascolta»). */
+    val podcast: String = "",
+    /** (12/11/2026) la miniatura di una voce esterna senza video YouTube (la copertina del podcast). */
+    val copertina: String = "",
 ) {
-    val link: String get() = "https://www.youtube.com/watch?v=$youtubeId"
-    val anteprima: String get() = "https://i.ytimg.com/vi/$youtubeId/mqdefault.jpg"
+    val link: String get() = esterno.ifBlank { "https://www.youtube.com/watch?v=$youtubeId" }
+    val anteprima: String get() = when {
+        esterno.isBlank() -> "https://i.ytimg.com/vi/$youtubeId/mqdefault.jpg"
+        sottotitoliDa.isNotBlank() -> "https://i.ytimg.com/vi/$sottotitoliDa/mqdefault.jpg"
+        else -> copertina
+    }
+    /** Il video YouTube a cui legare note e minuti: lo stesso, o l'«Originale» di una voce esterna (vuoto se non c'e'). */
+    val idYoutubeVero: String get() = if (esterno.isBlank()) youtubeId else sottotitoliDa
 
     /** «11' · Aperistoria · Storia · Europa»: solo cio' che c'e'. */
     fun dettagli(): String = listOf(durata, tipo.lowercase().replaceFirstChar { it.uppercase() },

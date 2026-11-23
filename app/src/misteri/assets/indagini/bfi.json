@@ -1,0 +1,3129 @@
+{
+ "id": "bfi",
+ "titolo": "La storia di BFi",
+ "descrizione": "Indagine preparata dal documentario di Cronache Hacker (15 novembre 2026) sulla e-zine BFi e la scena hacker italiana, 1994-2015. Ogni nota riporta il minuto del video; persone indicate solo col nickname, come nel documentario.",
+ "video_principale": "ir3ZndHj1fA",
+ "video_collegati": [],
+ "teoria": {
+  "titolo": "La storia di BFi secondo Cronache Hacker",
+  "descrizione": "Una rivista elettronica scritta da ragazzi con un nickname, nata nel 1998 per spiegare come funzionano le reti e dare voce alla scena italiana, cresciuta fra Hackmeeting, convegni e riviste internazionali, e spenta in silenzio nel 2009 senza mai chiudere."
+ },
+ "note": [
+  {
+   "id": "n1",
+   "titolo": "Settembre 1999: il sito sfregiato",
+   "testo": "La home page di un sito italiano viene sostituita da due sconosciuti, che ringraziano una rivista per averli ispirati: BFi. Nel numero 7, a Natale, smaster scrive che BFi «non promuove l'hacking inteso come danneggiamento o modifica di dati altrui» e ai due dice: «Crescete!». Archivio: BFi#7, 25/12/1999 · https://bfi.s0ftpj.org/online/bfi7/index.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 0:01"
+  },
+  {
+   "id": "n2",
+   "titolo": "«Siamo italiani. Siamo cattivi. Siamo corrotti.»",
+   "testo": "Le tre righe con cui comincia BFi, Butchered From Inside («macellati dall'interno»): i redattori sono stufi di sentirsi sminuiti solo perché italiani. Archivio: BFi#1, febbraio 1998 · https://bfi.s0ftpj.org/online/bfi1/index.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 66
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 1:06"
+  },
+  {
+   "id": "n3",
+   "titolo": "11 maggio 1994: le perquisizioni alle BBS",
+   "testo": "In tutta Italia la Guardia di Finanza fa 173 perquisizioni a chi tiene in casa una BBS. Chi resta passa su Internet e su IRC, dove nel 1996 nasce la rivista System Down, ferma nell'estate 1997.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 94
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 1:34"
+  },
+  {
+   "id": "n4",
+   "titolo": "Primavera 1997: nasce s0ftpj",
+   "testo": "Un gruppo di amici dei canali IRC fonda s0ftpj, «comunità no-profit di coder». Accanto a loro c'è l'Orda delle Badlands.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 128
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 2:08"
+  },
+  {
+   "id": "n5",
+   "titolo": "Febbraio 1998: BFi numero 1",
+   "testo": "I due gruppi mettono insieme 16 articoli: Unix, phreaking, virus, crittografia, overclock. 18 firme, nessuna con un nome vero. Lo scopo dichiarato: valorizzare l'Italia nella scena underground. Archivio: BFi#1, febbraio 1998 · https://bfi.s0ftpj.org/online/bfi1/index.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 163
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 2:43"
+  },
+  {
+   "id": "n6",
+   "titolo": "Giugno 1998: il primo Hackmeeting, Firenze",
+   "testo": "Al primo Hackmeeting italiano aderisce anche l'Orda delle Badlands, con 18 nickname.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 227
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 3:47"
+  },
+  {
+   "id": "n7",
+   "titolo": "10 luglio 1998: il giornale radio della RAI",
+   "testo": "Sul sito della RAI il GR delle 13 viene sostituito da una versione ironica su Windows 98. L'autore, McKrak di System Down, viene perquisito ad agosto. Il 4 aprile 2000 il giudice decide che non va processato: il server, secondo il giudice, non era protetto perché la password era scritta in un file su un altro computer RAI aperto a chiunque.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 238
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 3:58"
+  },
+  {
+   "id": "n8",
+   "titolo": "1999: la posta dei lettori",
+   "testo": "BFi ha qualche centinaio di lettori. La posta la curano Cavallo e poi \\sPIRIT\\; a chi chiede un manifesto dell'underground italiano rispondono che basta la traduzione del Manifesto dell'hacker di Mentor (1986). Archivio: BFi#5, marzo 1999 · https://bfi.s0ftpj.org/online/bfi5/bfi5.00.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 312
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 5:12"
+  },
+  {
+   "id": "n9",
+   "titolo": "Giugno 1999: la dissociazione",
+   "testo": "In apertura del numero 6 lo staff di BFi si dissocia da qualunque gruppo o azione di stampo eversivo, «alla luce degli ultimi avvenimenti politici e sociali». Archivio: BFi#6, giugno 1999 · https://bfi.s0ftpj.org/online/bfi6/bfi6.00.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 386
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 6:26"
+  },
+  {
+   "id": "n10",
+   "titolo": "Agosto 1999: il Chaos Communication Camp",
+   "testo": "del0rean, FuSyS, Kobaiashi e Nello|Z vanno al primo campo estivo del Chaos Computer Club vicino a Berlino; il resoconto per BFi si intitola «Boys From Ipanema in gita a Berlino».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 440
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 7:20"
+  },
+  {
+   "id": "n11",
+   "titolo": "4 settembre 1999: «L'Hacker e il Magistrato», Pescara",
+   "testo": "Al convegno di Metro Olografix i redattori di BFi parlano allo stesso tavolo con un avvocato, un magistrato e un tenente colonnello della Guardia di Finanza. Secondo il colonnello, se un sistema non è protetto la colpa più grossa è di chi doveva proteggerlo.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 496
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 8:16"
+  },
+  {
+   "id": "n12",
+   "titolo": "Aprile 2000: il kernel",
+   "testo": "Nel numero 8 pIGpEN firma 5 articoli sul kernel di BSD; FuSyS scrive i moduli Ombra e Luce per Linux. Il suo strumento KSTAT, che scova chi si nasconde nel kernel, viene citato in uno studio del SANS sui rootkit. Archivio: BFi#8, 30/04/2000 · https://bfi.s0ftpj.org/online/bfi8/index.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 644
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 10:44"
+  },
+  {
+   "id": "n13",
+   "titolo": "2 maggio 2000: l'avviso su Bugtraq",
+   "testo": "FuSyS segnala su Bugtraq, a nome di S0ftProjecT, una falla in Sniffit.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 702
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 11:42"
+  },
+  {
+   "id": "n14",
+   "titolo": "3 novembre 2000: il numero 9",
+   "testo": "Scaricato più di 11.000 volte, contiene un'intervista a The Mentor, che consiglia ai ragazzi di imparare Linux e programmare legalmente. Archivio: BFi#9, 03/11/2000 · https://bfi.s0ftpj.org/online/bfi9/index.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 753
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 12:33"
+  },
+  {
+   "id": "n15",
+   "titolo": "Aprile-giugno 2001: il FreakNet e l'Hackmeeting di Catania",
+   "testo": "Il Comune vuole lo sgombero del centro sociale Auro e del FreakNet; l'Hackmeeting si tiene lo stesso lì dal 22 al 24 giugno.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 790
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 13:10"
+  },
+  {
+   "id": "n16",
+   "titolo": "30 settembre 2001: «BFi non è politicamente impegnata»",
+   "testo": "Nell'editoriale del numero 10 smaster scrive che BFi non si schiera e critica la poca tecnica all'Hackmeeting di Catania, riportando una voce senza accusare nessuno. Archivio: BFi#10, 30/09/2001 · https://bfi.s0ftpj.org/online/bfi10/index.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 830
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 13:50"
+  },
+  {
+   "id": "n17",
+   "titolo": "2002-2004: un articolo alla volta, poi la carta",
+   "testo": "Dal 2002 BFi pubblica un articolo appena è pronto; nel 2004 ICT Security intervista la redazione (oltre 4.000 lettori l'anno per articolo). Ad agosto 2004 BFi esce per la prima volta su carta al campo di Metro Olografix a Pescara. Archivio: BFi#13-dev-07, 20/08/2004, «chi siamo, cosa facciamo, dove stiamo andando e perche'?» (Asbesto) · https://bfi.s0ftpj.org/bfi-it.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 945
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 15:45"
+  },
+  {
+   "id": "n18",
+   "titolo": "2005-2006: vecna e Hacking Team",
+   "testo": "vecna lavora in Hacking Team a Milano facendo penetration test; nel giugno 2006 se ne va perché, spiegherà, non era il tipo di ricerca che voleva fare.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1101
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 18:21"
+  },
+  {
+   "id": "n19",
+   "titolo": "2007: «Attacking the Core»",
+   "testo": "twiz e sgrakkyu, autori di BFi, firmano un articolo su Phrack e parlano al Chaos Communication Congress di Berlino il 29 dicembre 2007.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1129
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 18:49"
+  },
+  {
+   "id": "n20",
+   "titolo": "2008-2009: il silenzio",
+   "testo": "L'ultimo articolo di BFi esce il 3 marzo 2008; l'ultima notizia sul sito, il 2 aprile 2009, è SniffJoke di vecna. Poi niente: nessun annuncio, nessun addio. Archivio: BFi#14-dev-08, 03/03/2008, «weaponize your SELF» (snagg), ultimo articolo · https://bfi.s0ftpj.org/bfi-it.html.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1197
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 19:57"
+  },
+  {
+   "id": "n21",
+   "titolo": "Luglio 2015: la fuga di dati di Hacking Team",
+   "testo": "Un hacker che si fa chiamare Fisher, mai identificato, pubblica 400 GB di dati dell'azienda; WikiLeaks mette online oltre un milione di email, fra cui quelle di vecna, che scrive di essere d'accordo con la pubblicazione.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1215
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 20:15"
+  },
+  {
+   "id": "n22",
+   "titolo": "Il sito è ancora acceso",
+   "testo": "Nessuno ha mai chiuso BFi: tutti i numeri dal febbraio 1998 sono ancora online, gratis.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1263
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 21:03"
+  },
+  {
+   "id": "d1",
+   "titolo": "Documento: Il sito sfregiato",
+   "testo": "Home page di Michieli Computers (Udine) dalla Wayback Machine, settembre 1999; nel testo messo dai due c'è il ringraziamento «a bFI x l'ispirazione».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 2
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 0:02"
+  },
+  {
+   "id": "d2",
+   "titolo": "Documento: L'archivio dei numeri di BFi",
+   "testo": "Pagina del sito di BFi con l'elenco dei numeri e l'indice del numero 7 (25 dicembre 1999).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 15
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 0:15"
+  },
+  {
+   "id": "d3",
+   "titolo": "Documento: L'editoriale di Natale 1999",
+   "testo": "Pagina dell'editoriale di smaster nel numero 7: «BFi non promuove l'hacking inteso come danneggiamento».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 47
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 0:47"
+  },
+  {
+   "id": "d4",
+   "titolo": "Documento: Il numero 1",
+   "testo": "Intro del numero 1 (febbraio 1998) con il titolo in caratteri e le tre righe «Siamo italiani. Siamo cattivi. Siamo corrotti.».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 70
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 1:10"
+  },
+  {
+   "id": "d5",
+   "titolo": "Documento: System Down",
+   "testo": "Il sito della rivista System Down dalla Wayback Machine (gruppo di IRC, 1996), con l'elenco dei membri fra cui Jack McKrak.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 120
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 2:00"
+  },
+  {
+   "id": "d6",
+   "titolo": "Documento: Le interviste a s0ftpj",
+   "testo": "Estratti dell'intervista di ICT Security (2004) e di AntiOffline (luglio 2000): s0ftpj «nasce nella primavera del 1997».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 132
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 2:12"
+  },
+  {
+   "id": "d7",
+   "titolo": "Documento: L'Orda delle Badlands su Phrack",
+   "testo": "Estratto di Phrack n. 65, «International Scenes» (2008), sull'Orda delle Badlands e il suo capo carismatico.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 160
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 2:40"
+  },
+  {
+   "id": "d8",
+   "titolo": "Documento: Indice e firme del numero 1",
+   "testo": "Indice del numero 1 (febbraio 1998) e la pagina «Hanno collaborato a questo numero» con i nickname.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 187
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 3:07"
+  },
+  {
+   "id": "d9",
+   "titolo": "Documento: L'avvertenza del numero 1",
+   "testo": "Box «Attenzione» del numero 1: «pensate ai vostri amici, alla vostra ragazza, ai vostri genitori, al vostro cane».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 215
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 3:35"
+  },
+  {
+   "id": "d10",
+   "titolo": "Documento: Hackmeeting 98",
+   "testo": "Locandina di Hack-it 98, Firenze, C.P.A., 5-6-7 giugno 1998, e lista delle adesioni dell'Orda delle Badlands.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 227
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 3:47"
+  },
+  {
+   "id": "d11",
+   "titolo": "Documento: Il caso del GR1",
+   "testo": "Sito del Giornale Radio Rai (Wayback Machine) e l'atto del GIP del Tribunale di Roma riportato da Punto Informatico (aprile 2000): «i sistemi di protezione della RAI non erano settati».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 242
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 4:02"
+  },
+  {
+   "id": "d12",
+   "titolo": "Documento: I giornali del 1998",
+   "testo": "L'Unità dell'11 agosto 1998, p. 7: «Preso giovane hacker»; Il Resto del Carlino dell'11 agosto 1998: «Rischia otto anni per una bravata».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 275
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 4:35"
+  },
+  {
+   "id": "d13",
+   "titolo": "Documento: Il tributo a McKrak",
+   "testo": "Pagina di BFi n. 10, «Tributo a System Down: il caso McKrak».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 297
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 4:57"
+  },
+  {
+   "id": "d14",
+   "titolo": "Documento: La posta del numero 5",
+   "testo": "La rubrica della posta di BFi n. 5 (marzo 1999) e la richiesta di un «manifesto» dell'underground italiano.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 335
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 5:35"
+  },
+  {
+   "id": "d15",
+   "titolo": "Documento: Il Manifesto di Mentor",
+   "testo": "Phrack n. 7, file 3, «The Conscience of a Hacker», scritto l'8 gennaio 1986.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 352
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 5:52"
+  },
+  {
+   "id": "d16",
+   "titolo": "Documento: La dissociazione del numero 6",
+   "testo": "Disclaimer di BFi n. 6 (giugno 1999): lo staff «si dissocia da qualunque gruppo o azione di stampo eversivo».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 390
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 6:30"
+  },
+  {
+   "id": "d17",
+   "titolo": "Documento: Hackit 99, Milano",
+   "testo": "Manifesto dell'Hackmeeting di Milano, deposito Bulk, 18-20 giugno 1999, e foto dell'evento da hackmeeting.org.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 412
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 6:52"
+  },
+  {
+   "id": "d18",
+   "titolo": "Documento: Il Chaos Communication Camp",
+   "testo": "FAQ del Chaos Communication Camp 1999 (events.ccc.de) e una foto di Wau Holland (Wikimedia Commons).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 457
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 7:37"
+  },
+  {
+   "id": "d19",
+   "titolo": "Documento: «Boys From Ipanema in gita a Berlino»",
+   "testo": "Il resoconto del campo scritto in quattro per BFi n. 7.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 482
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 8:02"
+  },
+  {
+   "id": "d20",
+   "titolo": "Documento: Il convegno di Pescara",
+   "testo": "Il resoconto di BFi n. 7 sul convegno di Metro Olografix del 4 settembre 1999: «Tensione totalmente assente».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 550
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 9:10"
+  },
+  {
+   "id": "d21",
+   "titolo": "Documento: sikurezza.org",
+   "testo": "La home page della mailing list sikurezza.org di Kobaiashi e Nello|Z (Wayback Machine, settembre 2000).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 600
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 10:00"
+  },
+  {
+   "id": "d22",
+   "titolo": "Documento: «Etica: politica aziendale»",
+   "testo": "L'articolo di Nello|Z in BFi n. 7 sul primo lavoro e il sogno della grande sala.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 610
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 10:10"
+  },
+  {
+   "id": "d23",
+   "titolo": "Documento: Il numero 8 e il kernel",
+   "testo": "Intro di FuSyS e indice di BFi n. 8 (aprile 2000) con gli articoli di pIGpEN e i moduli Ombra e Luce.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 647
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 10:47"
+  },
+  {
+   "id": "d24",
+   "titolo": "Documento: KSTAT nello studio del SANS",
+   "testo": "Il paper GIAC/SANS «Kernel Rootkits» di Dino Dai Zovi, che cita KSTAT di s0ftpj.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 687
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 11:27"
+  },
+  {
+   "id": "d25",
+   "titolo": "Documento: L'avviso su Bugtraq",
+   "testo": "Messaggio su Bugtraq del 2 maggio 2000, advisory SPJ-003-000 di S0ftProjecT sulla falla di Sniffit.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 702
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 11:42"
+  },
+  {
+   "id": "d26",
+   "titolo": "Documento: «Security? What security?»",
+   "testo": "L'intervista di AntiOffline (luglio 2000): «don't call us white-hats».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 725
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 12:05"
+  },
+  {
+   "id": "d27",
+   "titolo": "Documento: Il numero 9 e The Mentor",
+   "testo": "BFi n. 9 (3 novembre 2000) e l'intervista a The Mentor: «imparare linux e programmare».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 765
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 12:45"
+  },
+  {
+   "id": "d28",
+   "titolo": "Documento: Lo sgombero del FreakNet",
+   "testo": "Il sito del FreakNet e l'articolo del 17 aprile 2001 sullo sgombero a Catania; locandina dell'Hackmeeting 2001 al C.S.A. Auro, 22-24 giugno.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 795
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 13:15"
+  },
+  {
+   "id": "d29",
+   "titolo": "Documento: Il numero 10",
+   "testo": "Editoriale di smaster in BFi n. 10 (30 settembre 2001): «BFi non è politicamente impegnata», e l'indice con gli articoli di vecna.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 875
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 14:35"
+  },
+  {
+   "id": "d30",
+   "titolo": "Documento: Le interviste del 2004",
+   "testo": "ICT Security, febbraio e marzo 2004: BFi definita «il cugino italiano di Phrack»; il motto «Pizza, Famiglia e MD5».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 980
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 16:20"
+  },
+  {
+   "id": "d31",
+   "titolo": "Documento: BFi su carta",
+   "testo": "Foto del MOCA 2004 di Metro Olografix a Pescara e l'intro di BFi n. 13, edizione cartacea.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1032
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 17:12"
+  },
+  {
+   "id": "d32",
+   "titolo": "Documento: L'articolo di Asbesto",
+   "testo": "BFi n. 13: Asbesto racconta come è nato il FreakNet MediaLab nel centro sociale Auro di Catania.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1067
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 17:47"
+  },
+  {
+   "id": "d33",
+   "titolo": "Documento: L'intervista a vecna",
+   "testo": "Estratto dell'intervista a vecna del 21 luglio 2015 su Hacking Team: «L'investimento sul malware stava aumentando».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1105
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 18:25"
+  },
+  {
+   "id": "d34",
+   "titolo": "Documento: «Attacking the Core»",
+   "testo": "Phrack n. 64 (27 maggio 2007) di twiz e sgrakkyu e il programma del 24C3: 29 dicembre 2007, Saal 3, ore 17:15.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1147
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 19:07"
+  },
+  {
+   "id": "d35",
+   "titolo": "Documento: Phrack sull'Italia",
+   "testo": "Phrack n. 65 (novembre 2008), «International scenes: Italia», sul circolo virtuoso di BFi.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1180
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 19:40"
+  },
+  {
+   "id": "d36",
+   "titolo": "Documento: L'ultima notizia",
+   "testo": "Il sito di BFi con le ultime uscite: 2009/04/02, «SniffJoke» sniffer/IDS evasion tool.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1202
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 20:02"
+  },
+  {
+   "id": "d37",
+   "titolo": "Documento: La fuga di dati del 2015",
+   "testo": "L'account Twitter rinominato «Hacked Team» (Wayback Machine) e la pagina di WikiLeaks «more than 1 million searchable emails».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1222
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 20:22"
+  },
+  {
+   "id": "d38",
+   "titolo": "Documento: L'articolo di vecna su Gizmodo",
+   "testo": "Gizmodo, 14 luglio 2015: «I Worked at Hacking Team, My Emails Were Leaked, and I'm OK With That».",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1247
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 20:47"
+  },
+  {
+   "id": "d39",
+   "titolo": "Documento: Il sito oggi",
+   "testo": "La pagina di BFi su s0ftpj.org ancora online, con tutti i numeri.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1270
+    }
+   ],
+   "fonte": "Cronache Hacker, «La storia di BFi», min 21:10"
+  }
+ ],
+ "luoghi": [
+  {
+   "id": "l1",
+   "nome": "Firenze",
+   "lat": 43.7696,
+   "lon": 11.2558,
+   "descrizione": "Primo Hackmeeting italiano, giugno 1998 (posizione indicativa: centro città).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 227
+    }
+   ],
+   "note": [
+    "n6"
+   ]
+  },
+  {
+   "id": "l2",
+   "nome": "Milano",
+   "lat": 45.4642,
+   "lon": 9.19,
+   "descrizione": "Secondo Hackmeeting, giugno 1999; sede di Hacking Team (posizione indicativa: centro città).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 412
+    }
+   ],
+   "note": [
+    "n18"
+   ]
+  },
+  {
+   "id": "l3",
+   "nome": "Berlino",
+   "lat": 52.52,
+   "lon": 13.405,
+   "descrizione": "Chaos Communication Camp 1999 e Chaos Communication Congress 2007 (posizione indicativa: centro città).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 440
+    }
+   ],
+   "note": [
+    "n10",
+    "n19"
+   ]
+  },
+  {
+   "id": "l4",
+   "nome": "Pescara",
+   "lat": 42.4618,
+   "lon": 14.2161,
+   "descrizione": "Convegno «L'Hacker e il Magistrato» (1999) e BFi su carta al campo di Metro Olografix (2004) (posizione indicativa).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 496
+    }
+   ],
+   "note": [
+    "n11",
+    "n17"
+   ]
+  },
+  {
+   "id": "l5",
+   "nome": "Catania",
+   "lat": 37.5079,
+   "lon": 15.083,
+   "descrizione": "FreakNet MediaLab al centro sociale Auro e Hackmeeting del 2001 (posizione indicativa: centro città).",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 790
+    }
+   ],
+   "note": [
+    "n15"
+   ]
+  }
+ ],
+ "linee": [
+  {
+   "titolo": "I raduni della scena",
+   "luoghi": [
+    "l1",
+    "l2",
+    "l3",
+    "l4",
+    "l5"
+   ]
+  }
+ ],
+ "persone": [
+  {
+   "id": "p1",
+   "nome": "smaster",
+   "ruolo": "redattore di BFi",
+   "descrizione": "Firma le prime righe del numero 1 e molti editoriali.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 177
+    }
+   ],
+   "note": [
+    "n2",
+    "n16"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  },
+  {
+   "id": "p2",
+   "nome": "pIGpEN",
+   "ruolo": "redattore di BFi",
+   "descrizione": "Conta i lettori nel 1999; nel numero 8 firma 5 articoli sul kernel di BSD.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 317
+    }
+   ],
+   "note": [
+    "n12"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  },
+  {
+   "id": "p3",
+   "nome": "FuSyS",
+   "ruolo": "redattore di BFi",
+   "descrizione": "Moduli Ombra e Luce, KSTAT, avviso su Bugtraq del 2000.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 669
+    }
+   ],
+   "note": [
+    "n12",
+    "n13"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  },
+  {
+   "id": "p4",
+   "nome": "\\sPIRIT\\",
+   "ruolo": "redattore di BFi",
+   "descrizione": "Cura la posta dal numero 6; parla al convegno di Pescara.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 370
+    }
+   ],
+   "note": [
+    "n8",
+    "n11"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  },
+  {
+   "id": "p5",
+   "nome": "McKrak",
+   "ruolo": "autore di System Down",
+   "descrizione": "Studente che nel 1998 sostituì il GR della RAI con una versione ironica; il giudice nel 2000 decise di non processarlo.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 256
+    }
+   ],
+   "note": [
+    "n7"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  },
+  {
+   "id": "p6",
+   "nome": "vecna",
+   "ruolo": "redattore di BFi",
+   "descrizione": "Dal 2001 in redazione; in Hacking Team dal 2005 al 2006; autore di SniffJoke.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 932
+    }
+   ],
+   "note": [
+    "n18",
+    "n20",
+    "n21"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  },
+  {
+   "id": "p7",
+   "nome": "twiz e sgrakkyu",
+   "ruolo": "autori di BFi",
+   "descrizione": "Articolo «Attacking the Core» su Phrack e intervento al 24C3 nel 2007.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 1132
+    }
+   ],
+   "note": [
+    "n19"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  },
+  {
+   "id": "p8",
+   "nome": "The Mentor",
+   "ruolo": "autore del Manifesto dell'hacker (1986)",
+   "descrizione": "Intervistato nel numero 9 di BFi.",
+   "video": [
+    {
+     "id": "ir3ZndHj1fA",
+     "secondi": 761
+    }
+   ],
+   "note": [
+    "n14"
+   ],
+   "luoghi": [],
+   "relazioni": [],
+   "cronologia": []
+  }
+ ],
+ "trascrizione": {
+  "video": "ir3ZndHj1fA",
+  "lingua": "it",
+  "automatica": false,
+  "righe": [
+   {
+    "ms": 1980,
+    "durata_ms": 1050,
+    "testo": "Settembre 1999."
+   },
+   {
+    "ms": 3860,
+    "durata_ms": 2850,
+    "testo": "La prima pagina di un sito italiano non è più la sua."
+   },
+   {
+    "ms": 6960,
+    "durata_ms": 3210,
+    "testo": "Al suo posto ce n'è un'altra, messa lì da due sconosciuti."
+   },
+   {
+    "ms": 10440,
+    "durata_ms": 1970,
+    "testo": "E in quella pagina c'è un ringraziamento."
+   },
+   {
+    "ms": 12560,
+    "durata_ms": 1010,
+    "testo": "A una rivista."
+   },
+   {
+    "ms": 13720,
+    "durata_ms": 1650,
+    "testo": "Per aver ispirato il gesto."
+   },
+   {
+    "ms": 15580,
+    "durata_ms": 1670,
+    "testo": "La rivista si chiama BFi."
+   },
+   {
+    "ms": 17620,
+    "durata_ms": 4510,
+    "testo": "Non si stampa e non si compra in edicola: sono file di testo, si scaricano,"
+   },
+   {
+    "ms": 22160,
+    "durata_ms": 1550,
+    "testo": "si leggono di notte sul monitor."
+   },
+   {
+    "ms": 23960,
+    "durata_ms": 3200,
+    "testo": "Spiegano come funzionano le reti, i programmi, i sistemi."
+   },
+   {
+    "ms": 27160,
+    "durata_ms": 1630,
+    "testo": "E come ci si entra."
+   },
+   {
+    "ms": 28960,
+    "durata_ms": 3750,
+    "testo": "La scrivono una ventina di ragazzi, che si firmano solo con un nickname."
+   },
+   {
+    "ms": 33040,
+    "durata_ms": 2750,
+    "testo": "Quei due, in redazione, non li conosce nessuno."
+   },
+   {
+    "ms": 36000,
+    "durata_ms": 3930,
+    "testo": "Il giorno di Natale esce il numero 7, 6 mesi dopo il precedente."
+   },
+   {
+    "ms": 40180,
+    "durata_ms": 1830,
+    "testo": "L'editoriale lo firma smaster."
+   },
+   {
+    "ms": 42380,
+    "durata_ms": 3750,
+    "testo": "Racconta di quella pagina, e la chiama «uno spiacevole episodio»."
+   },
+   {
+    "ms": 46300,
+    "durata_ms": 1370,
+    "testo": "BFi, scrive,"
+   },
+   {
+    "ms": 47760,
+    "durata_ms": 4390,
+    "testo": "«non promuove l'hacking inteso come danneggiamento o modifica di dati altrui»."
+   },
+   {
+    "ms": 52260,
+    "durata_ms": 1450,
+    "testo": "E ai due sconosciuti dice:"
+   },
+   {
+    "ms": 53880,
+    "durata_ms": 4590,
+    "testo": "«vi dimostrerete più capaci codando un buon tool che bucando un serverino mal"
+   },
+   {
+    "ms": 58600,
+    "durata_ms": 380,
+    "testo": "protetto»."
+   },
+   {
+    "ms": 58980,
+    "durata_ms": 3870,
+    "testo": "Cioè: scrivete un buon programma, invece di entrare in un sito indifeso."
+   },
+   {
+    "ms": 62980,
+    "durata_ms": 3570,
+    "testo": "E poi, in maiuscolo, una parola sola: «Crescete!»"
+   },
+   {
+    "ms": 66820,
+    "durata_ms": 3910,
+    "testo": "Quasi 2 anni prima, quella stessa rivista era cominciata con 3 righe."
+   },
+   {
+    "ms": 70860,
+    "durata_ms": 1030,
+    "testo": "«Siamo italiani."
+   },
+   {
+    "ms": 72000,
+    "durata_ms": 1000,
+    "testo": "Siamo cattivi."
+   },
+   {
+    "ms": 73060,
+    "durata_ms": 1000,
+    "testo": "Siamo corrotti.»"
+   },
+   {
+    "ms": 74240,
+    "durata_ms": 1650,
+    "testo": "E subito sotto, il perché:"
+   },
+   {
+    "ms": 75980,
+    "durata_ms": 3510,
+    "testo": "sono stufi di sentirsi sminuiti solo perché sono italiani."
+   },
+   {
+    "ms": 79620,
+    "durata_ms": 1390,
+    "testo": "Si chiamava BFi."
+   },
+   {
+    "ms": 81220,
+    "durata_ms": 1390,
+    "testo": "Butchered From Inside."
+   },
+   {
+    "ms": 82840,
+    "durata_ms": 1360,
+    "testo": "Macellati dall'interno."
+   },
+   {
+    "ms": 89760,
+    "durata_ms": 4000,
+    "testo": "SIAMO ITALIANI"
+   },
+   {
+    "ms": 94040,
+    "durata_ms": 2170,
+    "testo": "11 maggio 1994."
+   },
+   {
+    "ms": 96960,
+    "durata_ms": 4590,
+    "testo": "In tutta Italia la Guardia di Finanza bussa alle porte di chi tiene accesa, in casa,"
+   },
+   {
+    "ms": 101680,
+    "durata_ms": 4970,
+    "testo": "una BBS: una bacheca elettronica dove la gente si scrive di notte, via modem."
+   },
+   {
+    "ms": 107320,
+    "durata_ms": 1570,
+    "testo": "173 perquisizioni."
+   },
+   {
+    "ms": 108980,
+    "durata_ms": 3310,
+    "testo": "Computer, modem e dischetti finiscono negli scatoloni."
+   },
+   {
+    "ms": 112460,
+    "durata_ms": 1730,
+    "testo": "Chi resta passa su Internet."
+   },
+   {
+    "ms": 114340,
+    "durata_ms": 4870,
+    "testo": "E su Internet i ragazzi si trovano su IRC: stanze di chat che non dormono mai."
+   },
+   {
+    "ms": 119300,
+    "durata_ms": 6470,
+    "testo": "Lì, nel 1996, nasce System Down: una rivista elettronica, scritta da loro, per loro."
+   },
+   {
+    "ms": 125960,
+    "durata_ms": 2770,
+    "testo": "Nell'estate del 1997 si ferma."
+   },
+   {
+    "ms": 128740,
+    "durata_ms": 1740,
+    "testo": "Nella primavera di quello stesso anno,"
+   },
+   {
+    "ms": 130480,
+    "durata_ms": 2630,
+    "testo": "un gruppo di amici di quei canali fonda un gruppo suo."
+   },
+   {
+    "ms": 133220,
+    "durata_ms": 1370,
+    "testo": "Lo chiamano s0ftpj."
+   },
+   {
+    "ms": 135000,
+    "durata_ms": 2730,
+    "testo": "Si definiscono una comunità no-profit di coder:"
+   },
+   {
+    "ms": 137820,
+    "durata_ms": 3270,
+    "testo": "ragazzi che scrivono programmi gratis, per il gusto di farlo."
+   },
+   {
+    "ms": 141100,
+    "durata_ms": 3950,
+    "testo": "Da dove venga il nome, 3 anni dopo, non se lo ricorderanno più nemmeno loro."
+   },
+   {
+    "ms": 145100,
+    "durata_ms": 2410,
+    "testo": "Rimane, scrivono, la sensazione."
+   },
+   {
+    "ms": 147760,
+    "durata_ms": 3530,
+    "testo": "Accanto a loro ci sono altri ragazzi: l'Orda delle Badlands."
+   },
+   {
+    "ms": 151460,
+    "durata_ms": 3030,
+    "testo": "Entrano nei server, combattono le guerre di IRC,"
+   },
+   {
+    "ms": 154520,
+    "durata_ms": 2430,
+    "testo": "quelle in cui ci si butta fuori a vicenda dai canali."
+   },
+   {
+    "ms": 156960,
+    "durata_ms": 3000,
+    "testo": "E hanno un capo che, racconterà anni dopo Phrack,"
+   },
+   {
+    "ms": 160080,
+    "durata_ms": 3590,
+    "testo": "la storica rivista hacker americana, i suoi ragazzi quasi venerano."
+   },
+   {
+    "ms": 163770,
+    "durata_ms": 1800,
+    "testo": "Febbraio 1998."
+   },
+   {
+    "ms": 166160,
+    "durata_ms": 2440,
+    "testo": "I due gruppi mettono insieme 16 articoli."
+   },
+   {
+    "ms": 168600,
+    "durata_ms": 3980,
+    "testo": "Ne esce un file di testo, con il titolo disegnato a lettere fatte di caratteri:"
+   },
+   {
+    "ms": 172580,
+    "durata_ms": 1700,
+    "testo": "Butchered From Inside."
+   },
+   {
+    "ms": 174680,
+    "durata_ms": 1000,
+    "testo": "Macellati dall'interno."
+   },
+   {
+    "ms": 175980,
+    "durata_ms": 1790,
+    "testo": "Numero 1, anno 1."
+   },
+   {
+    "ms": 177880,
+    "durata_ms": 1910,
+    "testo": "Le prime righe le firma smaster."
+   },
+   {
+    "ms": 180060,
+    "durata_ms": 1110,
+    "testo": "«Siamo italiani."
+   },
+   {
+    "ms": 181320,
+    "durata_ms": 1000,
+    "testo": "Siamo cattivi."
+   },
+   {
+    "ms": 182360,
+    "durata_ms": 1050,
+    "testo": "Siamo corrotti.»"
+   },
+   {
+    "ms": 183540,
+    "durata_ms": 3070,
+    "testo": "Dentro c'è un po' di tutto, come nella stanza di un ventenne."
+   },
+   {
+    "ms": 186700,
+    "durata_ms": 1810,
+    "testo": "Come nascondersi dentro Unix,"
+   },
+   {
+    "ms": 188560,
+    "durata_ms": 2870,
+    "testo": "il sistema dei grandi computer di università e aziende."
+   },
+   {
+    "ms": 191480,
+    "durata_ms": 2570,
+    "testo": "Il phreaking, cioè telefonare senza pagare."
+   },
+   {
+    "ms": 194060,
+    "durata_ms": 880,
+    "testo": "I virus."
+   },
+   {
+    "ms": 194940,
+    "durata_ms": 1000,
+    "testo": "La crittografia."
+   },
+   {
+    "ms": 196020,
+    "durata_ms": 2480,
+    "testo": "Come togliere la protezione a un videogioco appena uscito."
+   },
+   {
+    "ms": 198500,
+    "durata_ms": 2770,
+    "testo": "E come spingere il processore oltre il limite."
+   },
+   {
+    "ms": 201350,
+    "durata_ms": 2690,
+    "testo": "18 firme, nessuna con un nome vero."
+   },
+   {
+    "ms": 204040,
+    "durata_ms": 3860,
+    "testo": "Lo scopo è scritto in chiaro: valorizzare l'Italia nella scena underground."
+   },
+   {
+    "ms": 207900,
+    "durata_ms": 5190,
+    "testo": "E anche l'avvertimento, in maiuscolo: pensate ai vostri amici, alla vostra ragazza,"
+   },
+   {
+    "ms": 213100,
+    "durata_ms": 1840,
+    "testo": "ai vostri genitori, al vostro cane."
+   },
+   {
+    "ms": 214940,
+    "durata_ms": 2310,
+    "testo": "E soprattutto a voi stessi."
+   },
+   {
+    "ms": 217280,
+    "durata_ms": 1550,
+    "testo": "Quando uscirà il prossimo numero?"
+   },
+   {
+    "ms": 218840,
+    "durata_ms": 3620,
+    "testo": "Quando ci saranno gli articoli: fra 15 giorni, o fra 2 mesi."
+   },
+   {
+    "ms": 222460,
+    "durata_ms": 4810,
+    "testo": "Chi legge, avverte smaster, dopo questa prima dose non potrà più farne a meno."
+   },
+   {
+    "ms": 227430,
+    "durata_ms": 2720,
+    "testo": "Giugno 1998, Firenze."
+   },
+   {
+    "ms": 230180,
+    "durata_ms": 2110,
+    "testo": "Si tiene il primo Hackmeeting italiano."
+   },
+   {
+    "ms": 232380,
+    "durata_ms": 3250,
+    "testo": "Nella lista di chi aderisce c'è anche l'Orda delle Badlands:"
+   },
+   {
+    "ms": 235770,
+    "durata_ms": 2240,
+    "testo": "18 nickname e un eccetera."
+   },
+   {
+    "ms": 238240,
+    "durata_ms": 4950,
+    "testo": "Un mese dopo, il 10 luglio, è il giorno in cui in Italia arriva Windows 98."
+   },
+   {
+    "ms": 243640,
+    "durata_ms": 4750,
+    "testo": "Sul sito della RAI, il giornale radio delle 13 da ascoltare su Internet non c'è più."
+   },
+   {
+    "ms": 248540,
+    "durata_ms": 2080,
+    "testo": "Al suo posto c'è una versione ironica,"
+   },
+   {
+    "ms": 250620,
+    "durata_ms": 2870,
+    "testo": "piena di critiche a Windows 98 e a Bill Gates."
+   },
+   {
+    "ms": 253550,
+    "durata_ms": 3190,
+    "testo": "L'ha messa uno studente di ingegneria di poco più di vent'anni."
+   },
+   {
+    "ms": 256940,
+    "durata_ms": 3510,
+    "testo": "Si firma McKrak, e scrive su System Down."
+   },
+   {
+    "ms": 260653,
+    "durata_ms": 4947,
+    "testo": "Ad agosto, verso le 6 di sera, torna a casa e la trova piena di poliziotti."
+   },
+   {
+    "ms": 265600,
+    "durata_ms": 1010,
+    "testo": "Perquisizione."
+   },
+   {
+    "ms": 266720,
+    "durata_ms": 1770,
+    "testo": "3 ore di domande in salotto."
+   },
+   {
+    "ms": 268820,
+    "durata_ms": 2310,
+    "testo": "Poi la questura, e le foto segnaletiche."
+   },
+   {
+    "ms": 271280,
+    "durata_ms": 3670,
+    "testo": "Gli portano via 2 computer, i dischetti, un manuale di hacking."
+   },
+   {
+    "ms": 275300,
+    "durata_ms": 2480,
+    "testo": "I giornali titolano: «Preso giovane hacker»."
+   },
+   {
+    "ms": 277780,
+    "durata_ms": 3530,
+    "testo": "E un altro: «Rischia 8 anni per una bravata»."
+   },
+   {
+    "ms": 281540,
+    "durata_ms": 4590,
+    "testo": "Il 4 aprile 2000 il giudice decide che McKrak non va nemmeno processato."
+   },
+   {
+    "ms": 286280,
+    "durata_ms": 3450,
+    "testo": "Il motivo: la legge punisce chi entra in un sistema protetto."
+   },
+   {
+    "ms": 289780,
+    "durata_ms": 2880,
+    "testo": "E quello della RAI, scrive il giudice, protetto non era:"
+   },
+   {
+    "ms": 292660,
+    "durata_ms": 2760,
+    "testo": "la password del server stava scritta in un file,"
+   },
+   {
+    "ms": 295420,
+    "durata_ms": 2950,
+    "testo": "su un altro computer della RAI aperto a chiunque."
+   },
+   {
+    "ms": 298560,
+    "durata_ms": 2620,
+    "testo": "3 anni dopo, BFi pubblicherà la sua storia."
+   },
+   {
+    "ms": 301180,
+    "durata_ms": 5340,
+    "testo": "E scriverà: senza l'esempio di System Down, BFi non sarebbe mai esistita."
+   },
+   {
+    "ms": 307840,
+    "durata_ms": 4000,
+    "testo": "LA POSTA"
+   },
+   {
+    "ms": 312200,
+    "durata_ms": 1870,
+    "testo": "Marzo 1999."
+   },
+   {
+    "ms": 314760,
+    "durata_ms": 2810,
+    "testo": "BFi compie un anno ed è al numero 5."
+   },
+   {
+    "ms": 317820,
+    "durata_ms": 5370,
+    "testo": "Uno della redazione, pIGpEN, fa i conti: la rivista ha qualche centinaio di lettori."
+   },
+   {
+    "ms": 323240,
+    "durata_ms": 1030,
+    "testo": "O forse di più."
+   },
+   {
+    "ms": 324420,
+    "durata_ms": 2410,
+    "testo": "Nello stesso numero scrive una pagina di dediche."
+   },
+   {
+    "ms": 326960,
+    "durata_ms": 3350,
+    "testo": "Una è per chi gli scrive su IRC solo per fare due chiacchiere."
+   },
+   {
+    "ms": 330430,
+    "durata_ms": 2310,
+    "testo": "Un'altra, per chi lo tiene lontano dall'hacking."
+   },
+   {
+    "ms": 333020,
+    "durata_ms": 1250,
+    "testo": "E i lettori scrivono."
+   },
+   {
+    "ms": 334380,
+    "durata_ms": 1540,
+    "testo": "La posta la cura Cavallo."
+   },
+   {
+    "ms": 335920,
+    "durata_ms": 1410,
+    "testo": "C'è chi vuole un glossario."
+   },
+   {
+    "ms": 337400,
+    "durata_ms": 1850,
+    "testo": "Chi chiede come si clona un cellulare."
+   },
+   {
+    "ms": 339280,
+    "durata_ms": 2930,
+    "testo": "Chi offre materiale in cambio di un accesso a qualche computer."
+   },
+   {
+    "ms": 342400,
+    "durata_ms": 3600,
+    "testo": "Un ragazzo di 17 anni propone di scrivere un manifesto dell'underground"
+   },
+   {
+    "ms": 346080,
+    "durata_ms": 460,
+    "testo": "italiano."
+   },
+   {
+    "ms": 346540,
+    "durata_ms": 2480,
+    "testo": "Risposta: e che manifestiamo?"
+   },
+   {
+    "ms": 349020,
+    "durata_ms": 1990,
+    "testo": "Per me basta la traduzione di Mentor."
+   },
+   {
+    "ms": 351160,
+    "durata_ms": 1870,
+    "testo": "Mentor è un ragazzo americano."
+   },
+   {
+    "ms": 353100,
+    "durata_ms": 3980,
+    "testo": "Nel gennaio del 1986, poco dopo essere stato arrestato,"
+   },
+   {
+    "ms": 357080,
+    "durata_ms": 3760,
+    "testo": "scrive una pagina che fa il giro del mondo: il Manifesto dell'hacker."
+   },
+   {
+    "ms": 361000,
+    "durata_ms": 2550,
+    "testo": "Comincia così: «Un altro è stato preso oggi."
+   },
+   {
+    "ms": 363620,
+    "durata_ms": 1270,
+    "testo": "È su tutti i giornali.»"
+   },
+   {
+    "ms": 364940,
+    "durata_ms": 3790,
+    "testo": "E finisce così: «Sono un hacker, e questo è il mio manifesto.»"
+   },
+   {
+    "ms": 369020,
+    "durata_ms": 1390,
+    "testo": "Giugno, numero 6."
+   },
+   {
+    "ms": 370480,
+    "durata_ms": 1410,
+    "testo": "La posta passa a \\sPIRIT\\."
+   },
+   {
+    "ms": 372080,
+    "durata_ms": 3650,
+    "testo": "Alcuni dei lettori, scrive, avranno 13, 15 anni."
+   },
+   {
+    "ms": 375800,
+    "durata_ms": 3610,
+    "testo": "Uno chiede un maestro: «Il fatto è che non possiamo darti nessun aiuto.»"
+   },
+   {
+    "ms": 379480,
+    "durata_ms": 3440,
+    "testo": "Un altro vuole i programmi che generano i codici delle ricariche telefoniche."
+   },
+   {
+    "ms": 382920,
+    "durata_ms": 3230,
+    "testo": "Risposta, in maiuscolo: non funzionano."
+   },
+   {
+    "ms": 386320,
+    "durata_ms": 2130,
+    "testo": "In apertura del numero, una riga nuova:"
+   },
+   {
+    "ms": 388540,
+    "durata_ms": 2830,
+    "testo": "«Alla luce degli ultimi avvenimenti politici e sociali»,"
+   },
+   {
+    "ms": 391380,
+    "durata_ms": 4550,
+    "testo": "lo staff di BFi si dissocia da qualunque gruppo o azione di stampo eversivo."
+   },
+   {
+    "ms": 396190,
+    "durata_ms": 4060,
+    "testo": "L'introduzione \\sPIRIT\\ la scrive su un treno per Rimini, con un computer palmare."
+   },
+   {
+    "ms": 400380,
+    "durata_ms": 1870,
+    "testo": "Matrix è appena uscito al cinema."
+   },
+   {
+    "ms": 402460,
+    "durata_ms": 2430,
+    "testo": "«La rete è là fuori, Matrix esiste,"
+   },
+   {
+    "ms": 404940,
+    "durata_ms": 3660,
+    "testo": "e noi col vostro aiuto siamo Morpheus alla ricerca dell'Eletto.»"
+   },
+   {
+    "ms": 408760,
+    "durata_ms": 3600,
+    "testo": "E sulla polizia: «da noi i cattivi non vestono di nero, ma di blu.»"
+   },
+   {
+    "ms": 412360,
+    "durata_ms": 3240,
+    "testo": "Lo stesso mese, a Milano, c'è il secondo Hackmeeting,"
+   },
+   {
+    "ms": 415780,
+    "durata_ms": 1710,
+    "testo": "in un vecchio deposito occupato."
+   },
+   {
+    "ms": 417580,
+    "durata_ms": 3290,
+    "testo": "Si dorme nell'ostello del centro sociale o in tenda nel giardino."
+   },
+   {
+    "ms": 420920,
+    "durata_ms": 3280,
+    "testo": "Una rete locale collega qualche centinaio di computer; uno,"
+   },
+   {
+    "ms": 424200,
+    "durata_ms": 3570,
+    "testo": "per non scaldarsi troppo, è raffreddato ad acqua, dentro un secchio."
+   },
+   {
+    "ms": 427780,
+    "durata_ms": 3350,
+    "testo": "Il resoconto per BFi lo scrive |TSuNaMi|, dell'Orda:"
+   },
+   {
+    "ms": 431500,
+    "durata_ms": 1610,
+    "testo": "«Le magliette sono sempre poche."
+   },
+   {
+    "ms": 433160,
+    "durata_ms": 1910,
+    "testo": "La rete è sempre troppo lenta.»"
+   },
+   {
+    "ms": 435180,
+    "durata_ms": 2990,
+    "testo": "E chiude: «Felice di aver conosciuto chi non conoscevo,"
+   },
+   {
+    "ms": 438180,
+    "durata_ms": 2160,
+    "testo": "triste per chi c'era e adesso non c'è più.»"
+   },
+   {
+    "ms": 440340,
+    "durata_ms": 2260,
+    "testo": "Agosto. del0rean, FuSyS,"
+   },
+   {
+    "ms": 442925,
+    "durata_ms": 4115,
+    "testo": "Kobaiashi e Nello|Z si danno appuntamento alle 5 del pomeriggio fuori dalla"
+   },
+   {
+    "ms": 447040,
+    "durata_ms": 1640,
+    "testo": "stazione Zoo di Berlino."
+   },
+   {
+    "ms": 448680,
+    "durata_ms": 4100,
+    "testo": "Treno, metropolitana, una navetta, e poi campi di fieno."
+   },
+   {
+    "ms": 452780,
+    "durata_ms": 5130,
+    "testo": "È il Chaos Communication Camp: il primo campo estivo del Chaos Computer Club,"
+   },
+   {
+    "ms": 458000,
+    "durata_ms": 1770,
+    "testo": "il club degli hacker tedeschi."
+   },
+   {
+    "ms": 459960,
+    "durata_ms": 4350,
+    "testo": "Montano le tende di notte e dormono per terra 3 giorni, senza un tavolo."
+   },
+   {
+    "ms": 464520,
+    "durata_ms": 3030,
+    "testo": "Incontrano Wau Holland, uno dei fondatori del Club,"
+   },
+   {
+    "ms": 467600,
+    "durata_ms": 1750,
+    "testo": "vestito con una tunica di paglia."
+   },
+   {
+    "ms": 469580,
+    "durata_ms": 4130,
+    "testo": "Davanti alla maglietta di un altro italiano, FuSyS sbuffa: «Che palle,"
+   },
+   {
+    "ms": 473740,
+    "durata_ms": 1290,
+    "testo": "è pieno di italiani!»"
+   },
+   {
+    "ms": 475080,
+    "durata_ms": 2700,
+    "testo": "La notte la temperatura scende a 7 gradi,"
+   },
+   {
+    "ms": 477780,
+    "durata_ms": 3730,
+    "testo": "e Kobaiashi finisce in un'ambulanza della Croce Rossa, a scaldarsi."
+   },
+   {
+    "ms": 481560,
+    "durata_ms": 4150,
+    "testo": "Lo raccontano loro stessi, nel resoconto che scrivono in quattro per BFi."
+   },
+   {
+    "ms": 485980,
+    "durata_ms": 5110,
+    "testo": "Il titolo è «Boys From Ipanema in gita a Berlino»: le iniziali fanno BFi."
+   },
+   {
+    "ms": 491400,
+    "durata_ms": 2710,
+    "testo": "Il viaggio costa 150 marchi a testa."
+   },
+   {
+    "ms": 494180,
+    "durata_ms": 2030,
+    "testo": "Scrivono: ne è valsa la pena."
+   },
+   {
+    "ms": 496440,
+    "durata_ms": 3310,
+    "testo": "4 settembre 1999, Pescara."
+   },
+   {
+    "ms": 500030,
+    "durata_ms": 3210,
+    "testo": "Un'associazione di appassionati di telematica, Metro Olografix,"
+   },
+   {
+    "ms": 503480,
+    "durata_ms": 4050,
+    "testo": "organizza in un albergo un convegno che si chiama «L'Hacker e il Magistrato»."
+   },
+   {
+    "ms": 507700,
+    "durata_ms": 4370,
+    "testo": "Stavolta quelli di BFi non sono solo fra il pubblico: li hanno invitati a parlare."
+   },
+   {
+    "ms": 512220,
+    "durata_ms": 4350,
+    "testo": "Ci sono Black Berry, \\sPIRIT\\ e altri tre, che nel resoconto restano anonimi."
+   },
+   {
+    "ms": 516720,
+    "durata_ms": 1940,
+    "testo": "Al tavolo con loro: un avvocato,"
+   },
+   {
+    "ms": 518660,
+    "durata_ms": 3190,
+    "testo": "un magistrato e un tenente colonnello della Guardia di Finanza."
+   },
+   {
+    "ms": 522000,
+    "durata_ms": 3330,
+    "testo": "Prima di cominciare, nella hall, il colonnello spiega la sua idea:"
+   },
+   {
+    "ms": 525600,
+    "durata_ms": 2190,
+    "testo": "se un sistema non è protetto come si deve,"
+   },
+   {
+    "ms": 527860,
+    "durata_ms": 2400,
+    "testo": "la colpa più grossa è di chi lo doveva proteggere."
+   },
+   {
+    "ms": 530260,
+    "durata_ms": 4250,
+    "testo": "Il convegno comincia alle 9 di sera e finisce quasi a mezzanotte."
+   },
+   {
+    "ms": 534640,
+    "durata_ms": 3770,
+    "testo": "Quelli di BFi, lo ammettono loro stessi, fanno una magra figura."
+   },
+   {
+    "ms": 538620,
+    "durata_ms": 4410,
+    "testo": "L'avvocato li consola: «Non avevate speranze contro quegli animali da conferenza.»"
+   },
+   {
+    "ms": 543140,
+    "durata_ms": 1790,
+    "testo": "Poi la cena, a mezzanotte."
+   },
+   {
+    "ms": 545080,
+    "durata_ms": 3330,
+    "testo": "Una tavolata di 14 persone: da una parte i ragazzi,"
+   },
+   {
+    "ms": 548480,
+    "durata_ms": 2160,
+    "testo": "dall'altra il magistrato e il colonnello."
+   },
+   {
+    "ms": 550640,
+    "durata_ms": 3390,
+    "testo": "Black Berry scrive: «Tensione totalmente assente."
+   },
+   {
+    "ms": 554120,
+    "durata_ms": 3880,
+    "testo": "Non si cercano contrasti di sorta, anche perché non c'è dialogo tra gli estremi.»"
+   },
+   {
+    "ms": 559320,
+    "durata_ms": 4000,
+    "testo": "QUALE SICUREZZA?"
+   },
+   {
+    "ms": 563680,
+    "durata_ms": 2010,
+    "testo": "Natale 1999."
+   },
+   {
+    "ms": 566400,
+    "durata_ms": 5110,
+    "testo": "Nell'editoriale del numero 7, prima ancora del sito sfregiato, smaster si scusa:"
+   },
+   {
+    "ms": 571600,
+    "durata_ms": 3030,
+    "testo": "6 mesi senza uscire, un record negativo."
+   },
+   {
+    "ms": 574760,
+    "durata_ms": 3870,
+    "testo": "Il motivo è il poco tempo, tra lo studio, il lavoro e, scrive,"
+   },
+   {
+    "ms": 578680,
+    "durata_ms": 3150,
+    "testo": "«vari problemi interni al gruppo», non ancora risolti."
+   },
+   {
+    "ms": 581880,
+    "durata_ms": 4360,
+    "testo": "BFi, aggiunge, non è fatta per danneggiare: è fatta per la riflessione,"
+   },
+   {
+    "ms": 586240,
+    "durata_ms": 2530,
+    "testo": "e per la ricerca delle debolezze dei sistemi."
+   },
+   {
+    "ms": 588940,
+    "durata_ms": 3990,
+    "testo": "Chiude con gli auguri: il vino del pranzo di Natale comincia a farsi sentire."
+   },
+   {
+    "ms": 593060,
+    "durata_ms": 2260,
+    "testo": "Buon Natale, e felice millennium bug."
+   },
+   {
+    "ms": 595440,
+    "durata_ms": 2430,
+    "testo": "Intanto, i ragazzi di BFi crescono."
+   },
+   {
+    "ms": 598090,
+    "durata_ms": 4420,
+    "testo": "Kobaiashi e Nello|Z aprono sikurezza.org: una mailing list,"
+   },
+   {
+    "ms": 602560,
+    "durata_ms": 3930,
+    "testo": "cioè una lista di posta dove ogni messaggio arriva a tutti gli iscritti."
+   },
+   {
+    "ms": 606520,
+    "durata_ms": 2460,
+    "testo": "In italiano, e solo di sicurezza informatica."
+   },
+   {
+    "ms": 608980,
+    "durata_ms": 4950,
+    "testo": "Nello stesso numero Nello|Z avverte i lettori: ecco cosa vi aspetta al primo lavoro."
+   },
+   {
+    "ms": 614000,
+    "durata_ms": 3370,
+    "testo": "Portate il curriculum, e il capo lo sfoglia senza capire una parola."
+   },
+   {
+    "ms": 617420,
+    "durata_ms": 2300,
+    "testo": "Vi assume lo stesso, ma vi paga una miseria."
+   },
+   {
+    "ms": 619720,
+    "durata_ms": 3280,
+    "testo": "Vi fa fare cose che non c'entrano niente con quello per cui vi ha preso,"
+   },
+   {
+    "ms": 623000,
+    "durata_ms": 2560,
+    "testo": "e le ore diventano il triplo di quelle concordate."
+   },
+   {
+    "ms": 625560,
+    "durata_ms": 3160,
+    "testo": "Poi vi nomina capo progetto: un titolo, niente di più,"
+   },
+   {
+    "ms": 628720,
+    "durata_ms": 1370,
+    "testo": "perché i soldi se li tiene lui."
+   },
+   {
+    "ms": 630200,
+    "durata_ms": 2290,
+    "testo": "Il capo decide, scrive, voi no."
+   },
+   {
+    "ms": 632560,
+    "durata_ms": 4040,
+    "testo": "Poi racconta il suo sogno: una grande sala, la Terra su uno schermo in fondo,"
+   },
+   {
+    "ms": 636600,
+    "durata_ms": 4230,
+    "testo": "e i più bravi ai loro tavoli, felici di stare insieme e di condividere tutto."
+   },
+   {
+    "ms": 640960,
+    "durata_ms": 2230,
+    "testo": "L'ultima riga: «questo è solo un sogno."
+   },
+   {
+    "ms": 643280,
+    "durata_ms": 1430,
+    "testo": "Bye, vado a lavorare.»"
+   },
+   {
+    "ms": 644790,
+    "durata_ms": 1000,
+    "testo": "Aprile 2000."
+   },
+   {
+    "ms": 645940,
+    "durata_ms": 1000,
+    "testo": "Numero 8."
+   },
+   {
+    "ms": 647030,
+    "durata_ms": 1740,
+    "testo": "FuSyS apre così: «D'accordo."
+   },
+   {
+    "ms": 649080,
+    "durata_ms": 1120,
+    "testo": "Non ce l'abbiamo fatta."
+   },
+   {
+    "ms": 650200,
+    "durata_ms": 1210,
+    "testo": "Siamo ancora in ritardo.»"
+   },
+   {
+    "ms": 651640,
+    "durata_ms": 2620,
+    "testo": "Gli anni passano, scrive, e il tempo è sempre meno."
+   },
+   {
+    "ms": 654260,
+    "durata_ms": 6090,
+    "testo": "Eppure il numero è pieno. pIGpEN, da solo, firma 5 articoli sul kernel di BSD,"
+   },
+   {
+    "ms": 660480,
+    "durata_ms": 2370,
+    "testo": "un sistema operativo libero, cugino di Linux."
+   },
+   {
+    "ms": 663040,
+    "durata_ms": 3880,
+    "testo": "Il kernel è il cuore di un sistema operativo: il punto più profondo,"
+   },
+   {
+    "ms": 666920,
+    "durata_ms": 2410,
+    "testo": "dove può nascondersi chi non vuole farsi trovare."
+   },
+   {
+    "ms": 669440,
+    "durata_ms": 2770,
+    "testo": "FuSyS scrive 2 moduli per il kernel di Linux,"
+   },
+   {
+    "ms": 672280,
+    "durata_ms": 3480,
+    "testo": "pezzi di programma che si aggiungono al cuore del sistema mentre il computer è"
+   },
+   {
+    "ms": 675760,
+    "durata_ms": 720,
+    "testo": "acceso."
+   },
+   {
+    "ms": 676480,
+    "durata_ms": 1720,
+    "testo": "Li chiama Ombra e Luce."
+   },
+   {
+    "ms": 678200,
+    "durata_ms": 3370,
+    "testo": "Ombra serve a chi entra in un sistema, per restarci nascosto."
+   },
+   {
+    "ms": 681660,
+    "durata_ms": 1690,
+    "testo": "Luce serve a chi lo difende."
+   },
+   {
+    "ms": 683400,
+    "durata_ms": 4750,
+    "testo": "Uno strumento di FuSyS, KSTAT, serve proprio a scovare chi si nasconde lì dentro."
+   },
+   {
+    "ms": 688280,
+    "durata_ms": 4240,
+    "testo": "Finisce citato in uno studio sui rootkit del kernel, i programmi che un intruso,"
+   },
+   {
+    "ms": 692520,
+    "durata_ms": 3410,
+    "testo": "una volta dentro, installa nel kernel per diventare invisibile."
+   },
+   {
+    "ms": 696080,
+    "durata_ms": 2063,
+    "testo": "Lo studio è pubblicato dal SANS,"
+   },
+   {
+    "ms": 698327,
+    "durata_ms": 3683,
+    "testo": "l'istituto americano che forma e certifica gli esperti di sicurezza."
+   },
+   {
+    "ms": 702260,
+    "durata_ms": 1110,
+    "testo": "2 maggio 2000."
+   },
+   {
+    "ms": 703680,
+    "durata_ms": 2250,
+    "testo": "FuSyS manda un messaggio su Bugtraq,"
+   },
+   {
+    "ms": 706100,
+    "durata_ms": 3910,
+    "testo": "la mailing list dove gli esperti di tutto il mondo si segnalano le falle."
+   },
+   {
+    "ms": 710200,
+    "durata_ms": 4060,
+    "testo": "In testa, disegnato con i caratteri, il nome del gruppo: S0ftProjecT,"
+   },
+   {
+    "ms": 714800,
+    "durata_ms": 2310,
+    "testo": "«Digital Security for Y2K»."
+   },
+   {
+    "ms": 717240,
+    "durata_ms": 1850,
+    "testo": "Sotto, una falla in Sniffit,"
+   },
+   {
+    "ms": 719240,
+    "durata_ms": 2750,
+    "testo": "un programma che serve a spiare il traffico di una rete."
+   },
+   {
+    "ms": 722040,
+    "durata_ms": 2250,
+    "testo": "Chi lo usa può essere attaccato da fuori."
+   },
+   {
+    "ms": 724520,
+    "durata_ms": 800,
+    "testo": "Luglio."
+   },
+   {
+    "ms": 725320,
+    "durata_ms": 4110,
+    "testo": "Un sito di sicurezza in lingua inglese, AntiOffline, li intervista."
+   },
+   {
+    "ms": 729540,
+    "durata_ms": 3850,
+    "testo": "Raccontano di essere nati come una cerchia di amici dell'underground italiano."
+   },
+   {
+    "ms": 733600,
+    "durata_ms": 3260,
+    "testo": "Un underground che, scrivono, con sorpresa di molti,"
+   },
+   {
+    "ms": 736860,
+    "durata_ms": 1930,
+    "testo": "ogni tanto sembra esistere davvero."
+   },
+   {
+    "ms": 738900,
+    "durata_ms": 1800,
+    "testo": "Sono fra i 15 e i 20,"
+   },
+   {
+    "ms": 740740,
+    "durata_ms": 2560,
+    "testo": "e stanno insieme grazie alla volontà di ferro di alcuni."
+   },
+   {
+    "ms": 743300,
+    "durata_ms": 4130,
+    "testo": "Sulla sicurezza in Italia rispondono con una domanda: sicurezza?"
+   },
+   {
+    "ms": 747480,
+    "durata_ms": 1050,
+    "testo": "Quale sicurezza?"
+   },
+   {
+    "ms": 748660,
+    "durata_ms": 4750,
+    "testo": "E chiedono una cosa sola: non chiamateci white hat, gli hacker buoni."
+   },
+   {
+    "ms": 753560,
+    "durata_ms": 1310,
+    "testo": "3 novembre 2000."
+   },
+   {
+    "ms": 755100,
+    "durata_ms": 1000,
+    "testo": "Numero 9."
+   },
+   {
+    "ms": 756380,
+    "durata_ms": 1850,
+    "testo": "L'introduzione è una parola sola."
+   },
+   {
+    "ms": 758380,
+    "durata_ms": 2870,
+    "testo": "Il numero verrà scaricato più di 11.000 volte."
+   },
+   {
+    "ms": 761440,
+    "durata_ms": 2110,
+    "testo": "Dentro c'è un'intervista a The Mentor,"
+   },
+   {
+    "ms": 763700,
+    "durata_ms": 4437,
+    "testo": "il ragazzo americano che nel 1986 scrisse il Manifesto dell'hacker."
+   },
+   {
+    "ms": 768273,
+    "durata_ms": 3387,
+    "testo": "L'ultima domanda è un consiglio ai ragazzi che vogliono diventare hacker."
+   },
+   {
+    "ms": 771660,
+    "durata_ms": 5230,
+    "testo": "Lui risponde: «Se avete intenzione di penetrare i computer, state attenti là fuori."
+   },
+   {
+    "ms": 776980,
+    "durata_ms": 1960,
+    "testo": "È molto probabile che veniate presi."
+   },
+   {
+    "ms": 778940,
+    "durata_ms": 4270,
+    "testo": "C'è così tanto che potete fare legalmente: imparare Linux e programmare."
+   },
+   {
+    "ms": 783600,
+    "durata_ms": 1730,
+    "testo": "Vi raccomando di iniziare da questo.»"
+   },
+   {
+    "ms": 786640,
+    "durata_ms": 4000,
+    "testo": "NON È POLITICAMENTE IMPEGNATA"
+   },
+   {
+    "ms": 790960,
+    "durata_ms": 2130,
+    "testo": "Aprile 2001, Catania."
+   },
+   {
+    "ms": 793120,
+    "durata_ms": 5000,
+    "testo": "Il FreakNet è un laboratorio autogestito, in alcune stanze del centro sociale Auro,"
+   },
+   {
+    "ms": 798120,
+    "durata_ms": 4630,
+    "testo": "un ex monastero: computer per chiunque, accesso a Internet, corsi di Linux."
+   },
+   {
+    "ms": 803020,
+    "durata_ms": 4040,
+    "testo": "Il Comune decide che il centro sociale e il FreakNet devono lasciare quei locali"
+   },
+   {
+    "ms": 807060,
+    "durata_ms": 1250,
+    "testo": "entro poche settimane."
+   },
+   {
+    "ms": 808420,
+    "durata_ms": 3270,
+    "testo": "Ed è proprio lì che a giugno deve tenersi il quarto Hackmeeting."
+   },
+   {
+    "ms": 811920,
+    "durata_ms": 3670,
+    "testo": "Si raccolgono firme, si mandano fax di protesta ai consiglieri comunali."
+   },
+   {
+    "ms": 815780,
+    "durata_ms": 4450,
+    "testo": "A giugno l'Hackmeeting si fa lo stesso, proprio lì, dal 22 al 24."
+   },
+   {
+    "ms": 820540,
+    "durata_ms": 2510,
+    "testo": "Sulla locandina: «Solo per veri hackers.»"
+   },
+   {
+    "ms": 823680,
+    "durata_ms": 3920,
+    "testo": "Alla fine gli organizzatori scrivono che la cosa più forte non è stata la tecnica,"
+   },
+   {
+    "ms": 827600,
+    "durata_ms": 1010,
+    "testo": "né la politica."
+   },
+   {
+    "ms": 828680,
+    "durata_ms": 1210,
+    "testo": "È stata la comunità."
+   },
+   {
+    "ms": 830180,
+    "durata_ms": 4250,
+    "testo": "2 mesi dopo, ad agosto, smaster scrive l'editoriale del numero 10."
+   },
+   {
+    "ms": 834560,
+    "durata_ms": 4040,
+    "testo": "Parte da una confessione: alcuni dei vecchi della redazione, scrive,"
+   },
+   {
+    "ms": 838600,
+    "durata_ms": 1790,
+    "testo": "sono stati presi dalla vita vera."
+   },
+   {
+    "ms": 840400,
+    "durata_ms": 1590,
+    "testo": "Altri si sono stancati."
+   },
+   {
+    "ms": 842260,
+    "durata_ms": 1270,
+    "testo": "«Questa rivista morirà.»"
+   },
+   {
+    "ms": 843740,
+    "durata_ms": 1450,
+    "testo": "Poi si corregge: «No."
+   },
+   {
+    "ms": 845370,
+    "durata_ms": 430,
+    "testo": "Nonono."
+   },
+   {
+    "ms": 845800,
+    "durata_ms": 940,
+    "testo": "Non credo.»"
+   },
+   {
+    "ms": 846740,
+    "durata_ms": 3550,
+    "testo": "Nei corridoi della facoltà vede ancora gente con idee interessanti."
+   },
+   {
+    "ms": 850500,
+    "durata_ms": 1870,
+    "testo": "Poi mette in fila quattro pensieri."
+   },
+   {
+    "ms": 852540,
+    "durata_ms": 2710,
+    "testo": "Il primo: BFi non è s0ftpj."
+   },
+   {
+    "ms": 855540,
+    "durata_ms": 3860,
+    "testo": "Se volessero solo farsi conoscere, scrive, basterebbe scrivere in inglese."
+   },
+   {
+    "ms": 859400,
+    "durata_ms": 4000,
+    "testo": "Non lo fanno perché sono un gruppo di italiani che lavora per altri italiani."
+   },
+   {
+    "ms": 863400,
+    "durata_ms": 2040,
+    "testo": "Non per l'analista di sicurezza australiano."
+   },
+   {
+    "ms": 865640,
+    "durata_ms": 4550,
+    "testo": "E chiude: «BFi non è s0ftpj, perché BFi sei tu.»"
+   },
+   {
+    "ms": 870380,
+    "durata_ms": 3830,
+    "testo": "Il quarto pensiero: «BFi non è politicamente impegnata.»"
+   },
+   {
+    "ms": 874320,
+    "durata_ms": 2630,
+    "testo": "In 3 anni e mezzo, nessun articolo politico."
+   },
+   {
+    "ms": 877080,
+    "durata_ms": 1060,
+    "testo": "BFi, scrive,"
+   },
+   {
+    "ms": 878140,
+    "durata_ms": 3680,
+    "testo": "è come una di quelle magliette hippie dove tutti i colori trovano spazio:"
+   },
+   {
+    "ms": 881820,
+    "durata_ms": 1490,
+    "testo": "la rivista non si schiera."
+   },
+   {
+    "ms": 883520,
+    "durata_ms": 4890,
+    "testo": "Per questo, sui no-global e sul G8 di Genova di luglio, qui non si leggerà niente."
+   },
+   {
+    "ms": 888540,
+    "durata_ms": 3520,
+    "testo": "Brevetti software, Echelon, la rete di intercettazioni americana,"
+   },
+   {
+    "ms": 892060,
+    "durata_ms": 2860,
+    "testo": "le leggi sull'hacking: sì, perché toccano la rete."
+   },
+   {
+    "ms": 894920,
+    "durata_ms": 1130,
+    "testo": "Il resto no."
+   },
+   {
+    "ms": 896280,
+    "durata_ms": 2260,
+    "testo": "Poi parla dell'Hackmeeting di Catania."
+   },
+   {
+    "ms": 898540,
+    "durata_ms": 2910,
+    "testo": "Nel programma, scrive, ci sono tante belle iniziative:"
+   },
+   {
+    "ms": 901520,
+    "durata_ms": 2670,
+    "testo": "«peccato che di hacktech non ci sia pressoché nulla.»"
+   },
+   {
+    "ms": 904240,
+    "durata_ms": 1830,
+    "testo": "Di tecnica, cioè, quasi niente."
+   },
+   {
+    "ms": 906320,
+    "durata_ms": 4230,
+    "testo": "Ai grandi raduni europei, in Germania e in Olanda, si parla soprattutto di hacking."
+   },
+   {
+    "ms": 910750,
+    "durata_ms": 2160,
+    "testo": "L'Italia sembra puntare sulla politica."
+   },
+   {
+    "ms": 913040,
+    "durata_ms": 1060,
+    "testo": "E riporta una voce:"
+   },
+   {
+    "ms": 914100,
+    "durata_ms": 4080,
+    "testo": "qualcuno ha ipotizzato che l'Hackmeeting sia stato portato a Catania per difendere"
+   },
+   {
+    "ms": 918180,
+    "durata_ms": 1350,
+    "testo": "il centro dallo sgombero."
+   },
+   {
+    "ms": 919720,
+    "durata_ms": 1360,
+    "testo": "È un peccato, scrive,"
+   },
+   {
+    "ms": 921080,
+    "durata_ms": 4050,
+    "testo": "che un evento rivelatosi estremamente interessante sia sporcato da queste voci."
+   },
+   {
+    "ms": 925180,
+    "durata_ms": 1250,
+    "testo": "«Non accuso nessuno.»"
+   },
+   {
+    "ms": 926640,
+    "durata_ms": 3270,
+    "testo": "Per lui un hacker è uno che sa ragionare con la propria testa."
+   },
+   {
+    "ms": 929940,
+    "durata_ms": 2770,
+    "testo": "Il numero esce il 30 settembre 2001."
+   },
+   {
+    "ms": 932940,
+    "durata_ms": 4010,
+    "testo": "Dentro ci sono 3 articoli di un autore arrivato da poco: vecna."
+   },
+   {
+    "ms": 937100,
+    "durata_ms": 3050,
+    "testo": "Insieme a un altro della redazione, scrive smaster,"
+   },
+   {
+    "ms": 940500,
+    "durata_ms": 2890,
+    "testo": "è vecna a rispondere a chi manda articoli alla rivista."
+   },
+   {
+    "ms": 943520,
+    "durata_ms": 1770,
+    "testo": "E le cose funzionano un po' meglio."
+   },
+   {
+    "ms": 945480,
+    "durata_ms": 1890,
+    "testo": "Poi BFi cambia forma."
+   },
+   {
+    "ms": 947560,
+    "durata_ms": 4560,
+    "testo": "Dal 2002 non aspetta più di avere un numero intero: pubblica un articolo alla volta,"
+   },
+   {
+    "ms": 952120,
+    "durata_ms": 1000,
+    "testo": "appena è pronto."
+   },
+   {
+    "ms": 953220,
+    "durata_ms": 2820,
+    "testo": "Alcuni vengono tradotti in inglese e in francese."
+   },
+   {
+    "ms": 956040,
+    "durata_ms": 3850,
+    "testo": "Copie della rivista vengono ospitate su siti in Austria e a Singapore."
+   },
+   {
+    "ms": 960220,
+    "durata_ms": 1310,
+    "testo": "Febbraio 2004."
+   },
+   {
+    "ms": 961810,
+    "durata_ms": 4880,
+    "testo": "ICT Security, una rivista italiana per professionisti della sicurezza informatica,"
+   },
+   {
+    "ms": 966760,
+    "durata_ms": 1970,
+    "testo": "intervista la redazione di BFi."
+   },
+   {
+    "ms": 968960,
+    "durata_ms": 4050,
+    "testo": "Ogni articolo, rispondono, lo leggono più di 4.000 persone l'anno."
+   },
+   {
+    "ms": 973160,
+    "durata_ms": 4040,
+    "testo": "Qualcuno li chiama «il cugino italiano di Phrack», la rivista hacker americana."
+   },
+   {
+    "ms": 977200,
+    "durata_ms": 4180,
+    "testo": "Loro rispondono che sono due cose diverse, e di grandezza diversa."
+   },
+   {
+    "ms": 981380,
+    "durata_ms": 4460,
+    "testo": "Ma aggiungono: ormai, spesso, i nostri articoli arrivano prima di Phrack."
+   },
+   {
+    "ms": 985940,
+    "durata_ms": 3840,
+    "testo": "E quando gli chiedono perché una rivista così non finisca su carta, rispondono:"
+   },
+   {
+    "ms": 989780,
+    "durata_ms": 1390,
+    "testo": "«Perché farlo?»"
+   },
+   {
+    "ms": 991240,
+    "durata_ms": 3580,
+    "testo": "Nessun editore, dicono, stamperebbe una rivista senza scadenze,"
+   },
+   {
+    "ms": 994820,
+    "durata_ms": 1310,
+    "testo": "per un pubblico di nicchia."
+   },
+   {
+    "ms": 996220,
+    "durata_ms": 3410,
+    "testo": "Il mese dopo, ICT Security intervista anche s0ftpj,"
+   },
+   {
+    "ms": 999760,
+    "durata_ms": 3790,
+    "testo": "e lo presenta come il gruppo di hacker italiani più famoso al mondo."
+   },
+   {
+    "ms": 1003800,
+    "durata_ms": 3830,
+    "testo": "Dall'estero, raccontano, arrivano buone risposte: qualche anno prima,"
+   },
+   {
+    "ms": 1007680,
+    "durata_ms": 1110,
+    "testo": "The Hacker's Choice,"
+   },
+   {
+    "ms": 1008940,
+    "durata_ms": 3250,
+    "testo": "un gruppo di hacker tedeschi noto per i suoi programmi di sicurezza,"
+   },
+   {
+    "ms": 1012200,
+    "durata_ms": 1900,
+    "testo": "li aveva messi fra i link da cui imparare."
+   },
+   {
+    "ms": 1014100,
+    "durata_ms": 2930,
+    "testo": "«Nessuno si aspettava una risposta di questo tipo.»"
+   },
+   {
+    "ms": 1017160,
+    "durata_ms": 4290,
+    "testo": "Per chi ha fretta, il loro motto: «Pizza, Famiglia e MD5.»"
+   },
+   {
+    "ms": 1021540,
+    "durata_ms": 2750,
+    "testo": "La formula che calcola l'impronta digitale di un file."
+   },
+   {
+    "ms": 1024480,
+    "durata_ms": 3190,
+    "testo": "E sul futuro: «Sicuramente non verremo quotati in borsa.»"
+   },
+   {
+    "ms": 1027860,
+    "durata_ms": 4070,
+    "testo": "Ad agosto, la rivista che nessun editore stamperebbe, la stampano loro."
+   },
+   {
+    "ms": 1032040,
+    "durata_ms": 3443,
+    "testo": "Siamo a Pescara, al primo campo estivo di Metro Olografix."
+   },
+   {
+    "ms": 1035680,
+    "durata_ms": 2570,
+    "testo": "BFi esce per la prima volta su carta."
+   },
+   {
+    "ms": 1038740,
+    "durata_ms": 3500,
+    "testo": "Nell'introduzione la redazione di BFi scherza: per scriverla,"
+   },
+   {
+    "ms": 1042240,
+    "durata_ms": 3970,
+    "testo": "impaginarla e stamparla in tempo per il campo, ci è voluto un miracolo."
+   },
+   {
+    "ms": 1046360,
+    "durata_ms": 1390,
+    "testo": "«BFi miracolo»."
+   },
+   {
+    "ms": 1047800,
+    "durata_ms": 3580,
+    "testo": "Il lavoro l'hanno fatto in tre: smaster, tlei e isazi."
+   },
+   {
+    "ms": 1051520,
+    "durata_ms": 3750,
+    "testo": "E la redazione li ringrazia per i loro occhi: occhi con le occhiaie."
+   },
+   {
+    "ms": 1055380,
+    "durata_ms": 3450,
+    "testo": "Sul sito, la versione da scaricare arriverà solo un mese dopo."
+   },
+   {
+    "ms": 1058900,
+    "durata_ms": 1370,
+    "testo": "Il motivo, scrivono:"
+   },
+   {
+    "ms": 1060360,
+    "durata_ms": 3800,
+    "testo": "insegnare a chi non c'era cosa voleva dire ricopiare un programma a mano,"
+   },
+   {
+    "ms": 1064160,
+    "durata_ms": 1110,
+    "testo": "da un foglio di carta."
+   },
+   {
+    "ms": 1065500,
+    "durata_ms": 3120,
+    "testo": "Dentro c'è un articolo di Asbesto, del FreakNet di Catania."
+   },
+   {
+    "ms": 1068620,
+    "durata_ms": 4850,
+    "testo": "Racconta lui stesso come è nato il laboratorio: con alcuni amici, scrive,"
+   },
+   {
+    "ms": 1073650,
+    "durata_ms": 3770,
+    "testo": "«chiedemmo ed ottenemmo una stanza dal Centro Sociale Auro di Catania."
+   },
+   {
+    "ms": 1077420,
+    "durata_ms": 2820,
+    "testo": "E fu quello l'inizio del FreakNet MediaLab.»"
+   },
+   {
+    "ms": 1080500,
+    "durata_ms": 3240,
+    "testo": "Poi ringrazia chi sta leggendo «questa magnifica rivista,"
+   },
+   {
+    "ms": 1083740,
+    "durata_ms": 3000,
+    "testo": "che alla scena ha dato e continuerà a dare tanto»."
+   },
+   {
+    "ms": 1086740,
+    "durata_ms": 4270,
+    "testo": "E chiude con un consiglio: mettete le mani sulle cose, ragazzi."
+   },
+   {
+    "ms": 1091120,
+    "durata_ms": 1270,
+    "testo": "«Guardatevi intorno."
+   },
+   {
+    "ms": 1092560,
+    "durata_ms": 2880,
+    "testo": "Imparate dalle piccole cose, finché siete in tempo.»"
+   },
+   {
+    "ms": 1096680,
+    "durata_ms": 4000,
+    "testo": "IN SILENZIO"
+   },
+   {
+    "ms": 1101040,
+    "durata_ms": 5190,
+    "testo": "2005. vecna entra in un'azienda di sicurezza di Milano: Hacking Team."
+   },
+   {
+    "ms": 1106300,
+    "durata_ms": 3500,
+    "testo": "Fa penetration test: i clienti pagano per farsi attaccare,"
+   },
+   {
+    "ms": 1109800,
+    "durata_ms": 1750,
+    "testo": "e scoprire dove sono deboli."
+   },
+   {
+    "ms": 1111680,
+    "durata_ms": 2270,
+    "testo": "Lui ci era entrato sperando di fare ricerca."
+   },
+   {
+    "ms": 1114040,
+    "durata_ms": 3690,
+    "testo": "Ma l'azienda investe sempre di più nel malware: programmi spia,"
+   },
+   {
+    "ms": 1117760,
+    "durata_ms": 3070,
+    "testo": "che entrano di nascosto nei computer per sorvegliare chi li usa."
+   },
+   {
+    "ms": 1121020,
+    "durata_ms": 4430,
+    "testo": "Nella primavera del 2006 vecna comincia a cercare altro, e a giugno se ne va."
+   },
+   {
+    "ms": 1125540,
+    "durata_ms": 3990,
+    "testo": "Più tardi spiegherà: «non era quello il tipo di ricerca che volevo intraprendere.»"
+   },
+   {
+    "ms": 1129620,
+    "durata_ms": 2590,
+    "testo": "Intanto è arrivata una nuova generazione."
+   },
+   {
+    "ms": 1132400,
+    "durata_ms": 4000,
+    "testo": "Due di loro scrivono su BFi già da qualche anno: twiz e sgrakkyu."
+   },
+   {
+    "ms": 1136560,
+    "durata_ms": 3210,
+    "testo": "Nel maggio 2007 firmano un lungo articolo su Phrack,"
+   },
+   {
+    "ms": 1139880,
+    "durata_ms": 4410,
+    "testo": "la storica rivista hacker americana: «Attacking the Core», attaccare il cuore."
+   },
+   {
+    "ms": 1144340,
+    "durata_ms": 3630,
+    "testo": "Come si entra nel kernel, il punto più profondo di un sistema,"
+   },
+   {
+    "ms": 1147980,
+    "durata_ms": 1760,
+    "testo": "su tre tipi di processore diversi."
+   },
+   {
+    "ms": 1149740,
+    "durata_ms": 2900,
+    "testo": "29 dicembre 2007, Berlino."
+   },
+   {
+    "ms": 1152640,
+    "durata_ms": 4140,
+    "testo": "Chaos Communication Congress, il raduno di fine anno degli hacker tedeschi."
+   },
+   {
+    "ms": 1156780,
+    "durata_ms": 2150,
+    "testo": "Sala 3, ore 17 e 15."
+   },
+   {
+    "ms": 1159120,
+    "durata_ms": 3500,
+    "testo": "Sul palco ci sono loro due, in inglese, davanti a una sala piena."
+   },
+   {
+    "ms": 1162620,
+    "durata_ms": 3320,
+    "testo": "Il titolo: «From Ring Zero to UID Zero»."
+   },
+   {
+    "ms": 1165940,
+    "durata_ms": 3970,
+    "testo": "UID Zero è il padrone del computer: l'utente che può fare tutto."
+   },
+   {
+    "ms": 1169980,
+    "durata_ms": 3790,
+    "testo": "Il loro intervento spiega come si fa a diventarlo senza autorizzazione."
+   },
+   {
+    "ms": 1173960,
+    "durata_ms": 1190,
+    "testo": "Novembre 2008."
+   },
+   {
+    "ms": 1175300,
+    "durata_ms": 4390,
+    "testo": "Phrack dedica una pagina all'Italia: la storia della scena dal 1994."
+   },
+   {
+    "ms": 1180340,
+    "durata_ms": 3010,
+    "testo": "Di BFi scrive che oggi la leggono anche gli stranieri,"
+   },
+   {
+    "ms": 1183360,
+    "durata_ms": 3120,
+    "testo": "grazie alle traduzioni in inglese, francese e spagnolo."
+   },
+   {
+    "ms": 1186480,
+    "durata_ms": 1850,
+    "testo": "E che ha creato un circolo virtuoso:"
+   },
+   {
+    "ms": 1188360,
+    "durata_ms": 3560,
+    "testo": "le idee di un articolo diventano il punto di partenza dell'articolo di qualcun"
+   },
+   {
+    "ms": 1191920,
+    "durata_ms": 580,
+    "testo": "altro."
+   },
+   {
+    "ms": 1192500,
+    "durata_ms": 3360,
+    "testo": "Phrack nota anche che negli ultimi anni gli articoli sono diminuiti."
+   },
+   {
+    "ms": 1195860,
+    "durata_ms": 1380,
+    "testo": "E spera in una ripresa."
+   },
+   {
+    "ms": 1197240,
+    "durata_ms": 4890,
+    "testo": "Ma quello che sarà l'ultimo articolo di BFi è già uscito, il 3 marzo 2008."
+   },
+   {
+    "ms": 1202240,
+    "durata_ms": 4670,
+    "testo": "L'ultima notizia sul sito è del 2 aprile 2009: un nuovo programma di vecna,"
+   },
+   {
+    "ms": 1207230,
+    "durata_ms": 570,
+    "testo": "SniffJoke."
+   },
+   {
+    "ms": 1207800,
+    "durata_ms": 3180,
+    "testo": "Serve a confondere chi cerca di spiare le connessioni di una rete."
+   },
+   {
+    "ms": 1210980,
+    "durata_ms": 900,
+    "testo": "Poi niente."
+   },
+   {
+    "ms": 1211880,
+    "durata_ms": 1910,
+    "testo": "Nessun annuncio, nessun addio."
+   },
+   {
+    "ms": 1213840,
+    "durata_ms": 2070,
+    "testo": "BFi si spegne in silenzio."
+   },
+   {
+    "ms": 1215980,
+    "durata_ms": 1170,
+    "testo": "Luglio 2015."
+   },
+   {
+    "ms": 1217440,
+    "durata_ms": 1870,
+    "testo": "Hacking Team viene svuotata."
+   },
+   {
+    "ms": 1219360,
+    "durata_ms": 2900,
+    "testo": "Un hacker che si fa chiamare Fisher, mai identificato,"
+   },
+   {
+    "ms": 1222260,
+    "durata_ms": 1810,
+    "testo": "prende l'account Twitter dell'azienda,"
+   },
+   {
+    "ms": 1224300,
+    "durata_ms": 4510,
+    "testo": "lo rinomina «Hacked Team» e mette in rete 400 gigabyte di dati interni."
+   },
+   {
+    "ms": 1228840,
+    "durata_ms": 4470,
+    "testo": "Pochi giorni dopo, WikiLeaks mette online più di 1 milione di email dell'azienda:"
+   },
+   {
+    "ms": 1233620,
+    "durata_ms": 2850,
+    "testo": "chiunque può leggerle, e cercarci dentro un nome."
+   },
+   {
+    "ms": 1236680,
+    "durata_ms": 2030,
+    "testo": "Fra quelle email ci sono anche le sue."
+   },
+   {
+    "ms": 1238860,
+    "durata_ms": 2310,
+    "testo": "Quelle di vecna, di 9 anni prima."
+   },
+   {
+    "ms": 1241440,
+    "durata_ms": 1210,
+    "testo": "Lui non si nasconde."
+   },
+   {
+    "ms": 1242700,
+    "durata_ms": 3610,
+    "testo": "Scrive un articolo, e lo intitola: ho lavorato a Hacking Team,"
+   },
+   {
+    "ms": 1246440,
+    "durata_ms": 3210,
+    "testo": "le mie email sono state pubblicate, e mi va bene così."
+   },
+   {
+    "ms": 1249920,
+    "durata_ms": 4140,
+    "testo": "I programmi spia dell'azienda, spiega, funzionavano finché erano segreti."
+   },
+   {
+    "ms": 1254060,
+    "durata_ms": 3370,
+    "testo": "Adesso che tutti possono vedere come sono fatti, sono bruciati:"
+   },
+   {
+    "ms": 1257540,
+    "durata_ms": 1970,
+    "testo": "in mano ai criminali non servono più."
+   },
+   {
+    "ms": 1259700,
+    "durata_ms": 3440,
+    "testo": "E scrive: questa fuga di documenti è nell'interesse di tutti."
+   },
+   {
+    "ms": 1263140,
+    "durata_ms": 3220,
+    "testo": "E BFi Nessuno l'ha mai chiusa."
+   },
+   {
+    "ms": 1266360,
+    "durata_ms": 1790,
+    "testo": "Il sito è ancora lì, acceso."
+   },
+   {
+    "ms": 1268440,
+    "durata_ms": 5600,
+    "testo": "Tutti i numeri, dal primo del febbraio 1998, sono ancora a disposizione di chiunque."
+   },
+   {
+    "ms": 1274200,
+    "durata_ms": 1910,
+    "testo": "Gratis, come è sempre stato."
+   },
+   {
+    "ms": 1277140,
+    "durata_ms": 1230,
+    "testo": "Io sono Ram."
+   },
+   {
+    "ms": 1278440,
+    "durata_ms": 2010,
+    "testo": "Questa era la storia di BFi."
+   },
+   {
+    "ms": 1280680,
+    "durata_ms": 3650,
+    "testo": "Se ti è piaciuta iscriviti, qui si raccontano le storie vere degli hacker."
+   },
+   {
+    "ms": 1284520,
+    "durata_ms": 2040,
+    "testo": "La prossima sta già arrivando."
+   }
+  ]
+ }
+}

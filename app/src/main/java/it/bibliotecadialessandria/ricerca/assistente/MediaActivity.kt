@@ -1,5 +1,7 @@
 package it.bibliotecadialessandria.ricerca.assistente
 
+import it.bibliotecadialessandria.ricerca.Dialogo
+import it.bibliotecadialessandria.ricerca.Lingua
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ClipData
@@ -99,7 +101,7 @@ class MediaActivity : Aspetto() {
         super.onActivityResult(codice, esito, dati)
         if (codice != SCEGLI || esito != Activity.RESULT_OK || dati == null) return
         val uri = urisDa(dati)
-        importa(this, uri, "telefono") { _, errori -> errori.firstOrNull()?.let { Toast.makeText(this, it, Toast.LENGTH_LONG).show() } }
+        importa(this, uri, "telefono") { _, errori -> errori.firstOrNull()?.let { Lingua.toast(this, it, Toast.LENGTH_LONG).show() } }
     }
 
     private fun disegna() {
@@ -143,7 +145,7 @@ class MediaActivity : Aspetto() {
     }
 
     private fun chiediCancella(v: Media.Voce) {
-        AlertDialog.Builder(this).setTitle("Cancellare «${v.nome}»?")
+        Dialogo(this).setTitle("Cancellare «${v.nome}»?")
             .setMessage("Il file sparisce da questo telefono. Non si torna indietro.")
             .setPositiveButton("Cancella") { _, _ -> Thread { Media.cancella(this, v); principale.post { disegna() } }.start() }
             .setNegativeButton("Annulla", null).show()
@@ -202,12 +204,12 @@ class MediaActivity : Aspetto() {
         /** Apre un file: i testi dentro l'app (un .md spesso non ha un'app per aprirlo), il resto con l'app giusta. */
         fun apri(a: Aspetto, v: Media.Voce) {
             val f = Media.fileDi(a, v)
-            if (!f.exists()) { Toast.makeText(a, "Il file non c'è più.", Toast.LENGTH_LONG).show(); return }
+            if (!f.exists()) { Lingua.toast(a, "Il file non c'è più.", Toast.LENGTH_LONG).show(); return }
             if (v.tipo == "testo") {
                 val testo = runCatching { f.readText() }.getOrDefault("")
                 val t = TextView(a).apply { text = testo; textSize = 15f; setTextColor(a.colore(R.color.testo)); setTextIsSelectable(true)
                     setPadding(a.dp(20), a.dp(12), a.dp(20), a.dp(12)) }
-                AlertDialog.Builder(a).setTitle(v.nome).setView(ScrollView(a).apply { addView(t) })
+                Dialogo(a).setTitle(v.nome).setView(ScrollView(a).apply { addView(t) })
                     .setPositiveButton("Chiudi", null).setNeutralButton("Condividi") { _, _ -> condividi(a, v) }.show()
                 return
             }
@@ -215,7 +217,7 @@ class MediaActivity : Aspetto() {
             runCatching { a.startActivity(i) }.onFailure {
                 runCatching { a.startActivity(Intent.createChooser(Intent(Intent.ACTION_VIEW).setDataAndType(uriDi(a, v), "*/*")
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION), v.nome)) }
-                    .onFailure { Toast.makeText(a, "Nessuna app per aprire questo file.", Toast.LENGTH_LONG).show() }
+                    .onFailure { Lingua.toast(a, "Nessuna app per aprire questo file.", Toast.LENGTH_LONG).show() }
             }
         }
 
@@ -225,7 +227,7 @@ class MediaActivity : Aspetto() {
                 .putExtra(Intent.EXTRA_SUBJECT, v.nome).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             i.clipData = ClipData.newRawUri(v.nome, u)
             runCatching { a.startActivity(Intent.createChooser(i, "Condividi ${v.nome}")) }
-                .onFailure { Toast.makeText(a, "Nessuna app per condividere.", Toast.LENGTH_LONG).show() }
+                .onFailure { Lingua.toast(a, "Nessuna app per condividere.", Toast.LENGTH_LONG).show() }
         }
     }
 }

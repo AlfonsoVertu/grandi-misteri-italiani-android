@@ -1,5 +1,6 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import it.bibliotecadialessandria.ricerca.Lingua
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -132,6 +133,30 @@ object Indagini {
                     i.metti(VoceCronologia(personaId = id, quando = c.optString("quando"), cosa = c.optString("cosa"), fonte = c.optString("fonte"), ordine = n))
                 }
             }
+
+            // (13/11/2026, SiS) le teorie di categoria del caso: "teorie":[{"id","categoria","titolo","descrizione","note":[…],
+            // "persone":[…],"passi":[{<campi della categoria>, "luogo": id di «luoghi» oppure "lat","lon","nome_luogo"}]}].
+            // Si aggiungono alla teoria del caso, non la sostituiscono.
+            lista(o.optJSONArray("teorie")).forEachIndexed { k, tj ->
+                val tid = tj.optString("id").ifBlank { "t$k" }
+                val chiave = "$caso:teoria:$tid"
+                if (i.teoriaDa(chiave) != null) return@forEachIndexed
+                val cat = CategorieTeorie.di(ctx, tj.optString("categoria"))
+                val idT = i.metti(Teoria(titolo = tj.optString("titolo").ifBlank { cat?.nome ?: "Teoria" }, descrizione = tj.optString("descrizione"),
+                    autore = "indagine", origine = chiave, categoria = tj.optString("categoria")))
+                stringhe(tj.optJSONArray("note")).mapNotNull { note[it] }.forEach { n -> i.metti(NotaTeoria(n, idT)) }
+                stringhe(tj.optJSONArray("persone")).mapNotNull { persone[it] }.forEach { pid -> i.metti(Legame(da = "persona", daId = pid, verso = "teoria", versoId = idT)) }
+                val punti = ArrayList<Long>()
+                lista(tj.optJSONArray("passi")).forEachIndexed { n, pj ->
+                    val sid = luoghi[pj.optString("luogo")] ?: if (pj.has("lat") && pj.has("lon")) i.metti(Segnalino(lat = pj.optDouble("lat"), lon = pj.optDouble("lon"),
+                        titolo = pj.optString("nome_luogo").ifBlank { "Passaggio ${n + 1}" }, testo = pj.optString("cosa"),
+                        autore = "indagine", origine = "$chiave:p$n")) else null
+                    if (sid != null) { i.metti(Legame(da = "teoria", daId = idT, verso = "segnalino", versoId = sid)); if (punti.lastOrNull() != sid) punti.add(sid) }
+                    val campi = JSONObject(); pj.keys().forEach { kk -> if (kk !in setOf("luogo", "lat", "lon", "nome_luogo")) campi.put(kk, pj.opt(kk)) }
+                    i.metti(PassoTeoria(teoriaId = idT, ordine = n, campi = campi.toString(), segnalinoId = sid))
+                }
+                if (punti.size >= 2) Archivio.nuovaLinea(ctx, tj.optString("titolo").ifBlank { "Linea" }, punti, "indagine", "$chiave:linea", cat?.colore ?: "#B8860B")
+            }
         }
 
         // (11/11/2026) i titoli di tutti i video citati, così le note non mostrano l'id
@@ -185,7 +210,7 @@ object Indagini {
         val o = JSONObject(json ?: throw IllegalArgumentException("nello ZIP non c'è teoria.json"))
         val caso = o.optString("id").ifBlank { "teoria_ricevuta" } + "_" + (System.currentTimeMillis() / 1000)
         importa(ctx, caso, o); Archivio.avvisa()
-        return o.optString("titolo").ifBlank { "Teoria ricevuta" }
+        return o.optString("titolo").ifBlank { "${Marca.TEORIA} ricevuta" }
     }
 
     /** Fuori dal filo dell'interfaccia. `forza` salta l'intervallo. Torna i titoli importati adesso. */
@@ -228,15 +253,15 @@ object Indagini {
         if (nuove.isEmpty()) return
         val c = ctx.applicationContext
         if (Build.VERSION.SDK_INT >= 26) c.getSystemService(NotificationManager::class.java).createNotificationChannel(
-            NotificationChannel(AVVISI, "Indagini nuove", NotificationManager.IMPORTANCE_DEFAULT).apply {
-                description = "Un avviso quando nell'app arriva un approfondimento nuovo su un caso" })
+            NotificationChannel(AVVISI, Lingua.t("Indagini nuove"), NotificationManager.IMPORTANCE_DEFAULT).apply {
+                description = Lingua.t("Un avviso quando nell'app arriva un approfondimento nuovo su un caso") })
         val nm = NotificationManagerCompat.from(c)
         if (!nm.areNotificationsEnabled()) return
         val apri = c.packageManager.getLaunchIntentForPackage(c.packageName)?.let {
             PendingIntent.getActivity(c, 7412, it, PendingIntent.FLAG_IMMUTABLE) }
-        val testo = nuove.joinToString(", ") + ": note, mappa e persone del caso, con i video al minuto."
+        val testo = nuove.joinToString(", ") + Marca.AVVISO_NUOVE
         val n = NotificationCompat.Builder(c, AVVISI).setSmallIcon(R.drawable.ic_notifica)
-            .setContentTitle(if (nuove.size == 1) "Nuova indagine nell'app" else "Nuove indagini nell'app")
+            .setContentTitle(Lingua.t(if (nuove.size == 1) "Nuova indagine nell'app" else "Nuove indagini nell'app"))
             .setContentText(testo).setStyle(NotificationCompat.BigTextStyle().bigText(testo))
             .setContentIntent(apri).setAutoCancel(true).build()
         try { nm.notify(7412, n) } catch (_: SecurityException) {}

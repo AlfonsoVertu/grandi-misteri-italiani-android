@@ -1,5 +1,6 @@
 package it.bibliotecadialessandria.ricerca.assistente
 
+import it.bibliotecadialessandria.ricerca.Dialogo
 import android.app.Activity
 import android.app.AlertDialog
 import it.bibliotecadialessandria.ricerca.Marca
@@ -120,7 +121,7 @@ object ModelliAi {
         colonna.addView(cerca)
         colonna.addView(elenco, android.widget.LinearLayout.LayoutParams(
             android.view.ViewGroup.LayoutParams.MATCH_PARENT, (380 * d).toInt()))
-        val finestra = AlertDialog.Builder(a).setTitle("Modelli (" + lista.size + ")")
+        val finestra = Dialogo(a).setTitle("Modelli (" + lista.size + ")")
             .setView(colonna).setNegativeButton("Annulla", null).create()
         var mostrati = lista
         fun rifai(q: String) {

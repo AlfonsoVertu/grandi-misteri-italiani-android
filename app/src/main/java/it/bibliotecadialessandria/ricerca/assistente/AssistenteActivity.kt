@@ -1,5 +1,7 @@
 package it.bibliotecadialessandria.ricerca.assistente
 
+import it.bibliotecadialessandria.ricerca.Dialogo
+import it.bibliotecadialessandria.ricerca.Lingua
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
@@ -66,7 +68,7 @@ class AssistenteActivity : Aspetto() {
         // arrivo e gli allegati gia' scelti si ritrovano dallo stato salvato
         stato?.getString("scatto")?.let { scatto = File(it) }
         stato?.getLongArray("in_attesa")?.let { inAttesa.addAll(it.toList()) }
-        ConfigAi.importaSeCe(this)?.let { android.widget.Toast.makeText(this, it, android.widget.Toast.LENGTH_LONG).show() }
+        ConfigAi.importaSeCe(this)?.let { Lingua.toast(this, it, android.widget.Toast.LENGTH_LONG).show() }
         Catalogo.prepara(this)
         val radice = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(colore(R.color.fondo)) }
 
@@ -182,7 +184,7 @@ class AssistenteActivity : Aspetto() {
 
     private fun menuAllegati() {
         val voci = arrayOf("Foto dalla galleria", "Scatta una foto", "Video", "PDF o altro file (anche audio)")
-        AlertDialog.Builder(this).setTitle("Allega").setItems(voci) { _, quale ->
+        Dialogo(this).setTitle("Allega").setItems(voci) { _, quale ->
             when (quale) {
                 0 -> scegliDa(Intent(Intent.ACTION_GET_CONTENT).setType("image/*").putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true))
                 1 -> fotocamera()
@@ -195,7 +197,7 @@ class AssistenteActivity : Aspetto() {
 
     private fun scegliDa(i: Intent) {
         runCatching { startActivityForResult(i.addCategory(Intent.CATEGORY_OPENABLE), ALLEGA) }
-            .onFailure { Toast.makeText(this, "Nessuna app per scegliere il file.", Toast.LENGTH_LONG).show() }
+            .onFailure { Lingua.toast(this, "Nessuna app per scegliere il file.", Toast.LENGTH_LONG).show() }
     }
 
     /** La fotocamera del telefono scrive in un file nostro (FileProvider): niente permesso CAMERA per l'app. */
@@ -208,7 +210,7 @@ class AssistenteActivity : Aspetto() {
             .addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
         i.clipData = ClipData.newRawUri("foto", u)
         runCatching { startActivityForResult(i, SCATTO) }
-            .onFailure { Toast.makeText(this, "Nessuna fotocamera disponibile.", Toast.LENGTH_LONG).show() }
+            .onFailure { Lingua.toast(this, "Nessuna fotocamera disponibile.", Toast.LENGTH_LONG).show() }
     }
 
     @Deprecated("Activity semplice, come il resto dell'app")
@@ -221,10 +223,10 @@ class AssistenteActivity : Aspetto() {
             else -> return
         }
         if (uri.isEmpty()) return
-        Toast.makeText(this, "Preparo l'allegato…", Toast.LENGTH_SHORT).show()
+        Lingua.toast(this, "Preparo l'allegato…", Toast.LENGTH_SHORT).show()
         MediaActivity.importa(this, uri, "chat") { prese, errori ->
             if (codice == SCATTO) scatto?.delete()
-            errori.firstOrNull()?.let { Toast.makeText(this, it, Toast.LENGTH_LONG).show() }
+            errori.firstOrNull()?.let { Lingua.toast(this, it, Toast.LENGTH_LONG).show() }
             inAttesa.addAll(prese.map { it.id }); disegnaStriscia()
         }
     }
@@ -258,7 +260,7 @@ class AssistenteActivity : Aspetto() {
                 if (!cfg.pronta) { invito(cfg.manca()); return true }
                 fermaLettore(); Voce.ferma()
                 val r = Ascolto.Registratore()
-                if (!r.parti()) { Toast.makeText(this, "Il microfono non si apre.", Toast.LENGTH_LONG).show(); return true }
+                if (!r.parti()) { Lingua.toast(this, "Il microfono non si apre.", Toast.LENGTH_LONG).show(); return true }
                 registratore = r; annullaVocale = false
                 v.alpha = 0.5f
                 registra.visibility = View.VISIBLE
@@ -274,8 +276,8 @@ class AssistenteActivity : Aspetto() {
                 registra.visibility = View.GONE
                 val pcm = r.ferma()
                 val ms = Ascolto.durataMs(pcm)
-                if (annullaVocale || e.actionMasked == MotionEvent.ACTION_CANCEL) { Toast.makeText(this, "Vocale annullato.", Toast.LENGTH_SHORT).show(); return true }
-                if (ms < 700) { Toast.makeText(this, "Tieni premuto il microfono mentre parli.", Toast.LENGTH_SHORT).show(); return true }
+                if (annullaVocale || e.actionMasked == MotionEvent.ACTION_CANCEL) { Lingua.toast(this, "Vocale annullato.", Toast.LENGTH_SHORT).show(); return true }
+                if (ms < 700) { Lingua.toast(this, "Tieni premuto il microfono mentre parli.", Toast.LENGTH_SHORT).show(); return true }
                 mandaVocale(pcm, ms)
             }
         }
@@ -292,7 +294,7 @@ class AssistenteActivity : Aspetto() {
 
     private fun mandaVocale(pcm: ByteArray, ms: Long) {
         val f = File(Conversazione.cartellaVocali(this), "vocale_${System.currentTimeMillis()}.wav")
-        runCatching { f.writeBytes(Ascolto.wav(pcm)) }.onFailure { Toast.makeText(this, "Vocale non salvato.", Toast.LENGTH_LONG).show(); return }
+        runCatching { f.writeBytes(Ascolto.wav(pcm)) }.onFailure { Lingua.toast(this, "Vocale non salvato.", Toast.LENGTH_LONG).show(); return }
         inFondo = true
         val t = campo.text.toString().trim()
         campo.setText("")
@@ -305,7 +307,7 @@ class AssistenteActivity : Aspetto() {
     override fun onRequestPermissionsResult(codice: Int, permessi: Array<out String>, esiti: IntArray) {
         super.onRequestPermissionsResult(codice, permessi, esiti)
         if (codice != PERMESSO_MICROFONO) return
-        Toast.makeText(this, if (esiti.firstOrNull() == PackageManager.PERMISSION_GRANTED) "Ora tieni premuto il microfono e parla."
+        Lingua.toast(this, if (esiti.firstOrNull() == PackageManager.PERMISSION_GRANTED) "Ora tieni premuto il microfono e parla."
             else "Senza il permesso del microfono non posso registrare i vocali.", Toast.LENGTH_LONG).show()
     }
 
@@ -318,7 +320,7 @@ class AssistenteActivity : Aspetto() {
                 prepare(); start()
             }
             suona = m.id
-        }.onFailure { Toast.makeText(this, "Il vocale non si riproduce.", Toast.LENGTH_SHORT).show() }
+        }.onFailure { Lingua.toast(this, "Il vocale non si riproduce.", Toast.LENGTH_SHORT).show() }
         disegna()
     }
 
@@ -329,7 +331,7 @@ class AssistenteActivity : Aspetto() {
 
     /** (11/11/2026) la chiave come procedura guidata in tre passi: per chi non sa cos'è una chiave API */
     private fun invito(perche: String?) {
-        AlertDialog.Builder(this).setTitle("Attiva l'assistente in 3 passi")
+        Dialogo(this).setTitle("Attiva l'assistente in 3 passi")
             .setMessage((perche?.let { "$it\n\n" } ?: "") +
                 "L'assistente usa un modello di intelligenza artificiale con una chiave tua, gratuita per iniziare.\n\n" +
                 "1. Tocca «Apri OpenRouter» e accedi (anche con Google).\n" +
@@ -342,7 +344,7 @@ class AssistenteActivity : Aspetto() {
     }
 
     private fun chiediSvuota() {
-        AlertDialog.Builder(this).setTitle("Svuotare la conversazione?")
+        Dialogo(this).setTitle("Svuotare la conversazione?")
             .setMessage("I messaggi con l'assistente saranno cancellati da questo telefono.")
             .setPositiveButton("Svuota") { _, _ -> Conversazione.svuota(this) }
             .setNegativeButton("Annulla", null).show()
@@ -540,12 +542,12 @@ class AssistenteActivity : Aspetto() {
 
     private fun copia(t: String) {
         (getSystemService(CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("Assistente", t))
-        Toast.makeText(this, "Copiato.", Toast.LENGTH_SHORT).show()
+        Lingua.toast(this, "Copiato.", Toast.LENGTH_SHORT).show()
     }
 
     private fun apri(link: String) {
         runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link))) }
-            .onFailure { Toast.makeText(this, "Nessuna app per aprire il link.", Toast.LENGTH_LONG).show() }
+            .onFailure { Lingua.toast(this, "Nessuna app per aprire il link.", Toast.LENGTH_LONG).show() }
     }
 
     companion object {

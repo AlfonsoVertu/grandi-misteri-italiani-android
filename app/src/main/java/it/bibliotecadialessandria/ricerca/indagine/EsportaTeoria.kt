@@ -1,5 +1,6 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import it.bibliotecadialessandria.ricerca.Lingua
 import android.app.Activity
 import android.content.Intent
 import android.widget.Toast
@@ -97,6 +98,11 @@ object EsportaTeoria {
             .put("video_principale", note.firstNotNullOfOrNull { n -> i.videoDi(n.id).firstOrNull()?.youtubeId } ?: "")
             .put("note", jNote).put("luoghi", jLuoghi).put("linee", JSONArray()).put("persone", jPersone)
             .put("app", Marca.NOME).put("esportata", System.currentTimeMillis())
+        // (13/11/2026, SiS) una teoria di categoria porta con sé la categoria e i passaggi della sua linea
+        if (t.categoria.isNotBlank()) j.put("teorie", JSONArray().put(JSONObject().put("id", "t1").put("categoria", t.categoria)
+            .put("titolo", t.titolo).put("descrizione", t.descrizione).put("note", JSONArray(note.mapNotNull { idNota[it.id] }))
+            .put("passi", JSONArray().apply { i.passiTeoria(t.id).forEach { p -> val o = CategorieTeorie.campi(p)
+                p.segnalinoId?.let { sid -> idLuogo[sid]?.let { o.put("luogo", it) } }; put(o) } })))
 
         val cart = File(a.cacheDir, "teorie").apply { mkdirs(); listFiles()?.forEach { it.delete() } }
         val out = File(cart, "$caso.zip")
@@ -112,22 +118,22 @@ object EsportaTeoria {
     /** Dal pulsante della teoria: prepara lo ZIP e apre la condivisione con l'email della redazione già scritta. */
     fun condividi(a: Activity, teoriaId: Long) {
         val titolo = Archivio.di(a).teoria(teoriaId)?.titolo ?: return
-        Toast.makeText(a, "Preparo lo ZIP della teoria…", Toast.LENGTH_SHORT).show()
+        Lingua.toast(a, "Preparo lo ZIP della ${Marca.TEORIA.lowercase()}…", Toast.LENGTH_SHORT).show()
         Thread {
             val f = runCatching { zip(a, teoriaId) }.getOrNull()
             a.runOnUiThread {
-                if (f == null || !f.isFile) { Toast.makeText(a, "Non sono riuscito a preparare lo ZIP.", Toast.LENGTH_LONG).show(); return@runOnUiThread }
+                if (f == null || !f.isFile) { Lingua.toast(a, "Non sono riuscito a preparare lo ZIP.", Toast.LENGTH_LONG).show(); return@runOnUiThread }
                 val u = FileProvider.getUriForFile(a, "${a.packageName}.file", f)
                 val manda = Intent(Intent.ACTION_SEND).setType("application/zip")
                     .putExtra(Intent.EXTRA_STREAM, u)
                     .putExtra(Intent.EXTRA_EMAIL, arrayOf(EMAIL))
-                    .putExtra(Intent.EXTRA_SUBJECT, "La mia teoria: $titolo")
-                    .putExtra(Intent.EXTRA_TEXT, "Ciao, vi mando la mia teoria «$titolo», fatta con l'app ${Marca.NOME}.\n\n" +
+                    .putExtra(Intent.EXTRA_SUBJECT, "La mia ${Marca.TEORIA.lowercase()}: $titolo")
+                    .putExtra(Intent.EXTRA_TEXT, "Ciao, vi mando la mia ${Marca.TEORIA.lowercase()} «$titolo», fatta con l'app ${Marca.NOME}.\n\n" +
                         "Dentro lo ZIP ci sono le note con i video al minuto, i luoghi, le persone e i file collegati.\n\n" +
                         "Il mio nome da citare nel video (facoltativo): ")
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                runCatching { a.startActivity(Intent.createChooser(manda, "Manda la teoria a $EMAIL")) }
-                    .onFailure { Toast.makeText(a, "Nessuna app per condividere: lo ZIP è pronto, scrivi a $EMAIL.", Toast.LENGTH_LONG).show() }
+                runCatching { a.startActivity(Intent.createChooser(manda, "Manda la ${Marca.TEORIA.lowercase()} a $EMAIL")) }
+                    .onFailure { Lingua.toast(a, "Nessuna app per condividere: lo ZIP è pronto, scrivi a $EMAIL.", Toast.LENGTH_LONG).show() }
             }
         }.start()
     }

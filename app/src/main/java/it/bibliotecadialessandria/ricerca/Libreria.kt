@@ -23,11 +23,14 @@ object Libreria {
     private fun aJson(v: Video) = JSONObject().apply {
         put("id", v.youtubeId); put("t", v.titolo); put("d", v.durata); put("da", v.data)
         put("ti", v.tipo); put("c", v.categoria); put("s", v.serie); put("p", v.periodo); put("z", v.zona)
+        if (v.esterno.isNotBlank()) put("e", v.esterno); if (v.sottotitoliDa.isNotBlank()) put("sd", v.sottotitoliDa)
+        if (v.podcast.isNotBlank()) put("pod", v.podcast); if (v.copertina.isNotBlank()) put("cop", v.copertina)
     }
 
     private fun daJson(o: JSONObject) = Video(
         o.optString("id"), o.optString("t"), o.optString("d"), o.optString("da"),
         o.optString("ti"), o.optString("c"), o.optString("s"), o.optString("p"), o.optString("z"),
+        o.optString("e"), o.optString("sd"), o.optString("pod"), o.optString("cop"),
     )
 
     private fun leggiLista(s: String?): MutableList<Video> {

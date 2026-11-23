@@ -1,6 +1,7 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
 import android.content.Context
+import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Delete
@@ -15,6 +16,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Transaction
 import androidx.room.Update
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /**
  * I dati dell'indagine (11/11/2026, fase 2b, STUDIO_ASSISTENTE_AI.md §4.5, §6, §7): note, video delle note al secondo,
@@ -50,6 +53,22 @@ data class Teoria(
     val titolo: String, val descrizione: String = "",
     val autore: String = "utente", val origine: String = "",
     val creata: Long = System.currentTimeMillis(), val modificata: Long = System.currentTimeMillis(),
+    /** (13/11/2026) la categoria di teorie ([CategorieTeorie]): "" = nessuna; "sis" = Segui i Soldi. */
+    @ColumnInfo(defaultValue = "") val categoria: String = "",
+)
+
+/**
+ * (13/11/2026, SiS) un passaggio della «linea» di una teoria di categoria: per SiS un passaggio di denaro. I campi sono
+ * quelli della categoria ([CategorieTeorie.Categoria.campi]) in un oggetto JSON; [segnalinoId] = il luogo sulla mappa.
+ */
+@Entity(tableName = "passo_teoria",
+    foreignKeys = [ForeignKey(entity = Teoria::class, parentColumns = ["id"], childColumns = ["teoriaId"], onDelete = ForeignKey.CASCADE)],
+    indices = [Index("teoriaId")])
+data class PassoTeoria(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val teoriaId: Long, val ordine: Int,
+    val campi: String = "{}",
+    val segnalinoId: Long? = null,
 )
 
 @Entity(tableName = "nota_teoria", primaryKeys = ["notaId", "teoriaId"],
@@ -174,6 +193,10 @@ interface Indice {
     @Update fun aggiorna(t: Teoria)
     @Delete fun togli(t: Teoria)
     @Query("SELECT * FROM teoria ORDER BY modificata DESC") fun teorie(): List<Teoria>
+    @Query("SELECT * FROM teoria WHERE categoria = :categoria ORDER BY modificata DESC") fun teorieDi(categoria: String): List<Teoria>
+    @Insert fun metti(p: PassoTeoria): Long
+    @Query("DELETE FROM passo_teoria WHERE id = :id") fun togliPassoTeoria(id: Long)
+    @Query("SELECT * FROM passo_teoria WHERE teoriaId = :teoriaId ORDER BY ordine, id") fun passiTeoria(teoriaId: Long): List<PassoTeoria>
     @Query("SELECT * FROM teoria WHERE id = :id") fun teoria(id: Long): Teoria?
     @Query("SELECT * FROM teoria WHERE origine = :origine AND origine != '' LIMIT 1") fun teoriaDa(origine: String): Teoria?
     @Insert(onConflict = OnConflictStrategy.IGNORE) fun metti(x: NotaTeoria): Long
@@ -241,8 +264,9 @@ interface Indice {
 }
 
 @Database(entities = [Nota::class, NotaVideo::class, Teoria::class, NotaTeoria::class, Segnalino::class, Linea::class,
-    LineaPunto::class, Persona::class, VoceCronologia::class, Legame::class, Memoria::class, Piano::class, Passo::class],
-    version = 1, exportSchema = false)
+    LineaPunto::class, Persona::class, VoceCronologia::class, Legame::class, Memoria::class, Piano::class, Passo::class,
+    PassoTeoria::class],
+    version = 2, exportSchema = false)
 abstract class ArchivioDb : RoomDatabase() {
     abstract fun indice(): Indice
 }
@@ -251,8 +275,20 @@ abstract class ArchivioDb : RoomDatabase() {
 object Archivio {
     @Volatile private var db: ArchivioDb? = null
 
+    /** (13/11/2026) 1 → 2: le categorie di teorie (SiS) e i passaggi della loro linea. Le teorie salvate restano. */
+    private val DA1A2 = object : Migration(1, 2) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("ALTER TABLE teoria ADD COLUMN categoria TEXT NOT NULL DEFAULT ''")
+            db.execSQL("CREATE TABLE IF NOT EXISTS passo_teoria (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, teoriaId INTEGER NOT NULL, " +
+                "ordine INTEGER NOT NULL, campi TEXT NOT NULL, segnalinoId INTEGER, " +
+                "FOREIGN KEY(teoriaId) REFERENCES teoria(id) ON UPDATE NO ACTION ON DELETE CASCADE)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_passo_teoria_teoriaId ON passo_teoria (teoriaId)")
+        }
+    }
+
     fun di(ctx: Context): Indice = (db ?: synchronized(this) {
         db ?: Room.databaseBuilder(ctx.applicationContext, ArchivioDb::class.java, "indagine.db")
+            .addMigrations(DA1A2)
             .allowMainThreadQueries()
             .build().also { db = it }
     }).indice()

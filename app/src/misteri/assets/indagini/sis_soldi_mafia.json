@@ -1,0 +1,70 @@
+{
+  "id": "sis_soldi_mafia",
+  "titolo": "Dove sono i soldi della mafia",
+  "descrizione": "Prima indagine SiS · Segui i Soldi. I soldi delle mafie non spariscono: cambiano forma. Qui solo fatti con la loro fonte; la tesi dell'autore è in fondo, separata.",
+  "teoria": {
+    "titolo": "Dove sono i soldi della mafia",
+    "descrizione": "Le ricchezze delle mafie passano dai contanti a beni intestati ad altri, ad aziende legali e al Nord. Lo Stato ne recupera una parte con sequestri e confische; il resto continua a lavorare nell'economia."
+  },
+  "note": [
+    {
+      "id": "n1",
+      "titolo": "Quanto vale l'economia illegale",
+      "testo": "Dal 2014 l'ISTAT conta nel PIL anche le attività illegali (droga, contrabbando, prostituzione): valgono circa l'1% del PIL e la droga è la voce più grande. Le stime sul riciclaggio delle mafie nell'economia legale sono più alte, ma sono stime.",
+      "fonte": "ISTAT, «L'economia non osservata nei conti nazionali» (rapporti annuali)"
+    },
+    {
+      "id": "n2",
+      "titolo": "Il costo per l'economia: -16% in 30 anni",
+      "testo": "Uno studio di Paolo Pinotti per la Banca d'Italia confronta Puglia e Basilicata, dove la criminalità organizzata arriva dagli anni '70, con regioni simili rimaste fuori: in 30 anni il PIL per abitante perde circa il 16%, soprattutto perché gli investimenti privati vengono sostituiti da spesa pubblica meno produttiva.",
+      "fonte": "P. Pinotti, «The economic costs of organized crime: evidence from Southern Italy», Banca d'Italia, Temi di discussione n. 868 (2012); The Economic Journal (2015)"
+    },
+    {
+      "id": "n3",
+      "titolo": "I prestanome",
+      "testo": "Il metodo più documentato dalle inchieste: case, terreni e aziende intestati a parenti, amici o imprenditori senza precedenti. Per Matteo Messina Denaro, nel corso degli anni, la DIA e i tribunali hanno sequestrato e confiscato beni per miliardi di euro intestati a persone ritenute suoi prestanome.",
+      "fonte": "Direzione Investigativa Antimafia, relazioni semestrali al Parlamento"
+    },
+    {
+      "id": "n4",
+      "titolo": "La lira non c'entra",
+      "testo": "Le banconote in lire si sono potute cambiare in Banca d'Italia fino al 2012. Ma i soldi grandi delle mafie non restano in contanti: vengono riciclati prima, dentro beni e attività.",
+      "fonte": "Banca d'Italia, conversione delle lire"
+    },
+    {
+      "id": "n5",
+      "titolo": "I soldi al Nord",
+      "testo": "L'inchiesta «Infinito» delle procure di Milano e Reggio Calabria (luglio 2010) ha mostrato la 'ndrangheta radicata in Lombardia con le sue «locali». Le relazioni DIA indicano ogni anno la Lombardia fra le regioni con più infiltrazioni negli appalti e nelle imprese.",
+      "fonte": "DDA di Milano e Reggio Calabria, operazione Infinito-Crimine (2010); relazioni DIA"
+    },
+    {
+      "id": "n6",
+      "titolo": "Quello che lo Stato recupera",
+      "testo": "Dal 2010 l'Agenzia nazionale per i beni sequestrati e confiscati (ANBSC) gestisce immobili e aziende tolti alle mafie, per riassegnarli a enti pubblici e associazioni. Una parte dei patrimoni dei boss storici non è mai stata trovata.",
+      "fonte": "ANBSC, benisequestraticonfiscati.it"
+    }
+  ],
+  "luoghi": [
+    {"id": "l1", "nome": "Trapani (Messina Denaro, sequestri ai prestanome)", "lat": 38.0176, "lon": 12.5365, "note": ["n3"]},
+    {"id": "l2", "nome": "Milano (inchiesta Infinito, 2010)", "lat": 45.4642, "lon": 9.19, "note": ["n5"]},
+    {"id": "l3", "nome": "Reggio Calabria (sede dell'ANBSC)", "lat": 38.1113, "lon": 15.6473, "note": ["n6"]},
+    {"id": "l4", "nome": "Bari (Puglia, studio Pinotti)", "lat": 41.1171, "lon": 16.8719, "note": ["n2"]},
+    {"id": "l5", "nome": "Roma (ISTAT e Banca d'Italia)", "lat": 41.9028, "lon": 12.4964, "note": ["n1", "n4"]}
+  ],
+  "teorie": [
+    {
+      "id": "sis",
+      "categoria": "sis",
+      "titolo": "SiS · Dove sono i soldi della mafia",
+      "descrizione": "Seguendo i soldi: si guadagnano con la droga e le estorsioni, si ripuliscono con i prestanome, salgono al Nord nell'economia legale, e lo Stato ne recupera una parte.\n\nTESI DELL'AUTORE (non un fatto accertato): l'economia italiana è frenata dai soldi della droga, passati, bloccati e presenti, e dal sistema dei favori e degli accordi politici; chi vuole offrire servizi trova le porte chiuse se non entra negli accordi.",
+      "note": ["n1", "n2", "n3", "n4", "n5", "n6"],
+      "passi": [
+        {"quando": "ogni anno", "importo": "circa 1% del PIL", "cosa": "I soldi nascono dalle attività illegali: soprattutto droga, poi estorsioni e usura.", "da": "attività illegali", "a": "contanti dei clan", "stato": "stima ufficiale ISTAT", "fonte": "ISTAT, economia non osservata", "luogo": "l5"},
+        {"quando": "da decenni", "importo": "miliardi", "cosa": "Si ripuliscono intestandoli ad altri: case, terreni, aziende.", "da": "contanti dei clan", "a": "beni di prestanome", "stato": "sequestri e confische (DIA, tribunali)", "fonte": "relazioni DIA", "luogo": "l1"},
+        {"quando": "dagli anni '70-'80", "importo": "non quantificato", "cosa": "Salgono al Nord e entrano nell'economia legale: appalti, imprese, commercio.", "da": "Sud", "a": "imprese del Nord", "stato": "accertato in singole inchieste (es. Infinito, 2010)", "fonte": "DDA Milano; relazioni DIA", "luogo": "l2"},
+        {"quando": "dal 2010", "importo": "decine di migliaia di beni", "cosa": "Lo Stato ne recupera una parte e li riassegna.", "da": "patrimoni confiscati", "a": "enti pubblici e associazioni", "stato": "confische definitive", "fonte": "ANBSC", "luogo": "l3"},
+        {"quando": "in 30 anni", "importo": "-16% del PIL per abitante", "cosa": "Il conto lo paga l'economia del territorio: meno investimenti privati.", "da": "economia del territorio", "a": "perdita di ricchezza", "stato": "studio Banca d'Italia", "fonte": "Pinotti, Banca d'Italia (2012) / Economic Journal (2015)", "luogo": "l4"}
+      ]
+    }
+  ]
+}

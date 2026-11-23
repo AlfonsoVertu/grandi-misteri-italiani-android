@@ -33,9 +33,11 @@ android {
         create("misteri") {
             dimension = "canale"
             applicationId = "eu.workingwithweb.canali.misteri"
-            versionCode = 8
-            versionName = "3.42.42.42"
+            versionCode = 12
+            versionName = "7.42.42"
         }
+        // (14/11/2026) la prima app in turco: AkademikLink (Prof. Dr. Behçet Yalın Özkara)
+        // (23/11/2026) Endriu Files (@EndriuFiles): app dedicata, completa come Grandi misteri; pagina noindex, niente store
     }
 
     signingConfigs {
@@ -75,4 +77,7 @@ dependencies {
     ksp("androidx.room:room-compiler:2.6.1")
     // la mappa: OpenStreetMap con osmdroid (Apache 2.0, nessuna chiave)
     implementation("org.osmdroid:osmdroid-android:6.1.20")
+    // (14/11/2026) le prove delle lingue (LinguaProva) girano sul computer: JUnit e org.json vero
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.json:json:20240303")
 }

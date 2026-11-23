@@ -1,5 +1,6 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import it.bibliotecadialessandria.ricerca.Dialogo
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -37,7 +38,7 @@ class MemoriaActivity : Schermata() {
     }
 
     private fun scheda(m: Memoria) {
-        AlertDialog.Builder(this).setTitle(m.titolo).setMessage("${m.tipo} · creata da ${if (m.creataDa == "ai") "AI" else "utente"} il ${Memorie.quando(m.creata)}\n\n${m.testo}")
+        Dialogo(this).setTitle(m.titolo).setMessage("${m.tipo} · creata da ${if (m.creataDa == "ai") "AI" else "utente"} il ${Memorie.quando(m.creata)}\n\n${m.testo}")
             .setPositiveButton("Modifica") { _, _ -> modifica(m) }
             .setNeutralButton("Cancella") { _, _ -> conferma("Cancellare «${m.titolo}»?", "L'assistente non se la ricorderà più. Non si torna indietro.") {
                 Archivio.di(this).togli(m); disegna() } }
@@ -47,7 +48,7 @@ class MemoriaActivity : Schermata() {
     private fun modifica(m: Memoria?) {
         val tipi = Memorie.TIPI.toTypedArray()
         var scelto = (m?.tipo ?: "istruzione").let { Memorie.TIPI.indexOf(it).coerceAtLeast(0) }
-        AlertDialog.Builder(this).setTitle("Tipo di memoria").setSingleChoiceItems(arrayOf("Istruzione: come vuoi che lavori", "Flusso: una procedura a passi",
+        Dialogo(this).setTitle("Tipo di memoria").setSingleChoiceItems(arrayOf("Istruzione: come vuoi che lavori", "Flusso: una procedura a passi",
             "Fatto: una cosa appresa", "Preferenza: un tuo gusto"), scelto) { d, k -> scelto = k; d.dismiss()
             chiedi(if (m == null) "Nuova memoria" else "Modifica memoria", listOf(Triple("Titolo", m?.titolo.orEmpty(), 1), Triple("Testo", m?.testo.orEmpty(), 5))) { v ->
                 if (v[0].isBlank()) return@chiedi
@@ -59,7 +60,7 @@ class MemoriaActivity : Schermata() {
     }
 
     private fun markdown() {
-        AlertDialog.Builder(this).setTitle("Markdown").setItems(arrayOf("Esporta in un file .md", "Importa da un file .md")) { _, k ->
+        Dialogo(this).setTitle("Markdown").setItems(arrayOf("Esporta in un file .md", "Importa da un file .md")) { _, k ->
             if (k == 0) @Suppress("DEPRECATION") startActivityForResult(Intent(Intent.ACTION_CREATE_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE)
                 .setType("text/markdown").putExtra(Intent.EXTRA_TITLE, "memoria_assistente.md"), ESPORTA)
             else @Suppress("DEPRECATION") startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE)

@@ -1,5 +1,7 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import it.bibliotecadialessandria.ricerca.Dialogo
+import it.bibliotecadialessandria.ricerca.Lingua
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -152,7 +154,7 @@ abstract class Schermata : Aspetto() {
             (if (etichetta.isNotBlank()) " — $etichetta" else "")
     }
 
-    fun avvisa(t: String) = Toast.makeText(this, t, Toast.LENGTH_LONG).show()
+    fun avvisa(t: String) = Lingua.toast(this, t, Toast.LENGTH_LONG).show()
 
     /** Un dialogo con dei campi; [fatto] riceve i valori (nello stesso ordine). */
     fun chiedi(titolo: String, campi: List<Triple<String, String, Int>>, si: String = "Salva", spiega: String = "",
@@ -160,13 +162,13 @@ abstract class Schermata : Aspetto() {
         val box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(20), dp(8), dp(20), 0) }
         if (spiega.isNotBlank()) box.addView(nota(spiega), sotto(8))
         val e = campi.map { (sugg, valore, righe) -> campo(sugg, valore, righe).also { box.addView(it, sotto(8)) } }
-        AlertDialog.Builder(this).setTitle(titolo).setView(ScrollView(this).apply { addView(box) })
+        Dialogo(this).setTitle(titolo).setView(ScrollView(this).apply { addView(box) })
             .setPositiveButton(si) { _, _ -> fatto(e.map { it.text.toString().trim() }) }
             .setNegativeButton("Annulla", null).show()
     }
 
     fun conferma(titolo: String, testo: String, si: String = "Cancella", fatto: () -> Unit) {
-        AlertDialog.Builder(this).setTitle(titolo).setMessage(testo)
+        Dialogo(this).setTitle(titolo).setMessage(testo)
             .setPositiveButton(si) { _, _ -> fatto() }.setNegativeButton("Annulla", null).show()
     }
 
@@ -184,14 +186,14 @@ abstract class Schermata : Aspetto() {
     /** Sceglie da un elenco (id, nome). */
     fun scegli(titolo: String, voci: List<Pair<Long, String>>, vuoto: String, fatto: (Long) -> Unit) {
         if (voci.isEmpty()) { avvisa(vuoto); return }
-        AlertDialog.Builder(this).setTitle(titolo).setItems(voci.map { it.second }.toTypedArray()) { _, k -> fatto(voci[k].first) }
+        Dialogo(this).setTitle(titolo).setItems(voci.map { it.second }.toTypedArray()) { _, k -> fatto(voci[k].first) }
             .setNegativeButton("Annulla", null).show()
     }
 
     companion object {
         fun apri(a: Activity, link: String) {
             runCatching { a.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link))) }
-                .onFailure { Toast.makeText(a, "Nessuna app per aprire il link.", Toast.LENGTH_LONG).show() }
+                .onFailure { Lingua.toast(a, "Nessuna app per aprire il link.", Toast.LENGTH_LONG).show() }
         }
 
         fun vai(ctx: Context, cosa: Class<*>, id: Long = 0, extra: Intent.() -> Unit = {}) =

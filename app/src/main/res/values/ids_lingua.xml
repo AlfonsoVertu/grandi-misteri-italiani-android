@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Le etichette che Lingua.kt mette sulle viste (14/11/2026, come FroWay): testo mostrato, suggerimento, «non tradurre». -->
+<resources>
+    <item name="lingua_mostrato" type="id" />
+    <item name="lingua_suggerimento" type="id" />
+    <item name="lingua_no" type="id" />
+    <item name="lingua_guardata" type="id" />
+</resources>

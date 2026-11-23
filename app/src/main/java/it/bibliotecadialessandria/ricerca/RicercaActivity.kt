@@ -125,12 +125,12 @@ class RicercaActivity : Activity() {
 
     override fun onCreate(stato: Bundle?) {
         super.onCreate(stato)
-        if (Marca.ASSISTENTE) it.bibliotecadialessandria.ricerca.assistente.ConfigAi.importaSeCe(this)?.let { android.widget.Toast.makeText(this, it, android.widget.Toast.LENGTH_LONG).show() }
+        if (Marca.ASSISTENTE) it.bibliotecadialessandria.ricerca.assistente.ConfigAi.importaSeCe(this)?.let { Lingua.toast(this, it, android.widget.Toast.LENGTH_LONG).show() }
         // (11/11/2026, fase 2b) le indagini precaricate negli assets: una volta sola, nel database della persona
         if (Marca.ASSISTENTE) ambito.launch {
             val nuove = withContext(Dispatchers.IO) { runCatching { it.bibliotecadialessandria.ricerca.indagine.Indagini.importaSeServe(this@RicercaActivity) }.getOrDefault(emptyList()) +
                 runCatching { it.bibliotecadialessandria.ricerca.indagine.Indagini.scaricaNuove(this@RicercaActivity) }.getOrDefault(emptyList()) }
-            if (nuove.isNotEmpty()) avvisa("Indagine pronta: " + nuove.joinToString(", ") + ". La trovi in Teorie, Note, Mappa e Persone di interesse.")
+            if (nuove.isNotEmpty()) avvisa("Indagine pronta: " + nuove.joinToString(", ") + ". La trovi in ${Marca.TEORIE}, Note, Mappa e Persone di interesse.")
             withContext(Dispatchers.IO) { it.bibliotecadialessandria.ricerca.indagine.Rag.scriviCopia(this@RicercaActivity) }
         }
         scorrimento = ScrollView(this).apply { isFillViewport = true }
@@ -269,7 +269,7 @@ class RicercaActivity : Activity() {
         val mappa = Intent(this, it.bibliotecadialessandria.ricerca.indagine.MappaActivity::class.java)
         val t = runCatching { it.bibliotecadialessandria.ricerca.indagine.Archivio.di(this).teorie() }.getOrDefault(emptyList())
         if (t.isEmpty()) { startActivity(mappa); return }
-        android.app.AlertDialog.Builder(this).setTitle("Quale caso?")
+        Dialogo(this).setTitle("Quale caso?")
             .setItems((t.map { it.titolo } + "Tutti i luoghi").toTypedArray()) { _, k ->
                 startActivity(if (k < t.size) Intent(mappa).putExtra("teoria", t[k].id) else mappa) }
             .setNegativeButton("Annulla", null).show()
@@ -282,11 +282,11 @@ class RicercaActivity : Activity() {
         dentro.addView(LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL; setPadding(dp(18), dp(16), dp(18), dp(16))
             background = GradientDrawable().apply { cornerRadius = dp(18).toFloat(); setColor(colore(R.color.oro)) }
-            addView(TextView(this@RicercaActivity).apply { text = "INDAGINE DEL GIORNO"; textSize = 12f; setTextColor(Color.WHITE); alpha = 0.85f
+            addView(TextView(this@RicercaActivity).apply { text = Marca.TITOLO_DEL_GIORNO; textSize = 12f; setTextColor(Color.WHITE); alpha = 0.85f
                 letterSpacing = 0.08f })
             addView(TextView(this@RicercaActivity).apply { text = t.titolo; textSize = 20f; setTextColor(Color.WHITE)
                 setTypeface(Typeface.SERIF, Typeface.BOLD); setPadding(0, dp(4), 0, dp(4)) })
-            addView(TextView(this@RicercaActivity).apply { text = "Note con il minuto di ogni video, luoghi sulla mappa e persone del caso.  Apri l'indagine ›"
+            addView(TextView(this@RicercaActivity).apply { text = Marca.SOTTO_DEL_GIORNO
                 textSize = 14f; setTextColor(Color.WHITE) })
             setOnClickListener { startActivity(Intent(this@RicercaActivity, TeoriaActivity::class.java).putExtra("id", t.id)) }
         }, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply { setMargins(0, 0, 0, dp(12)) })
@@ -301,18 +301,26 @@ class RicercaActivity : Activity() {
             Voce(R.drawable.ic_post, "Post", "Dal canale") { scheda = Scheda.POST; disegna() },
         )) + listOf(
             Voce(R.drawable.ic_cerca, "Cerca", Marca.CERCA_SOTTO) { scheda = Scheda.CERCA; disegna() },
-        ) + (if (!Marca.ASSISTENTE) emptyList() else listOf(
+        ) + (if (Marca.PODCAST_FEED.isBlank()) emptyList() else listOf(
+            // (12/11/2026) gli episodi del podcast: la ricerca con il solo tipo «Podcast» acceso
+            Voce(R.drawable.ic_novita, "Podcast", Marca.SOTTO_PODCAST) { apriPodcast() },
+        )) + (if (!Marca.ASSISTENTE) emptyList() else listOf(
             // (10/11/2026) l'assistente AI e le sue impostazioni (fornitore e chiave dell'utente)
-            Voce(R.drawable.ic_assistente, "Assistente AI", "Chiedi dei casi e dei video") {
+            Voce(R.drawable.ic_assistente, "Assistente AI", Marca.SOTTO_ASSISTENTE) {
                 startActivity(Intent(this, AssistenteActivity::class.java)) },
             Voce(R.drawable.ic_regola, "Impostazioni AI", "Fornitore, chiave, modello") {
                 startActivity(Intent(this, ImpostazioniAiActivity::class.java)) },
             // (11/11/2026) l'archivio dell'indagine: foto, video, PDF e file (anche quelli mandati all'assistente)
-            Voce(R.drawable.ic_media, "Media", "Foto, video e PDF dell'indagine") {
+            Voce(R.drawable.ic_media, "Media", Marca.SOTTO_MEDIA) {
                 startActivity(Intent(this, it.bibliotecadialessandria.ricerca.assistente.MediaActivity::class.java)) },
             // (11/11/2026, fase 2b) l'indagine: teorie, note, mappa, persone di interesse, memoria dell'assistente
-            Voce(R.drawable.ic_teoria, "Teorie", "Note, video e luoghi per ipotesi") {
+            Voce(R.drawable.ic_teoria, "${Marca.TEORIE}", Marca.SOTTO_TEORIE) {
                 startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.TeorieActivity::class.java)) },
+        ) + it.bibliotecadialessandria.ricerca.indagine.CategorieTeorie.tutte(this).map { k ->
+            // (13/11/2026) le sezioni delle categorie di teorie (SiS · Segui i Soldi), se l'app ne ha
+            Voce(R.drawable.ic_teoria, k.nome, k.breve) {
+                startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.TeorieActivity::class.java).putExtra("categoria", k.id)) }
+        } + listOf(
             Voce(R.drawable.ic_nota, "Note", "Appunti con la fonte e il minuto") {
                 startActivity(Intent(this, it.bibliotecadialessandria.ricerca.indagine.NoteActivity::class.java)) },
             Voce(R.drawable.ic_mappa, "Mappa", "I luoghi dei casi") { scegliMappa() },
@@ -473,7 +481,7 @@ class RicercaActivity : Activity() {
                 cercando -> ris.addView(nota(Marca.CERCO))
                 totale == 0 -> ris.addView(nota("Nessun video con questi filtri."))
                 totale != null -> ris.addView(etichetta(
-                    "$totale video trovati" +
+                    (if (totale == 1) "1 video trovato" else "$totale video trovati") +
                         (if (trovati.size < (totale ?: 0)) " · ne vedi ${trovati.size}" else "")), sotto(8))
             }
             // (10/11/2026) per cercare anche dentro il parlato: le trascrizioni dei video trovati, una alla volta
@@ -515,7 +523,7 @@ class RicercaActivity : Activity() {
             if (g.opzioni.size > 16) {
                 // (29/10, Gioele: «è difficile scorrere» fra le 88 serie) niente piu' riquadro che scorre dentro
                 // la pagina e si prende il dito: una casella per cercare, le scelte in cima, le altre a richiesta
-                val cerca = campo("Cerca fra le ${g.opzioni.size} ${g.titolo.lowercase()}...", cercaGruppo[g.titolo].orEmpty())
+                val cerca = campo("Cerca in «${g.titolo}» (${g.opzioni.size})...", cercaGruppo[g.titolo].orEmpty())
                 cerca.addTextChangedListener(ricorda { cercaGruppo[g.titolo] = it; riempiCaselle(caselle, g, acc) })
                 filtri.addView(cerca, sopra(8))
                 riempiCaselle(caselle, g, acc)
@@ -526,7 +534,7 @@ class RicercaActivity : Activity() {
         }
         filtri.addView(titoletto("Personaggi, luoghi e altro"), sopra(14))
         m.attributi.forEach { filtri.addView(campoFiltro(it), sopra(8)) }
-        filtri.addView(titoletto("Date, durata, quantita'"), sopra(14))
+        filtri.addView(titoletto("Date, durata, quantità"), sopra(14))
         m.testi.filter { it.campo != "Descrizione" }.forEach { filtri.addView(campoFiltro(it), sopra(8)) }
         filtri.addView(bottone(if (cercando) "Cerco..." else "Cerca con questi filtri", pieno = true) {
             cercaOra()
@@ -741,11 +749,15 @@ class RicercaActivity : Activity() {
         if (dettagli.isNotBlank()) riga.addView(nota(dettagli))
 
         val bottoni = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
-        bottoni.addView(bottone("▶  Guarda", pieno = true) { apri(v.link) },
+        bottoni.addView(bottone(if (v.esterno.isNotBlank()) "🎧  Ascolta" else "▶  Guarda", pieno = true) { apri(v.link) },
             LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { rightMargin = dp(4) })
         bottoni.addView(bottone("Condividi") { condividi(v) },
             LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { leftMargin = dp(4) })
         riga.addView(bottoni, sopra(8))
+        // (12/11/2026) un video che e' anche un episodio di podcast, o un episodio che ha il suo video «Originale»
+        if (v.podcast.isNotBlank()) riga.addView(bottone("🎧  Ascolta il podcast") { apri(v.podcast) }, sopra(6))
+        if (v.esterno.isNotBlank() && v.sottotitoliDa.isNotBlank())
+            riga.addView(bottone("▶  Guarda l'originale su YouTube") { apri("https://www.youtube.com/watch?v=${v.sottotitoliDa}") }, sopra(6))
 
         val azioni = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
         val preferito = v.youtubeId in idPreferiti
@@ -769,8 +781,9 @@ class RicercaActivity : Activity() {
             val ultime = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
             ultime.addView(bottone("⤓  Trascrizione") { scaricaTrascrizione(v) },
                 LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { rightMargin = dp(4) })
-            ultime.addView(bottone("＋ Nota") { it.bibliotecadialessandria.ricerca.indagine.NoteActivity.daVideo(this, v.youtubeId, v.titolo) },
-                LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { leftMargin = dp(4) })
+            if (v.idYoutubeVero.isNotBlank())
+                ultime.addView(bottone("＋ Nota") { it.bibliotecadialessandria.ricerca.indagine.NoteActivity.daVideo(this, v.idYoutubeVero, v.titolo) },
+                    LinearLayout.LayoutParams(0, WRAP_CONTENT, 1f).apply { leftMargin = dp(4) })
             riga.addView(ultime, sopra(6))
         }
         return riga
@@ -784,7 +797,7 @@ class RicercaActivity : Activity() {
     /** Le trascrizioni di piu' video, piano (una ogni 4 secondi, come gli strumenti del PC: YouTube non va forzato). */
     private fun scaricaTrascrizioni(lista: List<Video>) {
         var fermo = false
-        val attesa = AlertDialog.Builder(this).setTitle("Scarico le trascrizioni")
+        val attesa = Dialogo(this).setTitle("Scarico le trascrizioni")
             .setMessage("0 su ${lista.size}…").setNegativeButton("Ferma") { _, _ -> fermo = true }.setCancelable(false).show()
         ambito.launch {
             var ok = 0; var senza = 0
@@ -796,7 +809,7 @@ class RicercaActivity : Activity() {
                 if (i < lista.size - 1 && !fermo) kotlinx.coroutines.delay(4000)
             }
             if (attesa.isShowing) attesa.dismiss()
-            AlertDialog.Builder(this@RicercaActivity).setTitle("Trascrizioni")
+            Dialogo(this@RicercaActivity).setTitle("Trascrizioni")
                 .setMessage("Scaricate $ok" + (if (senza > 0) "; $senza video senza sottotitoli o non raggiungibili" else "") +
                     ".\n\nNei filtri accendi «Trascrizione» e cerca di nuovo: la ricerca guarderà anche dentro il parlato.")
                 .setPositiveButton("Va bene") { _, _ -> disegna() }.show()
@@ -804,7 +817,7 @@ class RicercaActivity : Activity() {
     }
 
     private fun scaricaTrascrizione(v: Video) {
-        val attesa = AlertDialog.Builder(this).setTitle(v.titolo)
+        val attesa = Dialogo(this).setTitle(v.titolo)
             .setMessage("Scarico i sottotitoli da YouTube…").setNegativeButton("Annulla", null).show()
         ambito.launch {
             val r = runCatching { withContext(Dispatchers.IO) { TrascrizioniYoutube.scarica(this@RicercaActivity, v.youtubeId) } }
@@ -818,7 +831,7 @@ class RicercaActivity : Activity() {
                     if (t.tradotta) append(" · tradotti da YouTube")
                 }
                 val inizio = TrascrizioniYoutube.blocchi(t).take(3).joinToString("\n") { "[${TrascrizioniYoutube.tempo(it.inizioMs)}] ${it.testo}" }
-                AlertDialog.Builder(this@RicercaActivity).setTitle("Trascrizione pronta")
+                Dialogo(this@RicercaActivity).setTitle("Trascrizione pronta")
                     .setMessage("$come\n\n$inizio…")
                     .setPositiveButton("Salva in un file") { _, _ ->
                         daSalvare = testo
@@ -832,8 +845,8 @@ class RicercaActivity : Activity() {
             }.onFailure { e ->
                 val msg = if (e is TrascrizioniYoutube.NonDisponibile) e.message
                     else "Non riesco a scaricare la trascrizione: ${e.message ?: "errore di rete"}"
-                AlertDialog.Builder(this@RicercaActivity).setTitle("Trascrizione non disponibile").setMessage(msg)
-                    .setPositiveButton("Apri su YouTube") { _, _ -> apri(v.link) }
+                Dialogo(this@RicercaActivity).setTitle("Trascrizione non disponibile").setMessage(msg)
+                    .setPositiveButton(if (v.esterno.isNotBlank()) "Apri l'episodio" else "Apri su YouTube") { _, _ -> apri(v.link) }
                     .setNegativeButton("Chiudi", null).show()
             }
         }
@@ -868,7 +881,7 @@ class RicercaActivity : Activity() {
     private fun chiediAggiungiAPlaylist(v: Video) {
         val nomi = Libreria.nomiPlaylist(this)
         val voci = (nomi + "+ Nuova playlist...").toTypedArray()
-        AlertDialog.Builder(this)
+        Dialogo(this)
             .setTitle("Aggiungi a una playlist")
             .setItems(voci) { _, i ->
                 if (i < nomi.size) {
@@ -888,7 +901,7 @@ class RicercaActivity : Activity() {
             inputType = InputType.TYPE_CLASS_TEXT
             setPadding(dp(16), dp(12), dp(16), dp(12))
         }
-        AlertDialog.Builder(this)
+        Dialogo(this)
             .setTitle("Nuova playlist")
             .setView(campo)
             .setPositiveButton("Crea") { _, _ ->
@@ -903,7 +916,7 @@ class RicercaActivity : Activity() {
     }
 
     private fun chiediElimina(nome: String) {
-        AlertDialog.Builder(this)
+        Dialogo(this)
             .setTitle("Eliminare \"$nome\"?")
             .setMessage("La playlist sarà rimossa da questo telefono. I video restano sul sito.")
             .setPositiveButton("Elimina") { _, _ ->
@@ -926,7 +939,7 @@ class RicercaActivity : Activity() {
         val voci = mutableListOf("Guarda su YouTube")
         voci += if (somnio) "Aggiungi alla libreria Somnio" else "Aggiungi alla libreria Somnio (non installata)"
         voci += "Invia il link a un'altra app..."
-        AlertDialog.Builder(this)
+        Dialogo(this)
             .setTitle(v.titolo)
             .setItems(voci.toTypedArray()) { _, i ->
                 when (i) {
@@ -953,6 +966,16 @@ class RicercaActivity : Activity() {
     private fun apri(link: String) {
         runCatching { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(link))) }
             .onFailure { avvisa("Nessuna app per aprire il link.") }
+    }
+
+    /** (12/11/2026) Gli episodi del podcast, dal piu' recente: la ricerca senza parole con il filtro Tipo = Podcast. */
+    private fun apriPodcast() {
+        ambito.launch {
+            val m = modulo ?: runCatching { Catalogo.modulo() }.getOrNull()?.also { modulo = it } ?: return@launch
+            accese = (accese ?: predefinite(m)).filterNot { it.startsWith("tipo:") }.toMutableSet().apply { add("tipo:Podcast") }
+            testo = ""; scheda = Scheda.CERCA
+            cercaOra()
+        }
     }
 
     private fun cercaOra() {
@@ -1255,7 +1278,7 @@ class RicercaActivity : Activity() {
         if (Seguiti.diCasa(this, s)) card.addView(nota(if (s.casa == packageName) "È il canale di questa app: puoi mettere in pausa gli avvisi, non toglierlo."
             else "È il canale di un'altra app della famiglia: si toglie disinstallando quell'app.")) else
         card.addView(bottone("Smetti di seguire") {
-            AlertDialog.Builder(this).setTitle("Smettere di seguire «${s.nome}»?")
+            Dialogo(this).setTitle("Smettere di seguire «${s.nome}»?")
                 .setMessage("Non riceverai più avvisi da questo canale.")
                 .setPositiveButton("Smetti") { _, _ -> Seguiti.togli(this, s.id); canaleAperto = null; disegna() }
                 .setNegativeButton("Annulla", null).show()
@@ -1289,7 +1312,7 @@ class RicercaActivity : Activity() {
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_URI
             setPadding(dp(16), dp(12), dp(16), dp(12))
         }
-        AlertDialog.Builder(this)
+        Dialogo(this)
             .setTitle("Aggiungi un canale")
             .setMessage("Incolla il link di un canale YouTube (anche @nome) o di un qualsiasi suo video.")
             .setView(campo)
@@ -1330,7 +1353,7 @@ class RicercaActivity : Activity() {
             val canale = info?.canale?.ifBlank { null }
             val voci = mutableListOf(if (Libreria.ePreferito(this@RicercaActivity, idVideo)) "★ Già nei preferiti" else "☆ Aggiungi ai preferiti", "+ Aggiungi a una playlist")
             if (canale != null) voci += "Segui il canale «$canale» e ricevi gli avvisi"
-            AlertDialog.Builder(this@RicercaActivity)
+            Dialogo(this@RicercaActivity)
                 .setTitle(titolo)
                 .setItems(voci.toTypedArray()) { _, n ->
                     when (n) {
@@ -1369,7 +1392,7 @@ class RicercaActivity : Activity() {
     }
 
     private fun etichetta(t: String) = TextView(this).apply {
-        text = t.uppercase(); textSize = 12f; letterSpacing = 0.12f
+        text = Lingua.t(t).uppercase(if (Marca.LINGUA == "tr") java.util.Locale("tr") else java.util.Locale.ROOT); textSize = 12f; letterSpacing = 0.12f
         setTypeface(Typeface.SANS_SERIF, Typeface.BOLD)
         setTextColor(colore(R.color.oro))
     }
@@ -1423,5 +1446,5 @@ class RicercaActivity : Activity() {
         override fun afterTextChanged(s: Editable?) { salva(s?.toString().orEmpty()) }
     }
 
-    private fun avvisa(t: String) = Toast.makeText(this, t, Toast.LENGTH_LONG).show()
+    private fun avvisa(t: String) = Lingua.toast(this, t, Toast.LENGTH_LONG).show()
 }

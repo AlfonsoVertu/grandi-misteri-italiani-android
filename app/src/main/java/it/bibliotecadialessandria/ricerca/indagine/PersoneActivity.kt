@@ -1,5 +1,7 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import it.bibliotecadialessandria.ricerca.Dialogo
+import it.bibliotecadialessandria.ricerca.Marca
 import android.app.AlertDialog
 import android.graphics.BitmapFactory
 import android.view.Gravity
@@ -106,15 +108,15 @@ class PersonaActivity : Schermata() {
 
     private fun collega(p: Persona) {
         val i = Archivio.di(this)
-        val voci = arrayOf("Un video al minuto", "Un segnalino della mappa", "Una nota", "Una teoria", "Un file dei Media", "Un'altra persona", "La foto (dai Media)")
-        AlertDialog.Builder(this).setTitle("Collega ${p.nome} a…").setItems(voci) { _, k ->
+        val voci = arrayOf("Un video al minuto", "Un segnalino della mappa", "Una nota", "Una ${Marca.TEORIA.lowercase()}", "Un file dei Media", "Un'altra persona", "La foto (dai Media)")
+        Dialogo(this).setTitle("Collega ${p.nome} a…").setItems(voci) { _, k ->
             fun conEtichetta(verso: String, vid: Long) = chiedi("Etichetta (facoltativa)", listOf(Triple("Es. «testimone in», «moglie di»", "", 1)), "Collega") { v ->
                 i.metti(Legame(da = "persona", daId = p.id, verso = verso, versoId = vid, etichetta = v[0])); disegna() }
             when (k) {
                 0 -> chiediVideo { vid, s, et -> i.metti(Legame(da = "persona", daId = p.id, verso = "video", youtubeId = vid, secondi = s, etichetta = et)); disegna() }
                 1 -> scegli("Quale segnalino?", i.segnalini().map { it.id to it.titolo }, "Non ci sono segnalini.") { conEtichetta("segnalino", it) }
                 2 -> scegli("Quale nota?", i.note().map { it.id to it.titolo }, "Non ci sono note.") { conEtichetta("nota", it) }
-                3 -> scegli("Quale teoria?", i.teorie().map { it.id to it.titolo }, "Non ci sono teorie.") { conEtichetta("teoria", it) }
+                3 -> scegli("Quale ${Marca.TEORIA.lowercase()}?", i.teorie().map { it.id to it.titolo }, "Non ci sono ${Marca.TEORIE.lowercase()}.") { conEtichetta("teoria", it) }
                 4 -> scegli("Quale file?", Media.tutte(this).map { it.id to it.nome }, "L'archivio Media è vuoto.") { conEtichetta("media", it) }
                 5 -> scegli("Quale persona?", i.persone().filter { it.id != p.id }.map { it.id to it.nome }, "Non ci sono altre persone.") { conEtichetta("persona", it) }
                 else -> scegli("Quale immagine?", Media.tutte(this).filter { it.tipo == "immagine" }.map { it.id to it.nome }, "Nei Media non ci sono immagini.") {

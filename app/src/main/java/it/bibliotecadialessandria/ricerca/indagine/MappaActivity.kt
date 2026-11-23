@@ -1,5 +1,7 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import it.bibliotecadialessandria.ricerca.Dialogo
+import it.bibliotecadialessandria.ricerca.Marca
 import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
@@ -126,7 +128,7 @@ class MappaActivity : Schermata() {
         barra.visibility = if (filtro != null || inCostruzione != null || perNota > 0) View.VISIBLE else View.GONE
         if (inCostruzione == null) barra.text = when {
             perNota > 0 -> "Tieni premuto sul punto della nota «${i.nota(perNota)?.titolo ?: ""}»"
-            filtro != null -> "Teoria: $filtro (${segnalini.size} luoghi) · tocca qui per vederli tutti"
+            filtro != null -> "${Marca.TEORIA}: $filtro (${segnalini.size} luoghi) · tocca qui per vederli tutti"
             else -> ""
         }
         if (!centrato) {
@@ -136,8 +138,16 @@ class MappaActivity : Schermata() {
                 focus != null -> { mappa.controller.setZoom(16.0); mappa.controller.setCenter(GeoPoint(focus.lat, focus.lon)); mappa.post { scheda(focus.id) } }
                 segnalini.size == 1 -> { mappa.controller.setZoom(15.0); mappa.controller.setCenter(GeoPoint(segnalini[0].lat, segnalini[0].lon)) }
                 segnalini.size > 1 -> mappa.post {
-                    runCatching { mappa.zoomToBoundingBox(BoundingBox.fromGeoPoints(segnalini.map { GeoPoint(it.lat, it.lon) }).increaseByScale(1.4f), false) }
-                    if (mappa.zoomLevelDouble > 16) mappa.controller.setZoom(16.0)
+                    val bb = BoundingBox.fromGeoPoints(segnalini.map { GeoPoint(it.lat, it.lon) })
+                    // luoghi sparsi per il mondo: allargato del 40% il riquadro supera i 360° e osmdroid
+                    // lo «gira» sul Pacifico; allora zoom minimo centrato sulla media dei segnalini
+                    if ((bb.lonEast - bb.lonWest) * 1.4 >= 360 || (bb.latNorth - bb.latSouth) * 1.4 >= 170) {
+                        mappa.controller.setZoom(mappa.minZoomLevel)
+                        mappa.controller.setCenter(GeoPoint(segnalini.map { it.lat }.average(), segnalini.map { it.lon }.average()))
+                    } else {
+                        runCatching { mappa.zoomToBoundingBox(bb.increaseByScale(1.4f), false) }
+                        if (mappa.zoomLevelDouble > 16) mappa.controller.setZoom(16.0)
+                    }
                 }
             }
         }
@@ -176,7 +186,7 @@ class MappaActivity : Schermata() {
         i.legamiVerso("segnalino", s.id).filter { it.da == "persona" }.mapNotNull { i.persona(it.daId) }.forEach { p ->
             box.addView(rigaAzione("👤  ${p.nome}" + if (p.ruolo.isNotBlank()) " · ${p.ruolo}" else "", { finestra?.dismiss(); vai(this, PersonaActivity::class.java, p.id) })) }
         i.linee().filter { l -> i.punti(l.id).any { it.segnalinoId == s.id } }.forEach { l -> box.addView(rigaAzione("〰  Linea: ${l.titolo}", { finestra?.dismiss(); schedaLinea(l.id) })) }
-        finestra = AlertDialog.Builder(this).setTitle(s.titolo).setView(ScrollView(this).apply { addView(box) })
+        finestra = Dialogo(this).setTitle(s.titolo).setView(ScrollView(this).apply { addView(box) })
             .setPositiveButton("Chiudi", null)
             .setNeutralButton("Cancella") { _, _ -> conferma("Cancellare «${s.titolo}»?", "Il segnalino sparisce dalla mappa, con i suoi passaggi nelle linee. Non si torna indietro.") {
                 Archivio.cancellaSegnalino(this, s); disegna() } }
@@ -217,7 +227,7 @@ class MappaActivity : Schermata() {
     private fun schedaLinea(id: Long) {
         val i = Archivio.di(this); val l = i.linea(id) ?: return
         val punti = i.punti(id).mapNotNull { i.segnalino(it.segnalinoId)?.titolo }
-        AlertDialog.Builder(this).setTitle("〰  ${l.titolo}").setMessage(punti.joinToString("\n→ "))
+        Dialogo(this).setTitle("〰  ${l.titolo}").setMessage(punti.joinToString("\n→ "))
             .setPositiveButton("Chiudi", null)
             .setNeutralButton("Cancella") { _, _ -> conferma("Cancellare la linea «${l.titolo}»?", "I segnalini restano.") { i.togliLinea(id); disegna() } }
             .setNegativeButton("Rinomina") { _, _ -> chiedi("Rinomina", listOf(Triple("Nome", l.titolo, 1))) { v -> i.aggiorna(l.copy(titolo = v[0].ifBlank { l.titolo })); disegna() } }
@@ -227,11 +237,11 @@ class MappaActivity : Schermata() {
     // ── opzioni ──────────────────────────────────────────────────────
 
     private fun opzioni() {
-        val voci = arrayOf("Nuova linea fra segnalini", "Filtra per teoria", "Mostra tutti i segnalini")
-        AlertDialog.Builder(this).setTitle("Mappa").setItems(voci) { _, k ->
+        val voci = arrayOf("Nuova linea fra segnalini", "Filtra per ${Marca.TEORIA.lowercase()}", "Mostra tutti i segnalini")
+        Dialogo(this).setTitle("Mappa").setItems(voci) { _, k ->
             when (k) {
                 0 -> { inCostruzione = mutableListOf(); aggiornaBarra(); disegna() }
-                1 -> scegli("Quale teoria?", Archivio.di(this).teorie().map { it.id to it.titolo }, "Non ci sono teorie.") { t -> teoria = t; centrato = false; disegna() }
+                1 -> scegli("Quale ${Marca.TEORIA.lowercase()}?", Archivio.di(this).teorie().map { it.id to it.titolo }, "Non ci sono ${Marca.TEORIE.lowercase()}.") { t -> teoria = t; centrato = false; disegna() }
                 else -> { teoria = 0; centrato = false; disegna() }
             }
         }.show()
@@ -246,9 +256,9 @@ class MappaActivity : Schermata() {
                 runOnUiThread {
                     r.onFailure { avvisa(it.message ?: "Ricerca non riuscita.") }.onSuccess { l ->
                         if (l.isEmpty()) { avvisa("Nessun luogo trovato."); return@onSuccess }
-                        AlertDialog.Builder(this).setTitle("Risultati (© OpenStreetMap)").setItems(l.map { it.nome }.toTypedArray()) { _, k ->
+                        Dialogo(this).setTitle("Risultati (© OpenStreetMap)").setItems(l.map { it.nome }.toTypedArray()) { _, k ->
                             mappa.controller.setZoom(16.0); mappa.controller.setCenter(GeoPoint(l[k].lat, l[k].lon))
-                            AlertDialog.Builder(this).setMessage("Mettere un segnalino qui?").setPositiveButton("Sì") { _, _ ->
+                            Dialogo(this).setMessage("Mettere un segnalino qui?").setPositiveButton("Sì") { _, _ ->
                                 nuovoSegnalino(l[k].lat, l[k].lon, l[k].nome.substringBefore(',')) }.setNegativeButton("No", null).show()
                         }.show()
                     }

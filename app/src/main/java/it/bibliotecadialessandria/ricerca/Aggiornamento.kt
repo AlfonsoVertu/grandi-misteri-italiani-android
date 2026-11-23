@@ -81,12 +81,12 @@ object Aggiornamento {
             a.runOnUiThread {
                 if (a.isFinishing) return@runOnUiThread
                 if (n == null) {
-                    if (!daSola) Toast.makeText(a, "L'app è già aggiornata.", Toast.LENGTH_SHORT).show()
+                    if (!daSola) Lingua.toast(a, "L'app è già aggiornata.", Toast.LENGTH_SHORT).show()
                     return@runOnUiThread
                 }
                 if (daSola && rimandata(ctx, n.codice)) return@runOnUiThread
                 val mega = if (n.dimensione > 0) " (%.1f MB)".format(n.dimensione / 1048576.0) else ""
-                AlertDialog.Builder(a).setTitle("C'è un aggiornamento")
+                Dialogo(a).setTitle("C'è un aggiornamento")
                     .setMessage("Versione ${n.nome.ifBlank { n.codice.toString() }}$mega." +
                         (if (n.note.isNotBlank()) "\n\n${n.note}" else "") +
                         "\n\nTocca Scarica, poi apri il file e installalo sopra questa: preferiti e playlist restano.")
@@ -100,6 +100,6 @@ object Aggiornamento {
 
     private fun apri(a: Activity, url: String) {
         runCatching { a.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) }
-            .onFailure { Toast.makeText(a, "Apri $PAGINA dal browser.", Toast.LENGTH_LONG).show() }
+            .onFailure { Lingua.toast(a, "Apri $PAGINA dal browser.", Toast.LENGTH_LONG).show() }
     }
 }

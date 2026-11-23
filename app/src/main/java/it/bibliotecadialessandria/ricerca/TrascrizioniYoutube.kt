@@ -23,7 +23,8 @@ import java.util.Locale
  *     chiede il PO token (`exp=xpe` nel baseUrl) e la risposta arriva VUOTA: lo stesso giorno, 0 byte.
  *     Si tiene come ultima prova, e se e' vuota si dice chiaramente che YouTube non la da'.
  * Una sola richiesta per video, su azione della persona (o dell'assistente), mai in blocco; poi si legge dalla cache
- * in `files/trascrizioni/`. Mai l'audio del video, mai server nostri, mai aggiramenti dei blocchi «non sei un bot».
+ * in `files/trascrizioni/`. Mai l'audio del video, mai server nostri (tranne, dal 12/11/2026, le trascrizioni fatte da noi per le voci
+ * senza video YouTube: vedi [nostra]), mai aggiramenti dei blocchi «non sei un bot».
  */
 object TrascrizioniYoutube {
 
@@ -146,7 +147,7 @@ object TrascrizioniYoutube {
     fun mettiInCache(ctx: Context, t: Trascrizione) = salva(ctx, t)
 
     fun salvata(ctx: Context, id: String): Trascrizione? = runCatching {
-        val o = JSONObject(file(ctx, id).takeIf { it.exists() }?.readText() ?: return null)
+        val o = JSONObject(file(ctx, Fonti.perSottotitoli(id) ?: id).takeIf { it.exists() }?.readText() ?: return null)
         val r = o.getJSONArray("righe")
         Trascrizione(o.getString("id"), o.optString("titolo"), o.optString("canale"), o.optInt("durata"), o.optString("lingua"),
             o.optBoolean("automatica"), o.optBoolean("tradotta"), o.optLong("scaricata"),
@@ -165,6 +166,15 @@ object TrascrizioniYoutube {
      * Fuori dal filo dell'interfaccia. Lancia [NonDisponibile] se il video non ha sottotitoli.
      */
     fun scarica(ctx: Context, id: String, lingua: String = "it", forza: Boolean = false): Trascrizione {
+        // (12/11/2026) una voce esterna (episodio di podcast): i sottotitoli del suo «Originale» su YouTube; se non c'e',
+        // una trascrizione nostra sul server dell'app (punto d'aggancio per le trascrizioni fatte da noi), altrimenti niente
+        if (Fonti.esterna(id)) {
+            val vero = Fonti.perSottotitoli(id)
+            if (vero != null) return scarica(ctx, vero, lingua, forza)
+            if (!forza) salvata(ctx, id)?.let { return it }
+            nostra(id)?.let { runCatching { salva(ctx, it) }; return it }
+            throw NonDisponibile("Per questo episodio la trascrizione non è ancora disponibile: non viene da un video YouTube con i sottotitoli.")
+        }
         if (!forza) salvata(ctx, id)?.takeIf { it.lingua.equals(lingua, true) || lingua.isBlank() }?.let { return it }
         val prove = player(id)
         val info = prove.map { infoDa(it.first) }.firstOrNull { it.titolo.isNotBlank() } ?: Info("", "", 0)
@@ -198,6 +208,19 @@ object TrascrizioniYoutube {
             else -> "Questo video non ha sottotitoli né trascrizione automatica su YouTube."
         }, tutte)
     }
+
+    /**
+     * (12/11/2026) Trascrizione fatta da noi per una voce senza sottotitoli YouTube: file
+     * `https://mondo.workingwithweb.eu/<cartella dell'app>/trascrizioni/<id>.json`, nello stesso formato della cache.
+     * Per ora non ce ne sono (Whisper sul PC, in futuro): se il file non c'e', null.
+     */
+    private fun nostra(id: String): Trascrizione? = runCatching {
+        val o = JSONObject(prendi("https://mondo.workingwithweb.eu/${Marca.MONDO}/trascrizioni/$id.json"))
+        val r = o.getJSONArray("righe")
+        Trascrizione(id, o.optString("titolo"), o.optString("canale"), o.optInt("durata"), o.optString("lingua", "it"),
+            o.optBoolean("automatica", true), false, System.currentTimeMillis(),
+            (0 until r.length()).map { r.getJSONArray(it).let { a -> Riga(a.getInt(0), a.getInt(1), a.getString(2)) } })
+    }.getOrNull()
 
     // ── il testo per il file ─────────────────────────────────────────
 

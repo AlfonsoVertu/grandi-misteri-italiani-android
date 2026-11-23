@@ -59,6 +59,12 @@ object CatalogoStrumento : Strumento() {
             else { if (v.categoria.isNotBlank()) put("categoria", v.categoria); if (v.serie.isNotBlank()) put("serie", v.serie) }
         }
         .put("tipo", v.tipo).put("data", v.data).put("durata", v.durata).put("link", v.link)
+        .apply {
+            // (12/11/2026) episodi di podcast: si ascoltano dal link; i sottotitoli (strumento trascrizioni con lo
+            // stesso youtube_id) vengono dal video YouTube «Originale», se c'e'
+            if (v.esterno.isNotBlank()) put("sottotitoli_da", v.sottotitoliDa.ifBlank { "nessuno: trascrizione non ancora disponibile" })
+            if (v.podcast.isNotBlank()) put("podcast", v.podcast)
+        }
 
     private fun cerca(a: JSONObject): JSONObject {
         val op = opzioni()

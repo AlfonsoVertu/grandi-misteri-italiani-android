@@ -1,5 +1,7 @@
 package it.bibliotecadialessandria.ricerca.assistente
 
+import it.bibliotecadialessandria.ricerca.Lingua
+import it.bibliotecadialessandria.ricerca.Marca
 import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
@@ -47,7 +49,7 @@ open class Aspetto : Activity() {
     }
 
     fun etichetta(t: String) = TextView(this).apply {
-        text = t.uppercase(); textSize = 12f; letterSpacing = 0.12f
+        text = Lingua.t(t).uppercase(if (Marca.LINGUA == "tr") java.util.Locale("tr") else java.util.Locale.ROOT); textSize = 12f; letterSpacing = 0.12f
         setTypeface(Typeface.SANS_SERIF, Typeface.BOLD)
         setTextColor(colore(R.color.oro))
     }

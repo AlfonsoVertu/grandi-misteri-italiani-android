@@ -1,0 +1,25 @@
+[
+  {
+    "id": "sis",
+    "nome": "SiS · Segui i Soldi",
+    "breve": "Teorie che partono dal denaro",
+    "elemento": "il denaro",
+    "colore": "#B8860B",
+    "icona": "💰",
+    "regole": [
+      "Si parte dai soldi: da dove vengono, dove passano, dove si fermano, chi ci guadagna e cosa bloccano.",
+      "Ogni passaggio ha la sua fonte (video al minuto, sentenza, relazione ufficiale) e il suo stato: sequestro, indagine, condanna o stima.",
+      "I fatti accertati restano separati dalle ipotesi; la tesi dell'autore è sempre detta come tesi.",
+      "Nessuna persona o azienda viene accusata senza una sentenza."
+    ],
+    "campi": [
+      {"id": "quando", "nome": "Quando"},
+      {"id": "importo", "nome": "Importo"},
+      {"id": "cosa", "nome": "Cosa succede"},
+      {"id": "da", "nome": "Da"},
+      {"id": "a", "nome": "A"},
+      {"id": "stato", "nome": "Stato"},
+      {"id": "fonte", "nome": "Fonte"}
+    ]
+  }
+]

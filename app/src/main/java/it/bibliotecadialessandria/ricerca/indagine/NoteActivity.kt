@@ -1,5 +1,8 @@
 package it.bibliotecadialessandria.ricerca.indagine
 
+import it.bibliotecadialessandria.ricerca.Dialogo
+import it.bibliotecadialessandria.ricerca.Lingua
+import it.bibliotecadialessandria.ricerca.Marca
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
@@ -56,15 +59,15 @@ class NoteActivity : Schermata() {
             val dp = { x: Int -> (x * a.resources.displayMetrics.density).toInt() }
             val minuto = android.widget.EditText(a).apply { hint = "Minuto, es. 12:30 (vuoto = tutto il video)"; isSingleLine = true }
             val box = LinearLayout(a).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(20), dp(8), dp(20), 0); addView(minuto) }
-            AlertDialog.Builder(a).setTitle("＋ Nota: $titolo").setView(box)
+            Dialogo(a).setTitle("＋ Nota: $titolo").setView(box)
                 .setPositiveButton("Nota nuova") { _, _ -> conMinuto(a, minuto.text.toString()) { s -> nuovaDa(a, youtubeId, titolo, s) } }
                 .setNeutralButton("In una nota esistente") { _, _ -> conMinuto(a, minuto.text.toString()) { s ->
                     val note = Archivio.di(a).note()
                     if (note.isEmpty()) { nuovaDa(a, youtubeId, titolo, s); return@conMinuto }
-                    AlertDialog.Builder(a).setTitle("In quale nota?").setItems(note.map { it.titolo }.toTypedArray()) { _, k ->
+                    Dialogo(a).setTitle("In quale nota?").setItems(note.map { it.titolo }.toTypedArray()) { _, k ->
                         Archivio.di(a).metti(NotaVideo(notaId = note[k].id, youtubeId = youtubeId, secondi = s))
                         Archivio.di(a).aggiorna(note[k].copy(modificata = System.currentTimeMillis()))
-                        android.widget.Toast.makeText(a, "Collegato a «${note[k].titolo}»" + (s?.let { " al minuto ${mmss(it)}" } ?: ""), android.widget.Toast.LENGTH_LONG).show()
+                        Lingua.toast(a, "Collegato a «${note[k].titolo}»" + (s?.let { " al minuto ${mmss(it)}" } ?: ""), android.widget.Toast.LENGTH_LONG).show()
                     }.setNegativeButton("Annulla", null).show()
                 } }
                 .setNegativeButton("Annulla", null).show()
@@ -72,7 +75,7 @@ class NoteActivity : Schermata() {
 
         private fun conMinuto(a: Context, t: String, fatto: (Int?) -> Unit) {
             if (t.isBlank()) { fatto(null); return }
-            val s = secondiDa(t) ?: run { android.widget.Toast.makeText(a, "Il minuto si scrive come 12:30.", android.widget.Toast.LENGTH_LONG).show(); return }
+            val s = secondiDa(t) ?: run { Lingua.toast(a, "Il minuto si scrive come 12:30.", android.widget.Toast.LENGTH_LONG).show(); return }
             fatto(s)
         }
 
@@ -112,12 +115,12 @@ class NotaActivity : Schermata() {
             addView(bottone("＋ Collega un video") { chiediVideo { vid, s, et -> i.metti(NotaVideo(notaId = n.id, youtubeId = vid, secondi = s, etichetta = et)); disegna() } }, sopra(6))
         }, sotto(10))
 
-        lista.addView(sezione("Teorie") {
+        lista.addView(sezione("${Marca.TEORIE}") {
             val t = i.teorieDellaNota(n.id)
-            if (t.isEmpty()) addView(nota("In nessuna teoria."))
+            if (t.isEmpty()) addView(nota("In nessuna ${Marca.TEORIA.lowercase()}."))
             t.forEach { x -> addView(rigaAzione("◇  ${x.titolo}", { vai(this@NotaActivity, TeoriaActivity::class.java, x.id) }) {
                 i.togliNotaDaTeoria(n.id, x.id); disegna() }) }
-            addView(bottone("Assegna a teorie") { assegna() }, sopra(6))
+            addView(bottone("Assegna a ${Marca.TEORIE.lowercase()}") { assegna() }, sopra(6))
         }, sotto(10))
 
         lista.addView(sezione("Sulla mappa") {
@@ -146,10 +149,10 @@ class NotaActivity : Schermata() {
     private fun assegna() {
         val i = Archivio.di(this)
         val tutte = i.teorie()
-        if (tutte.isEmpty()) { avvisa("Non ci sono teorie: creale nella schermata Teorie."); return }
+        if (tutte.isEmpty()) { avvisa("Non ci sono ${Marca.TEORIE.lowercase()}: creale nella schermata ${Marca.TEORIE}."); return }
         val dentro = i.teorieDellaNota(id).map { it.id }.toSet()
         val scelte = tutte.map { it.id in dentro }.toBooleanArray()
-        AlertDialog.Builder(this).setTitle("Teorie di questa nota")
+        Dialogo(this).setTitle("${Marca.TEORIE} di questa nota")
             .setMultiChoiceItems(tutte.map { it.titolo }.toTypedArray(), scelte) { _, k, si -> scelte[k] = si }
             .setPositiveButton("Salva") { _, _ ->
                 tutte.forEachIndexed { k, t -> if (scelte[k]) i.metti(NotaTeoria(id, t.id)) else i.togliNotaDaTeoria(id, t.id) }; disegna()
